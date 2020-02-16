@@ -1,0 +1,90 @@
+// @import "./colors";
+// @import "./size";
+@import "./font.scss";
+
+html {
+  font-size: 16px;
+}
+#app {
+  font-family: 'Noto Sans JP';
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  height: 100vh;
+  padding: auto auto;
+}
+
+.center {
+  text-align: center;
+}
+
+/*flex-class*/
+.flex {
+  display: flex;
+}
+.flex {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: -moz-box;
+  display: flex;
+}
+.inline-flex {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+}
+.flex-wrap {
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.space-between {
+  justify-content: space-between;
+}
+.space-around {
+  justify-content: space-around;
+}
+.content-center {
+  justify-content: center
+}
+.flex-middle {
+  align-items: center;
+}
+
+.baseline {
+  align-items: baseline;
+}
+.end {
+  justify-content: flex-end;
+}
+
+a {
+  text-decoration: none;
+  color: gray;
+  transition: .2s ease-in-out;
+}
+
+/*buttons*/
+.button {
+  display: inline-block;
+  width: 150px;
+  text-decoration: none;
+  outline: 0;
+  padding: .5em .6em;
+  background: #001E1D;
+  border-radius: 50px;
+  cursor: pointer;
+  color: #FFFFFE;
+  font-weight: bold;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+
+// cssのtransition
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
