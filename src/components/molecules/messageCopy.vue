@@ -1,36 +1,18 @@
 <template lang="pug">
-  .messageCopy
-    
+  .MessageCopy
+    copy-icon
+    span クリップボードにコピー
 </template>
 <script>
+import CopyIcon from "../../assets/icons/Orion_copy.svg";
 export default {
-  props: {
-    id: {
-      type: [String, Number],
-      default: ""
-    },
-    type: {
-      type: String,
-      default: ""
-      // validator: type => ["text", "password", "number"].includes(type)
-    },
-    placeholder: {
-      type: [String, Number],
-      default: ""
-    },
-    value: {
-      type: [String, Number],
-      default: ""
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    }
+  components: {
+    CopyIcon
   }
 };
 </script>
 <style lang="scss" scoped>
-.FormText {
+.MessageCopy {
   width: 100%;
 }
 </style>
