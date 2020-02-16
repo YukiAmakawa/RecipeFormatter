@@ -1,7 +1,6 @@
 <template lang="pug">
     .AppForm
       input.text-input(
-        :id="id"
         :type="type"
         :placeholder="placeholder"
         v-model="inputText"
@@ -11,10 +10,6 @@
 <script>
 export default {
   props: {
-    id: {
-      type: [String, Number],
-      default: ""
-    },
     type: {
       type: String,
       default: ""
