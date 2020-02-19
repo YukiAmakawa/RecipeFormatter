@@ -7,7 +7,7 @@
         :disabled="disabled"
       )
 </template>
-<script>
+<script lang="ts">
 export default {
   props: {
     type: {
@@ -20,12 +20,19 @@ export default {
       default: ""
     },
     value: {
-      type: [String, Number],
+      type: [String],
       default: ""
     },
     disabled: {
       type: Boolean,
       default: false
+    }
+  },
+  computed: {
+    inputText: {
+      get() {
+        return this.value;
+      }
     }
   }
 };

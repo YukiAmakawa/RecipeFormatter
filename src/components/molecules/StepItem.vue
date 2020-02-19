@@ -8,28 +8,26 @@
     )
     close-icon
 </template>
-<script>
+<script lang="ts">
 import MoveIcon from "../../assets/icons/Orion_copy.svg";
 import CloseIcon from "../../assets/icons/Orion_close.svg";
 import AppTextarea from "../atoms/AppTextarea.vue";
 
-export default {
+import Vue, { PropType } from "vue";
+export type Step = {
+  description: string;
+};
+
+export default Vue.extend({
   components: {
     MoveIcon,
     CloseIcon,
     AppTextarea
   },
   props: {
-    step: {
-      type: Object,
-      default: () => {
-        return {
-          description: ""
-        };
-      }
-    }
+    step: Object as PropType<Step>
   }
-};
+});
 </script>
 <style lang="scss" scoped>
 .StepItem {

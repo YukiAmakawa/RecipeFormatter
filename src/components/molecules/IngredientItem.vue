@@ -5,29 +5,26 @@
     app-form(type="text" placeholder="2つ" v-model="ingredient.amount")
     close-icon
 </template>
-<script>
+<script lang="ts">
 import MoveIcon from "../../assets/icons/Orion_copy.svg";
 import CloseIcon from "../../assets/icons/Orion_close.svg";
 import AppForm from "../atoms/AppForm.vue";
+import Vue, { PropType } from "vue";
+export type Ingredient = {
+  name: string;
+  amount: string;
+};
 
-export default {
+export default Vue.extend({
   components: {
     MoveIcon,
     CloseIcon,
     AppForm
   },
   props: {
-    ingredient: {
-      type: Object,
-      default: () => {
-        return {
-          name: "",
-          amount: ""
-        };
-      }
-    }
+    ingredient: Object as PropType<Ingredient>
   }
-};
+});
 </script>
 <style lang="scss" scoped>
 .IngredientItem {

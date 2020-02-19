@@ -3,7 +3,6 @@
     app-form(type="text" placeholder="肉じゃが" v-model="title")
     app-textarea(
       placeholder="食卓の定番料理。薄めの優しい味つけです"
-      row=2
       v-model="description"
     )
 </template>

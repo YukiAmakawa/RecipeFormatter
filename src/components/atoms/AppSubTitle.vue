@@ -1,12 +1,14 @@
 <template lang="pug">
   .AppSubTitle
-    【{{title}}】
+    span 【
+    span {{title}}
+    span 】
 </template>
 <script>
 export default {
   props: {
-    titile: {
-      type: [String],
+    title: {
+      type: String,
       default: ""
     }
   }

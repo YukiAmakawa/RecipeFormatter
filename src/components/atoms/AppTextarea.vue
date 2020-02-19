@@ -14,8 +14,19 @@ export default {
       default: ""
     },
     row: {
-      type: [Number],
+      type: Number,
       default: 2
+    },
+    value: {
+      type: String,
+      default: ""
+    }
+  },
+  computed: {
+    inputText: {
+      get() {
+        return this.value;
+      }
     }
   }
 };
