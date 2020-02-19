@@ -13,7 +13,7 @@ import RecipeTitle from "../../components/organisms/RecipeTitle.vue";
 import IngredientList from "../../components/organisms/IngredientList.vue";
 import StepList from "../../components/organisms/StepList.vue";
 import MemoList from "../../components/organisms/MemoList.vue";
-import HashTagList from "../../components/organisms/StepList.vue";
+import HashTagList from "../../components/organisms/HashTagList.vue";
 import Hashtag from "../../components/molecules/HashTagItem.vue";
 import { Ingredient } from "../../components/molecules/IngredientItem.vue";
 import { Step } from "../../components/molecules/StepItem.vue";
@@ -44,10 +44,27 @@ export default Vue.extend({
       title: "",
       description: ""
     },
-    ingredients: [],
-    steps: [],
-    memos: [],
-    hashtags: []
+    ingredients: [
+      {
+        name: "",
+        amount: ""
+      }
+    ],
+    steps: [
+      {
+        description: ""
+      }
+    ],
+    memos: [
+      {
+        description: ""
+      }
+    ],
+    hashtags: [
+      {
+        name: ""
+      }
+    ]
   })
 });
 </script>

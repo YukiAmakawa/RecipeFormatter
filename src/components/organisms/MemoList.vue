@@ -3,7 +3,8 @@
     app-sub-title(title="備考")
     div(v-for="(memo, index) in memos")
       step-item(:step="memo")
-    add-icon
+    .icon
+      add-icon
 </template>
 <script>
 import AppSubTitle from "../atoms/AppSubTitle.vue";

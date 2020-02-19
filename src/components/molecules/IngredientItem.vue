@@ -1,9 +1,10 @@
 <template lang="pug">
   .IngredientItem
-    move-icon
+    //- move-icon
     app-form(type="text" placeholder="じゃがいも" v-model="ingredient.name")
     app-form(type="text" placeholder="2つ" v-model="ingredient.amount")
-    close-icon
+    .icon
+      close-icon
 </template>
 <script lang="ts">
 import MoveIcon from "../../assets/icons/Orion_copy.svg";

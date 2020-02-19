@@ -4,7 +4,8 @@
     serving-for(:servingFor="servingFor")
     div(v-for="(ingredient, index) in ingredients")
       ingredient-item(:ingredient="ingredient")
-    add-icon
+    .icon
+      add-icon
 </template>
 <script>
 import AppSubTitle from "../atoms/AppSubTitle.vue";

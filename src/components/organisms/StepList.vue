@@ -3,7 +3,8 @@
     app-sub-title(title="作り方")
     div(v-for="(step, index) in steps")
       step-item(:step="step")
-    add-icon
+    .icon
+      add-icon
 </template>
 <script>
 import AppSubTitle from "../atoms/AppSubTitle.vue";
