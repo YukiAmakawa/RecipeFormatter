@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import AppLogo from "../../src/components/atoms/AppLogo.vue";
+import Index from "../../src/pages/recipes/index.vue";
 
 Vue.use(VueRouter);
 
@@ -8,7 +8,7 @@ const routes = [
   {
     path: "/",
     name: "form",
-    component: AppLogo
+    component: Index
   }
   // {
   //   path: "/about",
