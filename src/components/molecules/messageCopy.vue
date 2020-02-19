@@ -1,6 +1,7 @@
 <template lang="pug">
   .MessageCopy
-    copy-icon
+    .icon
+      copy-icon
     span クリップボードにコピー
 </template>
 <script>

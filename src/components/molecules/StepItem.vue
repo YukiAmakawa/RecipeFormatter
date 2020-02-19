@@ -1,12 +1,12 @@
 <template lang="pug">
   .StepItem
-    move-icon
+    //- move-icon
     app-textarea(
       placeholder="じゃがいもの皮をむき、一口大に切る"
-      row=2
       v-model="step.description"
     )
-    close-icon
+    .icon
+      close-icon
 </template>
 <script lang="ts">
 import MoveIcon from "../../assets/icons/Orion_copy.svg";

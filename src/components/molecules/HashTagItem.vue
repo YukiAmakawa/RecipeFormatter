@@ -2,10 +2,12 @@
   .HashTagItem
     span #
     app-form(type="text" placeholder="和食" v-model="hashtag.name")
-    close-icon
+    .icon
+      close-icon
 </template>
 <script lang="ts">
 import AppForm from "../atoms/AppForm.vue";
+import CloseIcon from "../../assets/icons/Orion_close.svg";
 import Vue, { PropType } from "vue";
 export type Hashtag = {
   name: string;
@@ -13,7 +15,8 @@ export type Hashtag = {
 
 export default Vue.extend({
   components: {
-    AppForm
+    AppForm,
+    CloseIcon
   },
   props: {
     hashtag: Object as PropType<Hashtag>
