@@ -1,7 +1,8 @@
 <template lang="pug">
   .HashTagList
-    div(v-for="(hashtag, index) in hashtags")
-      hash-tag-item(:hashtag="hashtag")
+    .hash-tag-list
+      ul(v-for="(hashtag, index) in hashtags")
+        hash-tag-item(:hashtag="hashtag")
     .icon
       add-icon
 </template>
@@ -24,6 +25,13 @@ export default {
 </script>
 <style lang="scss" scoped>
 .HashTagList {
-  width: 100%;
+  width: 217px;
+  .hash-tag-list {
+    width: 217px;
+  }
+  .icon {
+    margin-left: auto;
+    margin-right: 3px;
+  }
 }
 </style>

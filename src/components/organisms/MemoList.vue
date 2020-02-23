@@ -1,7 +1,8 @@
 <template lang="pug">
   .MemoList
-    app-sub-title(title="備考")
-    div(v-for="(memo, index) in memos")
+    .sub-title-wrap
+      app-sub-title(title="備考")
+    .memo-list(v-for="(memo, index) in memos")
       step-item(:step="memo")
     .icon
       add-icon
@@ -28,5 +29,13 @@ export default {
 <style lang="scss" scoped>
 .MemoList {
   width: 100%;
+  .memo-list {
+    margin-top: 5px;
+    width: 316px;
+  }
+  .icon {
+    margin-left: auto;
+    margin-right: 3px;
+  }
 }
 </style>
