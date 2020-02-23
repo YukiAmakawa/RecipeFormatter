@@ -7,6 +7,7 @@
       step-list.step-list(:steps="steps")
       memo-list.memo-list(:memos="memos")
       hash-tag-list.hash-tag-list(:hashtags="hashtags")
+      copy-text.copy-text
 </template>
 
 <script lang="ts">
@@ -16,6 +17,7 @@ import RecipeTitle from "../../components/molecules/RecipeTitle.vue";
 import IngredientList from "../../components/organisms/IngredientList.vue";
 import StepList from "../../components/organisms/StepList.vue";
 import MemoList from "../../components/organisms/MemoList.vue";
+import CopyText from "../../components/organisms/CopyText.vue";
 import HashTagList from "../../components/organisms/HashTagList.vue";
 import { Hashtag } from "../../components/molecules/HashTagItem.vue";
 import { Ingredient } from "../../components/molecules/IngredientItem.vue";
@@ -41,7 +43,8 @@ export default Vue.extend({
     IngredientList,
     StepList,
     MemoList,
-    HashTagList
+    HashTagList,
+    CopyText
   },
   data: (): Data => ({
     recipe: {
@@ -79,6 +82,9 @@ export default Vue.extend({
   }
   .ingredient-list {
     margin-top: 15px;
+  }
+  .message-copy {
+    margin-top: 20px;
   }
 }
 </style>
