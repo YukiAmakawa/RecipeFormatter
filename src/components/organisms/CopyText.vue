@@ -26,7 +26,7 @@
           p.title #料理すきな人とつながりたい
 </template>
 <script>
-import MessageCopy from "../../components/molecules/MessageCopy.vue";
+import MessageCopy from "../molecules/MessageCopy.vue";
 export default {
   components: {
     MessageCopy
