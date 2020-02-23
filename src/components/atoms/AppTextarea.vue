@@ -34,5 +34,17 @@ export default {
 <style lang="scss" scoped>
 .AppTextarea {
   width: 100%;
+  .text-input {
+    width: 100%;
+    font-size: 0.87rem;
+    line-height: calc(0.87rem * row);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 3px 8px;
+    border-radius: 3px;
+    resize: none;
+    &:focus {
+      outline: 1px solid rgba(0, 0, 0, 0.15);
+    }
+  }
 }
 </style>
