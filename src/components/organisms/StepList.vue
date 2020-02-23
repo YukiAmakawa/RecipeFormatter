@@ -1,7 +1,8 @@
 <template lang="pug">
   .StepList
-    app-sub-title(title="作り方")
-    div(v-for="(step, index) in steps")
+    .sub-title-wrap
+      app-sub-title(title="作り方")
+    .step-list(v-for="(step, index) in steps")
       step-item(:step="step")
     .icon
       add-icon
@@ -28,5 +29,12 @@ export default {
 <style lang="scss" scoped>
 .StepList {
   width: 100%;
+  .step-list {
+    margin-top: 5px;
+  }
+  .icon {
+    margin-left: auto;
+    margin-right: 3px;
+  }
 }
 </style>

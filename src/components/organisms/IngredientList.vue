@@ -1,8 +1,9 @@
 <template lang="pug">
   .IngredientList
-    app-sub-title(title="材料")
-    serving-for(:servingFor="servingFor")
-    div(v-for="(ingredient, index) in ingredients")
+    .title-wrap.flex.flex-middle
+      app-sub-title.subtitle(title="材料")
+      serving-for(:servingFor="servingFor")
+    .ingredient-list(v-for="(ingredient, index) in ingredients")
       ingredient-item(:ingredient="ingredient")
     .icon
       add-icon
@@ -35,5 +36,13 @@ export default {
 <style lang="scss" scoped>
 .IngredientList {
   width: 100%;
+  .ingredient-list {
+    margin-top: 5px;
+    width: 316px;
+  }
+  .icon {
+    margin-left: auto;
+    margin-right: 3px;
+  }
 }
 </style>

@@ -1,9 +1,10 @@
 <template lang="pug">
   .HashTagItem
-    span #
-    app-form(type="text" placeholder="和食" v-model="hashtag.name")
-    .icon
-      close-icon
+    div.flex.flex-middle
+      span.hash #
+      app-form.title(type="text" placeholder="和食" v-model="hashtag.name")
+      .icon
+        close-icon
 </template>
 <script lang="ts">
 import AppForm from "../atoms/AppForm.vue";
@@ -25,6 +26,12 @@ export default Vue.extend({
 </script>
 <style lang="scss" scoped>
 .HashTagItem {
-  width: 100%;
+  .title {
+    width: 175px;
+    margin-left: 5px;
+  }
+  .icon {
+    margin-left: 5px;
+  }
 }
 </style>

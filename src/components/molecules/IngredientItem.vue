@@ -1,10 +1,12 @@
 <template lang="pug">
   .IngredientItem
     //- move-icon
-    app-form(type="text" placeholder="じゃがいも" v-model="ingredient.name")
-    app-form(type="text" placeholder="2つ" v-model="ingredient.amount")
-    .icon
-      close-icon
+    div.flex.flex-middle
+      .wrap-forms.flex
+        app-form.name(type="text" placeholder="じゃがいも" v-model="ingredient.name")
+        app-form.amount(type="text" placeholder="2つ" v-model="ingredient.amount")
+      .icon
+        close-icon
 </template>
 <script lang="ts">
 import MoveIcon from "../../assets/icons/Orion_copy.svg";
@@ -30,5 +32,18 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .IngredientItem {
   width: 100%;
+  .wrap-forms {
+    width: 290px;
+    .name {
+      width: 175px;
+    }
+    .amount {
+      width: 108px;
+      margin-left: 7px;
+    }
+  }
+  .icon {
+    margin-left: 5px;
+  }
 }
 </style>

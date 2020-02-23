@@ -1,7 +1,7 @@
 <template lang="pug">
   .RecipeTitle
-    app-form(type="text" placeholder="肉じゃが" v-model="title")
-    app-textarea(
+    app-form.title(type="text" placeholder="肉じゃが" v-model="title")
+    app-textarea.description(
       placeholder="食卓の定番料理。薄めの優しい味つけです"
       v-model="description"
     )
@@ -30,5 +30,12 @@ export default {
 <style lang="scss" scoped>
 .RecipeTitle {
   width: 100%;
+  .title {
+    width: 175px;
+  }
+  .description {
+    width: 290px;
+    margin-top: 5px;
+  }
 }
 </style>

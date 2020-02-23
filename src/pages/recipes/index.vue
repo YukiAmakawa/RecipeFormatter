@@ -1,20 +1,23 @@
 <template lang="pug">
   .recipes-index
-    recipe-title(:title="recipe.title" :description="recipe.description")
-    ingredient-list(:ingredients="ingredients")
-    step-list(:steps="steps")
-    memo-list(:memos="memos")
-    hash-tag-list(:hashtags="hashtags")
+    .wrap
+      app-logo.app-logo
+      recipe-title.recipe-title(:title="recipe.title" :description="recipe.description")
+      ingredient-list.ingredient-list(:ingredients="ingredients")
+      step-list.step-list(:steps="steps")
+      memo-list.memo-list(:memos="memos")
+      hash-tag-list.hash-tag-list(:hashtags="hashtags")
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import RecipeTitle from "../../components/organisms/RecipeTitle.vue";
+import AppLogo from "../../components/atoms/AppLogo.vue";
+import RecipeTitle from "../../components/molecules/RecipeTitle.vue";
 import IngredientList from "../../components/organisms/IngredientList.vue";
 import StepList from "../../components/organisms/StepList.vue";
 import MemoList from "../../components/organisms/MemoList.vue";
 import HashTagList from "../../components/organisms/HashTagList.vue";
-import Hashtag from "../../components/molecules/HashTagItem.vue";
+import { Hashtag } from "../../components/molecules/HashTagItem.vue";
 import { Ingredient } from "../../components/molecules/IngredientItem.vue";
 import { Step } from "../../components/molecules/StepItem.vue";
 
@@ -33,6 +36,7 @@ export type Data = {
 
 export default Vue.extend({
   components: {
+    AppLogo,
     RecipeTitle,
     IngredientList,
     StepList,
@@ -68,3 +72,13 @@ export default Vue.extend({
   })
 });
 </script>
+<style lang="scss">
+.recipes-index {
+  .recipe-title {
+    margin-top: 36px;
+  }
+  .ingredient-list {
+    margin-top: 15px;
+  }
+}
+</style>

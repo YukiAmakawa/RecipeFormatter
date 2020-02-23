@@ -1,8 +1,6 @@
 <template lang="pug">
   .AppSubTitle
-    span 【
-    span {{title}}
-    span 】
+    span.sub-title 【{{title}}】
 </template>
 <script>
 export default {
@@ -16,6 +14,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 .AppSubTitle {
-  width: 100%;
+  width: 90px;
+  .sub-title {
+    font-size: 0.87rem;
+  }
 }
 </style>
