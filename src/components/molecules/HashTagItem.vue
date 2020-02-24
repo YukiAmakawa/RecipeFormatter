@@ -18,7 +18,7 @@ type Data = {
   hastagItem: Record<string, string>;
 };
 type Props = {
-  hastag: Record<string, string>;
+  hashtag: Record<string, string>;
 };
 
 export default Vue.extend({
