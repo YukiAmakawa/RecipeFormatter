@@ -3,7 +3,12 @@
     .wrap
       app-logo.app-logo
       recipe-title.recipe-title(:title="recipe.title" :description="recipe.description")
-      ingredient-list.ingredient-list(:ingredients="ingredients")
+      ingredient-list.ingredient-list(
+        :ingredients="ingredients.ingredientsList"
+        :servingFor="ingredients.servingFor"
+        @on-change-ingredient-list="onChangeIngredientList"
+        @on-change-serving-for="onChangeServingFor"
+      )
       step-list.step-list(:steps="steps")
       memo-list.memo-list(:memos="memos")
       hash-tag-list.hash-tag-list(:hashtags="hashtags" @on-change-hashtag-list="onChangeHashTagList")
@@ -28,9 +33,14 @@ type Recipe = {
   description: string;
 };
 
+type IngredientList = {
+  ingredientsList: Ingredient[];
+  servingFor: string;
+};
+
 export type Data = {
   recipe: Recipe;
-  ingredients: Ingredient[];
+  ingredients: IngredientList;
   steps: Step[];
   memos: Step[];
   hashtags: Hashtag[];
@@ -51,12 +61,15 @@ export default Vue.extend({
       title: "",
       description: ""
     },
-    ingredients: [
-      {
-        name: "",
-        amount: ""
-      }
-    ],
+    ingredients: {
+      ingredientsList: [
+        {
+          name: "",
+          amount: ""
+        }
+      ],
+      servingFor: ""
+    },
     steps: [
       {
         description: ""
@@ -76,6 +89,14 @@ export default Vue.extend({
   methods: {
     onChangeHashTagList(hashtagList: Hashtag[]) {
       this.hashtags = hashtagList;
+    },
+    onChangeIngredientList(ingredientList: Ingredient[]) {
+      this.ingredients.ingredientsList = ingredientList;
+    },
+    onChangeServingFor(servingFor: string) {
+      console.log("onChangeServingFor-index");
+      console.log(servingFor);
+      this.ingredients.servingFor = servingFor;
     }
   }
 });
