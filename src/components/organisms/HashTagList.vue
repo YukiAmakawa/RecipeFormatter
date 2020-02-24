@@ -1,8 +1,8 @@
 <template lang="pug">
   .HashTagList
     .hash-tag-list
-      ul(v-for="(hashtag, index) in hashtags")
-        hash-tag-item(:hashtag="hashtag" v-model="hashtagItems" @on-change-hashtag-item="onChangeHashtagList")
+      ul(v-for="(hashtag, index) in hashtags" v-model="hashtagItems")
+        hash-tag-item(:hashtag="hashtag" @on-change-hashtag-item="onChangeHashtagList($event, index)")
     .icon
       add-icon
 </template>
@@ -11,9 +11,6 @@ import HashTagItem from "../molecules/HashTagItem.vue";
 import AddIcon from "../../assets/icons/Orion_add-circle.svg";
 import { PropType } from "vue";
 import { Hashtag } from "../../components/molecules/HashTagItem.vue";
-// export type Hashtag = {
-//   name: string;
-// };
 type Data = {
   hastagItems: Array<Hashtag>;
 };
@@ -38,10 +35,9 @@ export default {
     };
   },
   methods: {
-    onChangeHashtagList(value: string) {
-      console.log("list");
-      console.log(value);
-      // this.$emit("on-change-hashtag-list", value);
+    onChangeHashtagList(hashtagItem: Hashtag, index: number) {
+      this.hashtagItems[index] = hashtagItem;
+      this.$emit("on-change-hashtag-list", this.hashtagItems);
     }
   }
 };

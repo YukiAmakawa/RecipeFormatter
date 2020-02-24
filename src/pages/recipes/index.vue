@@ -6,7 +6,7 @@
       ingredient-list.ingredient-list(:ingredients="ingredients")
       step-list.step-list(:steps="steps")
       memo-list.memo-list(:memos="memos")
-      hash-tag-list.hash-tag-list(:hashtags="hashtags")
+      hash-tag-list.hash-tag-list(:hashtags="hashtags" @on-change-hashtag-list="onChangeHashTagList")
       copy-text.copy-text
 </template>
 
@@ -69,10 +69,15 @@ export default Vue.extend({
     ],
     hashtags: [
       {
-        name: ""
+        title: ""
       }
     ]
-  })
+  }),
+  methods: {
+    onChangeHashTagList(hashtagList: Hashtag[]) {
+      this.hashtags = hashtagList;
+    }
+  }
 });
 </script>
 <style lang="scss">

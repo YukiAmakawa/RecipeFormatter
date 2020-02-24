@@ -2,7 +2,7 @@
   .HashTagItem
     div.flex.flex-middle
       span.hash #
-      app-form.title(type="text" placeholder="和食" v-model="hashtagItemTitle" @on-change-form="onChangeHashtagItem")
+      app-form.title(type="text" placeholder="和食" v-model="hashtagItem.title" @on-change-form="onChangeHashtagItem")
       .icon
         close-icon
 </template>
@@ -32,14 +32,12 @@ export default Vue.extend({
   },
   data() {
     return {
-      hashtagItemTitle: this.hashtag.title
+      hashtagItem: this.hashtag
     };
   },
   methods: {
-    onChangeHashtagItem(value: string) {
-      console.log("item");
-      console.log(value);
-      this.$emit("on-change-hashtag-item", value);
+    onChangeHashtagItem() {
+      this.$emit("on-change-hashtag-item", this.hashtagItem);
     }
   }
 });

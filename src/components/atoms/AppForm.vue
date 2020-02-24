@@ -41,8 +41,6 @@ export default {
   },
   methods: {
     onChangeForm(value: string) {
-      console.log("form");
-      console.log(value);
       this.$emit("on-change-form", value);
     }
   }
