@@ -3,8 +3,9 @@
       input.text-input(
         :type="type"
         :placeholder="placeholder"
-        v-model="inputText"
+        v-model="text"
         :disabled="disabled"
+        @change="onChangeForm(value)"
       )
 </template>
 <script lang="ts">
@@ -12,8 +13,8 @@ export default {
   props: {
     type: {
       type: String,
-      default: ""
-      // validator: type => ["text", "password", "number"].includes(type)
+      default: "text"
+      // validator: type => ["text"].includes(type)
     },
     placeholder: {
       type: [String, Number],
@@ -29,10 +30,20 @@ export default {
     }
   },
   computed: {
-    inputText: {
-      get() {
+    text: {
+      get(): string {
         return this.value;
+      },
+      set(value: string) {
+        this.$emit("input", value);
       }
+    }
+  },
+  methods: {
+    onChangeForm(value: string) {
+      console.log("form");
+      console.log(value);
+      this.$emit("on-change-form", value);
     }
   }
 };
