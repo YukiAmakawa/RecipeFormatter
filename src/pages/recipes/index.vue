@@ -9,7 +9,10 @@
         @on-change-ingredient-list="onChangeIngredientList"
         @on-change-serving-for="onChangeServingFor"
       )
-      step-list.step-list(:steps="steps")
+      step-list.step-list(
+        :steps="steps"
+        @on-change-step-list=""
+        )
       memo-list.memo-list(:memos="memos")
       hash-tag-list.hash-tag-list(:hashtags="hashtags" @on-change-hashtag-list="onChangeHashTagList")
       copy-text.copy-text
@@ -94,9 +97,10 @@ export default Vue.extend({
       this.ingredients.ingredientsList = ingredientList;
     },
     onChangeServingFor(servingFor: string) {
-      console.log("onChangeServingFor-index");
-      console.log(servingFor);
       this.ingredients.servingFor = servingFor;
+    },
+    onChangeStepList(stepList: Step[]) {
+      this.steps = stepList;
     }
   }
 });
