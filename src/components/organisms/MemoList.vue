@@ -3,25 +3,47 @@
     .sub-title-wrap
       app-sub-title(title="備考")
     .memo-list(v-for="(memo, index) in memos")
-      step-item(:step="memo")
+      memo-item(
+        :memo="memo"
+        @on-change-memo-item="onChangeMemoList($event, index)"
+      )
     .icon
       add-icon
 </template>
-<script>
+<script lang="ts">
 import AppSubTitle from "../atoms/AppSubTitle.vue";
-import StepItem from "../molecules/StepItem.vue";
+import MemoItem from "../molecules/MemoItem.vue";
 import AddIcon from "../../assets/icons/Orion_add-circle.svg";
+import { Memo } from "../../components/molecules/MemoItem.vue";
+
+type Data = {
+  memoItems: Array<Memo>;
+};
+type Props = {
+  memos: Array<Memo>;
+};
 
 export default {
   components: {
     AppSubTitle,
-    StepItem,
+    MemoItem,
     AddIcon
   },
   props: {
     memos: {
-      type: Array,
+      type: Array as PropType<Memo[]>,
       default: () => []
+    }
+  },
+  data() {
+    return {
+      memoItems: this.memos
+    };
+  },
+  methods: {
+    onChangeMemoList(memoItem: Memo, index: number) {
+      this.memoItems[index] = memoItem;
+      this.$emit("on-change-memo-list", this.memoItems);
     }
   }
 };
