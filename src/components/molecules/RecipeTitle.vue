@@ -3,50 +3,47 @@
     app-form.title(
       type="text"
       placeholder="肉じゃが"
-      v-model="recipeTitle"
+      v-model="recipeItem.title"
       @on-change-form="onChangeRecipeTitle"
     )
     app-textarea.description(
       placeholder="食卓の定番料理。薄めの優しい味つけです"
-      v-model="recipeDescription"
+      v-model="recipeItem.description"
       @on-change-textarea="onChangeRecipeTitle"
     )
 </template>
-<script>
+<script lang="ts">
 import AppForm from "../atoms/AppForm.vue";
 import AppTextarea from "../atoms/AppTextarea.vue";
+import Vue, { PropType } from "vue";
+export type Recipe = {
+  title: string;
+  description: string;
+};
 
-export default {
+export default Vue.extend({
   components: {
     AppForm,
     AppTextarea
   },
   props: {
-    title: {
-      type: String,
-      default: ""
-    },
-    description: {
-      type: String,
-      default: ""
-    }
+    recipe: Object as PropType<Recipe>
   },
   data() {
     return {
-      recipeTitle: this.title,
-      recipeDescription: this.description
+      recipeItem: {
+        title: this.title,
+        description: this.description
+      }
     };
   },
   methods: {
     onChangeRecipeTitle() {
       console.log("called");
-      this.$emit("on-change-recipe-title", {
-        title: this.recipeTitle,
-        description: this.recipeDescription
-      });
+      this.$emit("on-change-recipe-title", this.recipeItem);
     }
   }
-};
+});
 </script>
 <style lang="scss" scoped>
 .RecipeTitle {

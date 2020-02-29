@@ -2,36 +2,70 @@
   .CopyText
     message-copy.message-copy
     .formatted-text
-      p.formatted-title 
-        .name 【簡単春巻き】
+      p.formatted-title
+        .name {{recipe.title}}
+      p.formatted-description
+        .name {{recipe.description}}
       <br>
-      p.formatted-ingredients 【材料】（2人分）
+      p.formatted-ingredients 【材料】
+      span （
+      span {{servingFor}}
+      span ）
       ul.formatted-ingredients-list
-        li.ingredient
-          span.name 春巻きの皮&nbsp;&nbsp;
-          span.amount 10枚
-        li.ingredient
-          span.name 春巻きの皮&nbsp;&nbsp;
-          span.amount 10枚
+        li.ingredient(v-for="ingredient in ingredients")
+          p.name {{ingredient.name}}
+          p.amount {{ingredient.amount}}
       <br>
       p.formatted-steps 【作り方】
       ul.formatted-steps-list
-        li.ingredient
-          p.description ①しいたけ、ニラをみじん切りにします。
-          p.description ②ごま油を熱して、豚ひき肉に火が通るまで炒めたら、1を入れます。
+        li.step(v-for="(step, index) in steps")
+          p.step-description {{step.description}}
       <br>
       ul.formatted-hashtags-list
-        li.hastag
-          p.title #中華
-          p.title #料理すきな人とつながりたい
+        li.memo(v-for="(memo, index) in memos")
+          p.memo-description {{memo.description}}
+      ul.formatted-hashtags-list
+        li.hashtag(v-for="hashtag in hashtags")
+          p.hashtag-title \#{{hashtag.title}}
 </template>
-<script>
+<script lang="ts">
 import MessageCopy from "../molecules/MessageCopy.vue";
+import { PropType } from "vue";
+import { Recipe } from "../../components/molecules/RecipeTitle.vue";
+import { Hashtag } from "../../components/molecules/HashTagItem.vue";
+import { Ingredient } from "../../components/molecules/IngredientItem.vue";
+import { Step } from "../../components/molecules/StepItem.vue";
+import { Memo } from "../../components/molecules/MemoItem.vue";
 export default {
   components: {
     MessageCopy
   },
-  props: {}
+  props: {
+    recipe: {
+      type: Object as PropType<Recipe>,
+      default: {}
+    },
+    ingredients: {
+      type: Array as PropType<Ingredient[]>,
+      default: () => []
+    },
+    servingFor: {
+      type: String,
+      default: ""
+    },
+    steps: {
+      type: Array as PropType<Step[]>,
+      default: () => []
+    },
+    memos: {
+      type: Array as PropType<Memo[]>,
+      default: () => []
+    },
+    hashtags: {
+      type: Array as PropType<Hashtag[]>,
+      default: () => []
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

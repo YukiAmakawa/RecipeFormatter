@@ -3,8 +3,7 @@
     .wrap
       app-logo.app-logo
       recipe-title.recipe-title(
-        :title="recipe.title"
-        :description="recipe.description"
+        :recipe="recipe"
         @on-change-recipe-title="onChangeRecipeTitle"
       )
       ingredient-list.ingredient-list(
@@ -22,7 +21,14 @@
         @on-change-memo-list="onChangeMemoList"
       )
       hash-tag-list.hash-tag-list(:hashtags="hashtags" @on-change-hashtag-list="onChangeHashTagList")
-      copy-text.copy-text
+      copy-text.copy-text(
+        :recipe="recipe"
+        :ingredients="ingredients.ingredientsList"
+        :servingFor="ingredients.servingFor"
+        :steps="steps"
+        :memos="memos"
+        :hashtags="hashtags"
+      )
 </template>
 
 <script lang="ts">
@@ -34,15 +40,11 @@ import StepList from "../../components/organisms/StepList.vue";
 import MemoList from "../../components/organisms/MemoList.vue";
 import CopyText from "../../components/organisms/CopyText.vue";
 import HashTagList from "../../components/organisms/HashTagList.vue";
+import { Recipe } from "../../components/molecules/RecipeTitle.vue";
 import { Hashtag } from "../../components/molecules/HashTagItem.vue";
 import { Ingredient } from "../../components/molecules/IngredientItem.vue";
 import { Step } from "../../components/molecules/StepItem.vue";
 import { Memo } from "../../components/molecules/MemoItem.vue";
-
-type Recipe = {
-  title: string;
-  description: string;
-};
 
 type IngredientList = {
   ingredientsList: Ingredient[];
