@@ -2,7 +2,11 @@
   .recipes-index
     .wrap
       app-logo.app-logo
-      recipe-title.recipe-title(:title="recipe.title" :description="recipe.description")
+      recipe-title.recipe-title(
+        :title="recipe.title"
+        :description="recipe.description"
+        @on-change-recipe-title="onChangeRecipeTitle"
+      )
       ingredient-list.ingredient-list(
         :ingredients="ingredients.ingredientsList"
         :servingFor="ingredients.servingFor"
@@ -11,9 +15,12 @@
       )
       step-list.step-list(
         :steps="steps"
-        @on-change-step-list=""
+        @on-change-step-list="onChangeStepList"
         )
-      memo-list.memo-list(:memos="memos")
+      memo-list.memo-list(
+        :memos="memos"
+        @on-change-memo-list="onChangeMemoList"
+      )
       hash-tag-list.hash-tag-list(:hashtags="hashtags" @on-change-hashtag-list="onChangeHashTagList")
       copy-text.copy-text
 </template>
@@ -30,6 +37,7 @@ import HashTagList from "../../components/organisms/HashTagList.vue";
 import { Hashtag } from "../../components/molecules/HashTagItem.vue";
 import { Ingredient } from "../../components/molecules/IngredientItem.vue";
 import { Step } from "../../components/molecules/StepItem.vue";
+import { Memo } from "../../components/molecules/MemoItem.vue";
 
 type Recipe = {
   title: string;
@@ -41,11 +49,19 @@ type IngredientList = {
   servingFor: string;
 };
 
+type StepList = {
+  stepList: Step[];
+};
+
+type MemoList = {
+  memoList: Memo[];
+};
+
 export type Data = {
   recipe: Recipe;
   ingredients: IngredientList;
   steps: Step[];
-  memos: Step[];
+  memos: Memo[];
   hashtags: Hashtag[];
 };
 
@@ -90,6 +106,10 @@ export default Vue.extend({
     ]
   }),
   methods: {
+    onChangeRecipeTitle(recipeTitle: Recipe) {
+      console.log(recipeTitle);
+      this.recipe = recipeTitle;
+    },
     onChangeHashTagList(hashtagList: Hashtag[]) {
       this.hashtags = hashtagList;
     },
@@ -101,6 +121,9 @@ export default Vue.extend({
     },
     onChangeStepList(stepList: Step[]) {
       this.steps = stepList;
+    },
+    onChangeMemoList(memoList: Memo[]) {
+      this.memos = memoList;
     }
   }
 });
