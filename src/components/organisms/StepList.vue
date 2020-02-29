@@ -31,7 +31,7 @@ export default {
   },
   props: {
     steps: {
-      type: Array,
+      type: Array as PropType<Step[]>,
       default: () => []
     }
   },
