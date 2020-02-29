@@ -1,11 +1,11 @@
 <template lang="pug">
-  .StepItem
+  .MemoItem
     //- move-icon
     div.flex.flex-middle
       app-textarea.description(
-        placeholder="じゃがいもの皮をむき、一口大に切る"
-        v-model="step.description"
-        @on-change-textarea="onChangeStepItem"
+        placeholder="じゃがいもの下茹では電子レンジで代用できます"
+        v-model="memo.description"
+        @on-change-textarea="onChangeMemoItem"
       )
       .icon
         close-icon
@@ -15,15 +15,15 @@ import MoveIcon from "../../assets/icons/Orion_copy.svg";
 import CloseIcon from "../../assets/icons/Orion_close.svg";
 import AppTextarea from "../atoms/AppTextarea.vue";
 import Vue, { PropType } from "vue";
-export type Step = {
+export type Memo = {
   description: string;
 };
 
 type Data = {
-  step: string;
+  memo: string;
 };
 type Props = {
-  step: string;
+  memo: string;
 };
 
 export default Vue.extend({
@@ -33,22 +33,22 @@ export default Vue.extend({
     AppTextarea
   },
   props: {
-    step: Object as PropType<Step>
+    memo: Object as PropType<Memo>
   },
   data() {
     return {
-      stepItem: this.step
+      MemoItem: this.memo
     };
   },
   methods: {
-    onChangeStepItem() {
-      this.$emit("on-change-step-item", this.stepItem);
+    onChangeMemoItem() {
+      this.$emit("on-change-memo-item", this.MemoItem);
     }
   }
 });
 </script>
 <style lang="scss" scoped>
-.StepItem {
+.MemoItem {
   width: 100%;
   .description {
     width: 290px;

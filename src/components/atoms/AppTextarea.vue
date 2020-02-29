@@ -2,11 +2,12 @@
     .AppTextarea
       textarea.text-input(
         :placeholder="placeholder"
-        v-model="inputText"
+        v-model="text"
         :row="row"
+        @change="onChangeTextarea(value)"
       )
 </template>
-<script>
+<script lang="ts">
 export default {
   props: {
     placeholder: {
@@ -23,10 +24,18 @@ export default {
     }
   },
   computed: {
-    inputText: {
-      get() {
+    text: {
+      get(): string {
         return this.value;
+      },
+      set(value: string) {
+        this.$emit("input", value);
       }
+    }
+  },
+  methods: {
+    onChangeTextarea(value: string) {
+      this.$emit("on-change-textarea", value);
     }
   }
 };

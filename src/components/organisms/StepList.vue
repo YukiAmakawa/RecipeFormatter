@@ -3,14 +3,25 @@
     .sub-title-wrap
       app-sub-title(title="作り方")
     .step-list(v-for="(step, index) in steps")
-      step-item(:step="step")
+      step-item(
+        :step="step"
+        @on-change-step-item="onChangeStepList($event, index)"
+      )
     .icon
       add-icon
 </template>
-<script>
+<script lang="ts">
 import AppSubTitle from "../atoms/AppSubTitle.vue";
 import StepItem from "../molecules/StepItem.vue";
 import AddIcon from "../../assets/icons/Orion_add-circle.svg";
+import { Step } from "../../components/molecules/StepItem.vue";
+
+type Data = {
+  stepItems: Array<Step>;
+};
+type Props = {
+  steps: Array<Step>;
+};
 
 export default {
   components: {
@@ -20,8 +31,19 @@ export default {
   },
   props: {
     steps: {
-      type: Array,
+      type: Array as PropType<Step[]>,
       default: () => []
+    }
+  },
+  data() {
+    return {
+      stepItems: this.steps
+    };
+  },
+  methods: {
+    onChangeStepList(stepItem: Hashtag, index: number) {
+      this.stepItems[index] = stepItem;
+      this.$emit("on-change-step-list", this.stepItems);
     }
   }
 };

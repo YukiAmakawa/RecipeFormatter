@@ -2,13 +2,25 @@
   .ServingFor
     .flex.flex-middle
       span.blacket （
-      app-form.servingForm(type="text" placeholder="2人分" v-model="servingFor")
+      app-form.servingForm(
+        type="text"
+        placeholder="2人分"
+        v-model="servingForItem"
+        @on-change-form="onChangeServingForItem"
+      )
       span.blacket ）
 </template>
-<script>
+<script lang="ts">
 import AppForm from "../atoms/AppForm.vue";
+import Vue from "vue";
+type Data = {
+  servingForItem: string;
+};
+type Props = {
+  servingFor: string;
+};
 
-export default {
+export default Vue.extend({
   components: {
     AppForm
   },
@@ -17,8 +29,19 @@ export default {
       type: String,
       name: ""
     }
+  },
+  data() {
+    return {
+      servingForItem: this.servingFor
+    };
+  },
+  methods: {
+    onChangeServingForItem() {
+      console.log(this.servingForItem);
+      this.$emit("on-change-serving-for-item", this.servingForItem);
+    }
   }
-};
+});
 </script>
 <style lang="scss" scoped>
 .ServingFor {
