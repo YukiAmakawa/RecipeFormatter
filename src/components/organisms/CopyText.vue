@@ -1,6 +1,10 @@
 <template lang="pug">
   .CopyText
-    message-copy.message-copy
+    //- message-copy.message-copy(@click="copyTexts")
+    .message-wrap.flex.flex-middle(@click="copyTexts")
+      .icon
+        copy-icon
+      .copy-text クリップボードにコピー
     .formatted-text
       p.formatted-title
         .name {{recipe.title}}
@@ -29,7 +33,8 @@
           p.hashtag-title \#{{hashtag.title}}
 </template>
 <script lang="ts">
-import MessageCopy from "../molecules/MessageCopy.vue";
+// import MessageCopy from "../molecules/MessageCopy.vue";
+import CopyIcon from "../../assets/icons/Orion_copy.svg";
 import { PropType } from "vue";
 import { Recipe } from "../../components/molecules/RecipeTitle.vue";
 import { Hashtag } from "../../components/molecules/HashTagItem.vue";
@@ -38,7 +43,8 @@ import { Step } from "../../components/molecules/StepItem.vue";
 import { Memo } from "../../components/molecules/MemoItem.vue";
 export default {
   components: {
-    MessageCopy
+    // MessageCopy
+    CopyIcon
   },
   props: {
     recipe: {
@@ -65,15 +71,43 @@ export default {
       type: Array as PropType<Hashtag[]>,
       default: () => []
     }
+  },
+  methods: {
+    copyTexts() {
+      console.log("called");
+      const formattedText = this.$el.querySelector(".formatted-text")
+        .textContent;
+      navigator.clipboard
+        .writeText(formattedText)
+        .then(() => {
+          console.log("ok");
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
   }
 };
 </script>
 <style lang="scss" scoped>
 .CopyText {
   width: 100%;
-  font-size: 14px;
+  border-top: 1px dashed gray;
   p {
     margin: 2px;
+  }
+  .message-wrap {
+    width: 150px;
+    margin-left: auto;
+    margin-top: 8px;
+    .copy-text {
+      margin-left: 5px;
+      font-size: 12px;
+    }
+    .icon {
+      width: 14px;
+      height: 14px;
+    }
   }
 }
 </style>
