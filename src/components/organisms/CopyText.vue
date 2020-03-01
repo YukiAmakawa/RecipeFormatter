@@ -4,32 +4,29 @@
       .icon
         copy-icon
       .copy-text クリップボードにコピー
-    .formatted-text
-      p.formatted-title
-        .name {{recipe.title}}
-      p.formatted-description
-        .name {{recipe.description}}
+    span.formatted-text
+      span.recipe
+        span.recipe-name {{recipe.title}}<br>
+        span.recipe-description {{recipe.description}}<br><br>
+      template.formatted-ingredients 【材料】（{{servingFor}}）<br>
+      //- ul.formatted-ingredients-list
+      template.ingredient(v-for="ingredient in ingredients")
+        span.ing-name-amount {{ingredient.name}} {{ingredient.amount}}<br>
       <br>
-      p.formatted-ingredients 【材料】
-      span （
-      span {{servingFor}}
-      span ）
-      ul.formatted-ingredients-list
-        li.ingredient(v-for="ingredient in ingredients")
-          p.name {{ingredient.name}}
-          p.amount {{ingredient.amount}}
+      template.formatted-steps 【作り方】<br>
+      //- ul.formatted-steps-list
+      template.step(v-for="(step, index) in steps")
+        template.step-description {{index+1}}. {{step.description}}<br>
       <br>
-      p.formatted-steps 【作り方】
-      ul.formatted-steps-list
-        li.step(v-for="(step, index) in steps")
-          p.step-description {{step.description}}
+      template.formatted-steps 【備考】<br>
+      //- ul.formatted-hashtags-list
+      template.memo(v-for="(memo, index) in memos")
+          template.memo-description {{index+1}}. {{memo.description}}<br>
       <br>
-      ul.formatted-hashtags-list
-        li.memo(v-for="(memo, index) in memos")
-          p.memo-description {{memo.description}}
-      ul.formatted-hashtags-list
-        li.hashtag(v-for="hashtag in hashtags")
-          p.hashtag-title \#{{hashtag.title}}
+      //- ul.formatted-hashtags-list
+      template.hashtag(v-for="hashtag in hashtags")
+        template.hashtag-title \#{{hashtag.title}} 
+      <br>
 </template>
 <script lang="ts">
 import CopyIcon from "../../assets/icons/Orion_copy.svg";
@@ -72,8 +69,38 @@ export default {
   methods: {
     copyTexts() {
       console.log("called");
-      const formattedText = this.$el.querySelector(".formatted-text")
-        .textContent;
+      // const formattedText = this.$el
+      //   .querySelector(".formatted-text")
+      //   .textContent.replace(/\r?\n/g, "<br>");
+      const formattedTitle = `${this.recipe.title}\r\n${this.recipe.description}`;
+
+      const formattedIngredientTitle = `材料（${this.servingFor})\r\n`;
+      let formattedIngredientItem = [];
+      this.ingredients.forEach(i => {
+        formattedIngredientItem += `${i.name}　${i.amount}\r\n`;
+      });
+
+      const formattedMemotTitle = `備考\r\n`;
+      let formattedMemoItem = [];
+      this.memos.forEach((m, index) => {
+        formattedMemoItem += `${index + 1}. ${m.description}\r\n`;
+      });
+
+      const formattedStepTitle = `作り方\r\n`;
+      let formattedStepItem = [];
+      this.steps.forEach((s, index) => {
+        formattedStepItem += `${index + 1}. ${s.description}\r\n`;
+      });
+
+      let formattedHashtagItem = [];
+      this.hashtags.forEach(h => {
+        formattedHashtagItem += `#${h.title} `;
+      });
+
+      const line = ".\r\n";
+
+      const formattedText = `${formattedTitle}${line}${formattedIngredientTitle}${formattedIngredientItem}\r\n${line}\r\n${formattedStepTitle}${formattedStepItem}\r\n${line}${formattedMemotTitle}${formattedMemoItem}\r\n${formattedHashtagItem}`;
+
       navigator.clipboard
         .writeText(formattedText)
         .then(() => {

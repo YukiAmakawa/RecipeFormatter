@@ -79,29 +79,42 @@ export default Vue.extend({
   },
   data: (): Data => ({
     recipe: {
-      title: "",
-      description: ""
+      title: "ポテトサラダ",
+      description: "ほくほくおいしい"
     },
     ingredients: {
       ingredientsList: [
         {
-          name: "",
-          amount: ""
+          name: "じゃがいも",
+          amount: "3つ"
+        },
+        {
+          name: "マヨ",
+          amount: "大さじ2"
         }
       ],
-      servingFor: ""
+      servingFor: "1人分"
     },
     steps: [
       {
-        description: ""
+        description: "芋をふかす"
+      },
+      {
+        description: "つぶす"
       }
     ],
     memos: [
       {
-        description: ""
+        description: "芋はレンチンが早い"
+      },
+      {
+        description: "かつおぶし入れると美味しい"
       }
     ],
     hashtags: [
+      {
+        title: "テスト"
+      },
       {
         title: ""
       }
