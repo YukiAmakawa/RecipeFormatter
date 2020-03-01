@@ -79,8 +79,8 @@ export default Vue.extend({
   },
   data: (): Data => ({
     recipe: {
-      title: "ポテトサラダ",
-      description: "ほくほくおいしい"
+      title: "",
+      description: ""
     },
     ingredients: {
       ingredientsList: [
@@ -116,7 +116,7 @@ export default Vue.extend({
         title: "テスト"
       },
       {
-        title: ""
+        title: "じゃがいも"
       }
     ]
   }),

@@ -6,26 +6,26 @@
       .copy-text クリップボードにコピー
     span.formatted-text
       span.recipe
-        span.recipe-name {{recipe.title}}<br>
-        span.recipe-description {{recipe.description}}<br><br>
-      template.formatted-ingredients 【材料】（{{servingFor}}）<br>
+        span.recipe-name {{formattedTitle}}<br>
+        span.recipe-description {{formattedDescription}}<br>
+      template.formatted-ingredients {{formattedIngredientTitle}}<br>
       //- ul.formatted-ingredients-list
       template.ingredient(v-for="ingredient in ingredients")
-        span.ing-name-amount {{ingredient.name}} {{ingredient.amount}}<br>
+        span.ing-name-amount(v-if="ingredient.name&&ingredient.amount") {{ingredient.name}}  {{ingredient.amount}}<br>
       <br>
-      template.formatted-steps 【作り方】<br>
+      template.formatted-steps {{formattedStepTitle}}<br>
       //- ul.formatted-steps-list
       template.step(v-for="(step, index) in steps")
-        template.step-description {{index+1}}. {{step.description}}<br>
+        template.step-description(v-if="step.description") {{index+1}}. {{step.description}}<br>
       <br>
-      template.formatted-steps 【備考】<br>
+      template.formatted-steps {{formattedMemotTitle}}<br>
       //- ul.formatted-hashtags-list
       template.memo(v-for="(memo, index) in memos")
-          template.memo-description {{index+1}}. {{memo.description}}<br>
+          template.memo-description(v-if="memo.description") {{index+1}}. {{memo.description}}<br>
       <br>
       //- ul.formatted-hashtags-list
       template.hashtag(v-for="hashtag in hashtags")
-        template.hashtag-title \#{{hashtag.title}} 
+        template.hashtag-title(v-if="hashtag.title") \#{{hashtag.title}} 
       <br>
 </template>
 <script lang="ts">
@@ -66,47 +66,69 @@ export default {
       default: () => []
     }
   },
-  methods: {
-    copyTexts() {
-      const formattedTitle = `【${this.recipe.title}】\r\n${this.recipe.description}`;
-
-      const formattedIngredientTitle = `ー材料（${this.servingFor})ーーーーーー`;
+  computed: {
+    formattedServingFor() {
+      return this.servingFor ? `（${this.servingFor})` : "";
+    },
+    formattedTitle() {
+      return this.recipe.title ? `${this.recipe.title}】` : "";
+    },
+    formattedDescription() {
+      return this.recipe.description ? `${this.recipe.description}` : "";
+    },
+    formattedIngredientTitle() {
+      return this.ingredients[0].name && this.ingredients[0].amount
+        ? `ー材料${this.formattedServingFor}ーーーーーー`
+        : "";
+    },
+    formattedIngredientItem() {
       let formattedIngredientItem = [];
       this.ingredients.forEach(i => {
-        formattedIngredientItem += `\r\n${i.name}　${i.amount}`;
+        if (!i.name || !i.amount) return;
+        formattedIngredientItem += `\r\n${i.name}  ${i.amount}`;
       });
-
-      const formattedStepTitle = `ー作り方ーーーーーー`;
+      return formattedIngredientItem;
+    },
+    formattedStepTitle() {
+      return this.steps[0].description ? `ー作り方ーーーーーー` : "";
+    },
+    formattedStepItem() {
       let formattedStepItem = [];
       this.steps.forEach((s, index) => {
+        if (!s.description) return;
         formattedStepItem += `\r\n${index + 1}. ${s.description}`;
       });
-
-      const formattedMemotTitle = `ー備考ーーーーーー`;
+      return formattedStepItem;
+    },
+    formattedMemotTitle() {
+      return this.memos[0].description ? `ー備考ーーーーーー` : "";
+    },
+    formattedMemoItem() {
       let formattedMemoItem = [];
       this.memos.forEach((m, index) => {
+        if (!m.description) return;
         formattedMemoItem += `\r\n${index + 1}. ${m.description}`;
       });
+      return formattedMemoItem;
+    },
+    formatReturn() {
+      return `
 
+
+`;
+    },
+    formattedHashtagItem() {
       let formattedHashtagItem = [];
       this.hashtags.forEach(h => {
+        if (!h.title) return;
         formattedHashtagItem += `#${h.title}`;
       });
-
-      //インスタ上で改行させる為にここで改行している
-      const formattedText = `${formattedTitle}
-
-
-${formattedIngredientTitle}${formattedIngredientItem}
-
-
-${formattedStepTitle}${formattedStepItem}
-
-
-${formattedMemotTitle}${formattedMemoItem}
-
-
-${formattedHashtagItem}`;
+      return formattedHashtagItem;
+    }
+  },
+  methods: {
+    copyTexts() {
+      const formattedText = `${this.formatReturn}${this.formattedTitle}${this.formatReturn}${this.formattedDescription}${this.formatReturn}${this.formattedIngredientTitle}${this.formattedIngredientItem}${this.formatReturn}${this.formattedStepTitle}${this.formattedStepItem}${this.formatReturn}${this.formattedMemotTitle}${this.formattedMemoItem}${this.formatReturn}${this.formatReturn}${this.formattedHashtagItem}`;
 
       navigator.clipboard
         .writeText(formattedText)
