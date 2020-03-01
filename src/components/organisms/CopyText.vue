@@ -1,6 +1,5 @@
 <template lang="pug">
   .CopyText
-    //- message-copy.message-copy(@click="copyTexts")
     .message-wrap.flex.flex-middle(@click="copyTexts")
       .icon
         copy-icon
@@ -33,7 +32,6 @@
           p.hashtag-title \#{{hashtag.title}}
 </template>
 <script lang="ts">
-// import MessageCopy from "../molecules/MessageCopy.vue";
 import CopyIcon from "../../assets/icons/Orion_copy.svg";
 import { PropType } from "vue";
 import { Recipe } from "../../components/molecules/RecipeTitle.vue";
@@ -43,7 +41,6 @@ import { Step } from "../../components/molecules/StepItem.vue";
 import { Memo } from "../../components/molecules/MemoItem.vue";
 export default {
   components: {
-    // MessageCopy
     CopyIcon
   },
   props: {

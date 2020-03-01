@@ -138,7 +138,7 @@ export default Vue.extend({
   .ingredient-list {
     margin-top: 15px;
   }
-  .message-copy {
+  .copy-text {
     margin-top: 20px;
   }
 }
