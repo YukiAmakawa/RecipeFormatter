@@ -68,38 +68,45 @@ export default {
   },
   methods: {
     copyTexts() {
-      console.log("called");
-      // const formattedText = this.$el
-      //   .querySelector(".formatted-text")
-      //   .textContent.replace(/\r?\n/g, "<br>");
-      const formattedTitle = `${this.recipe.title}\r\n${this.recipe.description}`;
+      const formattedTitle = `【${this.recipe.title}】\r\n${this.recipe.description}`;
 
-      const formattedIngredientTitle = `材料（${this.servingFor})\r\n`;
+      const formattedIngredientTitle = `ー材料（${this.servingFor})ーーーーーー`;
       let formattedIngredientItem = [];
       this.ingredients.forEach(i => {
-        formattedIngredientItem += `${i.name}　${i.amount}\r\n`;
+        formattedIngredientItem += `\r\n${i.name}　${i.amount}`;
       });
 
-      const formattedMemotTitle = `備考\r\n`;
-      let formattedMemoItem = [];
-      this.memos.forEach((m, index) => {
-        formattedMemoItem += `${index + 1}. ${m.description}\r\n`;
-      });
-
-      const formattedStepTitle = `作り方\r\n`;
+      const formattedStepTitle = `ー作り方ーーーーーー`;
       let formattedStepItem = [];
       this.steps.forEach((s, index) => {
-        formattedStepItem += `${index + 1}. ${s.description}\r\n`;
+        formattedStepItem += `\r\n${index + 1}. ${s.description}`;
+      });
+
+      const formattedMemotTitle = `ー備考ーーーーーー`;
+      let formattedMemoItem = [];
+      this.memos.forEach((m, index) => {
+        formattedMemoItem += `\r\n${index + 1}. ${m.description}`;
       });
 
       let formattedHashtagItem = [];
       this.hashtags.forEach(h => {
-        formattedHashtagItem += `#${h.title} `;
+        formattedHashtagItem += `#${h.title}`;
       });
 
-      const line = ".\r\n";
+      //インスタ上で改行させる為にここで改行している
+      const formattedText = `${formattedTitle}
 
-      const formattedText = `${formattedTitle}${line}${formattedIngredientTitle}${formattedIngredientItem}\r\n${line}\r\n${formattedStepTitle}${formattedStepItem}\r\n${line}${formattedMemotTitle}${formattedMemoItem}\r\n${formattedHashtagItem}`;
+
+${formattedIngredientTitle}${formattedIngredientItem}
+
+
+${formattedStepTitle}${formattedStepItem}
+
+
+${formattedMemotTitle}${formattedMemoItem}
+
+
+${formattedHashtagItem}`;
 
       navigator.clipboard
         .writeText(formattedText)
