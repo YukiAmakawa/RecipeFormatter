@@ -1,6 +1,6 @@
 <template lang="pug">
   .CopyText
-    .message-wrap.flex.flex-middle(@click="copyTexts")
+    .message-wrap.flex.flex-middle.end(@click="copyTexts")
       .icon
         copy-icon
       p.copy-message クリップボードにコピー
@@ -162,8 +162,6 @@ export default {
   font-size: 12px;
 
   .message-wrap {
-    width: 150px;
-    margin-left: auto;
     margin-top: 8px;
     .copy-message {
       margin-left: 5px;
