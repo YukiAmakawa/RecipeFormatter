@@ -45,6 +45,7 @@ export default {
   width: 100%;
   .text-input {
     width: 100%;
+    height: 48px;
     border: 1px solid rgba(0, 0, 0, 0.15);
     padding: 3px 8px;
     border-radius: 3px;

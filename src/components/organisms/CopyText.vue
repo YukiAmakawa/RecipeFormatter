@@ -8,7 +8,9 @@
       p.default-message(v-if="isNoText") レシピを入力するとコピー用のテキストが表示されます
       span.recipe
         span.recipe-name {{formattedTitle}}<br>
+        <br>
         span.recipe-description {{formattedDescription}}<br>
+        <br>
       template.formatted-ingredients {{formattedIngredientTitle}}<br>
       //- ul.formatted-ingredients-list
       template.ingredient(v-for="ingredient in ingredients")
@@ -83,7 +85,7 @@ export default {
       return this.servingFor ? `（${this.servingFor})` : "";
     },
     formattedTitle() {
-      return this.recipe.title ? `${this.recipe.title}】` : "";
+      return this.recipe.title ? `【${this.recipe.title}】` : "";
     },
     formattedDescription() {
       return this.recipe.description ? `${this.recipe.description}` : "";
@@ -126,7 +128,6 @@ export default {
     formatReturn() {
       return `
 
-
 `;
     },
     formattedHashtagItem() {
@@ -140,7 +141,7 @@ export default {
   },
   methods: {
     copyTexts() {
-      const formattedText = `${this.formatReturn}${this.formattedTitle}${this.formatReturn}${this.formattedDescription}${this.formatReturn}${this.formattedIngredientTitle}${this.formattedIngredientItem}${this.formatReturn}${this.formattedStepTitle}${this.formattedStepItem}${this.formatReturn}${this.formattedMemotTitle}${this.formattedMemoItem}${this.formatReturn}${this.formatReturn}${this.formattedHashtagItem}`;
+      const formattedText = `${this.formatReturn}${this.formattedTitle}${this.formatReturn}${this.formattedDescription}${this.formatReturn}${this.formattedIngredientTitle}${this.formattedIngredientItem}${this.formatReturn}${this.formattedStepTitle}${this.formattedStepItem}${this.formatReturn}${this.formattedMemotTitle}${this.formattedMemoItem}${this.formatReturn}${this.formattedHashtagItem}`;
 
       navigator.clipboard
         .writeText(formattedText)
@@ -174,6 +175,7 @@ export default {
   }
   .formatted-text {
     margin-top: 15px;
+    font-size: 14px;
     .default-message {
       color: gray;
     }
