@@ -3,8 +3,9 @@
     .message-wrap.flex.flex-middle(@click="copyTexts")
       .icon
         copy-icon
-      .copy-text クリップボードにコピー
-    span.formatted-text
+      p.copy-message クリップボードにコピー
+    div.formatted-text
+      p.default-message(v-if="isNoText") レシピを入力するとコピー用のテキストが表示されます
       span.recipe
         span.recipe-name {{formattedTitle}}<br>
         span.recipe-description {{formattedDescription}}<br>
@@ -67,6 +68,17 @@ export default {
     }
   },
   computed: {
+    isNoText() {
+      return (
+        !this.recipe.title &&
+        !this.recipe.description &&
+        !this.ingredients[0].name &&
+        !this.servingFor &&
+        !this.steps[0].description &&
+        !this.memos[0].description &&
+        !this.hashtags[0].title
+      );
+    },
     formattedServingFor() {
       return this.servingFor ? `（${this.servingFor})` : "";
     },
@@ -146,20 +158,27 @@ export default {
 .CopyText {
   width: 100%;
   border-top: 1px dashed gray;
-  p {
-    margin: 2px;
-  }
+  font-size: 12px;
+
   .message-wrap {
     width: 150px;
     margin-left: auto;
     margin-top: 8px;
-    .copy-text {
+    .copy-message {
       margin-left: 5px;
-      font-size: 12px;
     }
     .icon {
       width: 14px;
       height: 14px;
+    }
+  }
+  .formatted-text {
+    margin-top: 15px;
+    .default-message {
+      color: gray;
+    }
+    p {
+      margin: 2px;
     }
   }
 }
