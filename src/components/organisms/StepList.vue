@@ -2,11 +2,12 @@
   .StepList
     .sub-title-wrap
       app-sub-title(title="作り方")
-    .step-list(v-for="(step, index) in steps")
-      step-item(
-        :step="step"
-        @on-change-step-item="onChangeStepList($event, index)"
-      )
+    ul.step-list
+      li(v-for="(step, index) in steps")
+        step-item(
+          :step="step"
+          @on-change-step-item="onChangeStepList($event, index)"
+        )
     .icon
       add-icon
 </template>
@@ -53,6 +54,9 @@ export default {
   width: 100%;
   .step-list {
     margin-top: 5px;
+    li + li {
+      margin-top: 5px;
+    }
   }
   .icon {
     margin-left: auto;

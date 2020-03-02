@@ -2,11 +2,12 @@
   .MemoList
     .sub-title-wrap
       app-sub-title(title="備考")
-    .memo-list(v-for="(memo, index) in memos")
-      memo-item(
-        :memo="memo"
-        @on-change-memo-item="onChangeMemoList($event, index)"
-      )
+    ul.memo-list
+      li(v-for="(memo, index) in memos")
+        memo-item(
+          :memo="memo"
+          @on-change-memo-item="onChangeMemoList($event, index)"
+        )
     .icon
       add-icon
 </template>
@@ -54,6 +55,9 @@ export default {
   .memo-list {
     margin-top: 5px;
     width: 316px;
+    li + li {
+      margin-top: 5px;
+    }
   }
   .icon {
     margin-left: auto;

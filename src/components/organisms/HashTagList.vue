@@ -1,8 +1,8 @@
 <template lang="pug">
   .HashTagList
-    .hash-tag-list
-      ul(v-for="(hashtag, index) in hashtags" v-model="hashtagItems")
-        hash-tag-item(:hashtag="hashtag" @on-change-hashtag-item="onChangeHashtagList($event, index)")
+    ul.hash-tag-list
+      li(v-for="(hashtag, index) in hashtags" v-model="hashtagItems")
+        hash-tag-item.hash-tag-item(:hashtag="hashtag" @on-change-hashtag-item="onChangeHashtagList($event, index)")
     .icon
       add-icon
 </template>
@@ -47,6 +47,9 @@ export default {
   width: 217px;
   .hash-tag-list {
     width: 217px;
+    li + li {
+      margin-top: 5px;
+    }
   }
   .icon {
     margin-left: auto;

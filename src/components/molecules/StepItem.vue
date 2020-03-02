@@ -52,7 +52,6 @@ export default Vue.extend({
   width: 100%;
   .description {
     width: 290px;
-    height: 40px;
   }
   .icon {
     margin-left: 5px;
