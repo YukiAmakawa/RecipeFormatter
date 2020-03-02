@@ -85,38 +85,38 @@ export default Vue.extend({
     ingredients: {
       ingredientsList: [
         {
-          name: "じゃがいも",
-          amount: "3つ"
+          name: "",
+          amount: ""
         },
         {
-          name: "マヨ",
-          amount: "大さじ2"
+          name: "",
+          amount: ""
         }
       ],
-      servingFor: "1人分"
+      servingFor: ""
     },
     steps: [
       {
-        description: "芋をふかす"
+        description: ""
       },
       {
-        description: "つぶす"
+        description: ""
       }
     ],
     memos: [
       {
-        description: "芋はレンチンが早い"
+        description: ""
       },
       {
-        description: "かつおぶし入れると美味しい"
+        description: ""
       }
     ],
     hashtags: [
       {
-        title: "テスト"
+        title: ""
       },
       {
-        title: "じゃがいも"
+        title: ""
       }
     ]
   }),
