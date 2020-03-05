@@ -2,7 +2,11 @@
   .HashTagList
     ul.hash-tag-list
       li(v-for="(hashtag, index) in hashtags" v-model="hashtagItems")
-        hash-tag-item.hash-tag-item(:hashtag="hashtag" @on-change-hashtag-item="onChangeHashtagList($event, index)")
+        hash-tag-item.hash-tag-item(
+          :hashtag="hashtag"
+          @on-change-hashtag-item="onChangeHashtagList($event, index)"
+          @on-delete-item="onDeleteListItem(index)"
+        )
     .icon
       add-icon
 </template>
@@ -38,6 +42,9 @@ export default {
     onChangeHashtagList(hashtagItem: Hashtag, index: number) {
       this.hashtagItems[index] = hashtagItem;
       this.$emit("on-change-hashtag-list", this.hashtagItems);
+    },
+    onDeleteListItem(index: number) {
+      this.$emit("on-delete-list-item", { item: "hashtags", index: index });
     }
   }
 };

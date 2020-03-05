@@ -8,7 +8,7 @@
         @on-change-textarea="onChangeStepItem"
       )
       .icon
-        close-icon
+        close-icon(@click="onDeleteItem")
 </template>
 <script lang="ts">
 import MoveIcon from "../../assets/icons/Orion_copy.svg";
@@ -43,6 +43,9 @@ export default Vue.extend({
   methods: {
     onChangeStepItem() {
       this.$emit("on-change-step-item", this.stepItem);
+    },
+    onDeleteItem() {
+      this.$emit("on-delete-item");
     }
   }
 });

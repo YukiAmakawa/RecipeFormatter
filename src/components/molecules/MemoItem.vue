@@ -8,7 +8,7 @@
         @on-change-textarea="onChangeMemoItem"
       )
       .icon
-        close-icon
+        close-icon(@click="onDeleteItem")
 </template>
 <script lang="ts">
 import MoveIcon from "../../assets/icons/Orion_copy.svg";
@@ -43,6 +43,9 @@ export default Vue.extend({
   methods: {
     onChangeMemoItem() {
       this.$emit("on-change-memo-item", this.MemoItem);
+    },
+    onDeleteItem() {
+      this.$emit("on-delete-item");
     }
   }
 });

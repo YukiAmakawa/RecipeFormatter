@@ -4,7 +4,7 @@
       span.hash #
       app-form.title(type="text" placeholder="和食" v-model="hashtagItem.title" @on-change-form="onChangeHashtagItem")
       .icon
-        close-icon
+        close-icon(@click="onDeleteItem")
 </template>
 <script lang="ts">
 import AppForm from "../atoms/AppForm.vue";
@@ -38,6 +38,9 @@ export default Vue.extend({
   methods: {
     onChangeHashtagItem() {
       this.$emit("on-change-hashtag-item", this.hashtagItem);
+    },
+    onDeleteItem() {
+      this.$emit("on-delete-item");
     }
   }
 });

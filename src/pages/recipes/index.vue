@@ -16,12 +16,18 @@
       step-list.step-list(
         :steps="steps"
         @on-change-step-list="onChangeStepList"
+        @on-delete-list-item="onDeleteListItem"
         )
       memo-list.memo-list(
         :memos="memos"
         @on-change-memo-list="onChangeMemoList"
+        @on-delete-list-item="onDeleteListItem"
       )
-      hash-tag-list.hash-tag-list(:hashtags="hashtags" @on-change-hashtag-list="onChangeHashTagList")
+      hash-tag-list.hash-tag-list(
+        :hashtags="hashtags"
+        @on-change-hashtag-list="onChangeHashTagList"
+        @on-delete-list-item="onDeleteListItem"
+      )
       copy-text.copy-text(
         :recipe="recipe"
         :ingredients="ingredients.ingredientsList"
@@ -145,11 +151,14 @@ export default Vue.extend({
       // item側で処理する
       // if (index === 0) return;
       // if (!alert("本当によろしいですか？")) return;
+      console.log(this[item]);
       if (item === "ingredients") {
         this.ingredients.ingredientsList = this.ingredients.ingredientsList.splice(
           index,
           1
         );
+      } else {
+        this[item] = this[item].splice(index, 1);
       }
     }
   }
