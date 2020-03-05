@@ -8,7 +8,7 @@
           @on-delete-item="deleteListItem(index)"
         )
     .icon
-      add-icon
+      add-icon(@click="addListItem")
 </template>
 <script lang="ts">
 import HashTagItem from "../molecules/HashTagItem.vue";
@@ -45,6 +45,9 @@ export default {
     },
     deleteListItem(index: number) {
       this.$emit("delete-list-item", { item: "hashtags", index: index });
+    },
+    addListItem() {
+      this.$emit("add-list-item", { item: "hashtags" });
     }
   }
 };

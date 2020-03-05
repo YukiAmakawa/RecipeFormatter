@@ -12,21 +12,25 @@
         @on-change-ingredient-list="onChangeIngredientList"
         @on-change-serving-for="onChangeServingFor",
         @delete-list-item="deleteListItem"
+        @add-list-item="addListItem"
       )
       step-list.step-list(
         :steps="steps"
         @on-change-step-list="onChangeStepList"
         @delete-list-item="deleteListItem"
+        @add-list-item="addListItem"
         )
       memo-list.memo-list(
         :memos="memos"
         @on-change-memo-list="onChangeMemoList"
         @delete-list-item="deleteListItem"
+        @add-list-item="addListItem"
       )
       hash-tag-list.hash-tag-list(
         :hashtags="hashtags"
         @on-change-hashtag-list="onChangeHashTagList"
         @delete-list-item="deleteListItem"
+        @add-list-item="addListItem"
       )
       copy-text.copy-text(
         :recipe="recipe"
@@ -151,14 +155,26 @@ export default Vue.extend({
       // item側で処理する
       // if (index === 0) return;
       // if (!alert("本当によろしいですか？")) return;
-      console.log(this[item]);
       if (item === "ingredients") {
-        this.ingredients.ingredientsList = this.ingredients.ingredientsList.splice(
-          index,
-          1
-        );
+        this.ingredients.ingredientsList.splice(index, 1);
       } else {
-        this[item] = this[item].splice(index, 1);
+        this[item].splice(index, 1);
+      }
+    },
+    addListItem({ item }) {
+      switch (item) {
+        case "ingredients":
+          this.ingredients.ingredientsList.push({ name: "", amount: "" });
+          break;
+        case "steps":
+          this.steps.push({ description: "" });
+          break;
+        case "memos":
+          this.memos.push({ description: "" });
+          break;
+        case "hashtags":
+          this.hashtags.push({ title: "" });
+          break;
       }
     }
   }
