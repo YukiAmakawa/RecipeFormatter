@@ -7,7 +7,7 @@
         memo-item(
           :memo="memo"
           @on-change-memo-item="onChangeMemoList($event, index)"
-          @on-delete-item="onDeleteListItem(index)"
+          @on-delete-item="deleteListItem(index)"
         )
     .icon
       add-icon
@@ -47,8 +47,8 @@ export default {
       this.memoItems[index] = memoItem;
       this.$emit("on-change-memo-list", this.memoItems);
     },
-    onDeleteListItem(index: number) {
-      this.$emit("on-delete-list-item", { item: "memos", index: index });
+    deleteListItem(index: number) {
+      this.$emit("delete-list-item", { item: "memos", index: index });
     }
   }
 };

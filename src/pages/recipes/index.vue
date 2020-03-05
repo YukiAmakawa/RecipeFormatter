@@ -11,22 +11,22 @@
         :servingFor="ingredients.servingFor"
         @on-change-ingredient-list="onChangeIngredientList"
         @on-change-serving-for="onChangeServingFor",
-        @on-delete-list-item="onDeleteListItem"
+        @delete-list-item="deleteListItem"
       )
       step-list.step-list(
         :steps="steps"
         @on-change-step-list="onChangeStepList"
-        @on-delete-list-item="onDeleteListItem"
+        @delete-list-item="deleteListItem"
         )
       memo-list.memo-list(
         :memos="memos"
         @on-change-memo-list="onChangeMemoList"
-        @on-delete-list-item="onDeleteListItem"
+        @delete-list-item="deleteListItem"
       )
       hash-tag-list.hash-tag-list(
         :hashtags="hashtags"
         @on-change-hashtag-list="onChangeHashTagList"
-        @on-delete-list-item="onDeleteListItem"
+        @delete-list-item="deleteListItem"
       )
       copy-text.copy-text(
         :recipe="recipe"
@@ -147,7 +147,7 @@ export default Vue.extend({
     onChangeMemoList(memoList: Memo[]) {
       this.memos = memoList;
     },
-    onDeleteListItem({ item, index }) {
+    deleteListItem({ item, index }) {
       // item側で処理する
       // if (index === 0) return;
       // if (!alert("本当によろしいですか？")) return;

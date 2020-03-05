@@ -5,7 +5,7 @@
         hash-tag-item.hash-tag-item(
           :hashtag="hashtag"
           @on-change-hashtag-item="onChangeHashtagList($event, index)"
-          @on-delete-item="onDeleteListItem(index)"
+          @on-delete-item="deleteListItem(index)"
         )
     .icon
       add-icon
@@ -43,8 +43,8 @@ export default {
       this.hashtagItems[index] = hashtagItem;
       this.$emit("on-change-hashtag-list", this.hashtagItems);
     },
-    onDeleteListItem(index: number) {
-      this.$emit("on-delete-list-item", { item: "hashtags", index: index });
+    deleteListItem(index: number) {
+      this.$emit("delete-list-item", { item: "hashtags", index: index });
     }
   }
 };

@@ -12,7 +12,7 @@
         ingredient-item(
           :ingredient="ingredient"
           @on-change-ingredient-item="onChangeIngredientList($event, index)"
-          @on-delete-item="onDeleteListItem(index)"
+          @on-delete-item="deleteListItem(index)"
         )
     .icon
       add-icon
@@ -65,8 +65,8 @@ export default {
     onChangeServingFor(servingFor: string) {
       this.$emit("on-change-serving-for", servingFor);
     },
-    onDeleteListItem(index: number) {
-      this.$emit("on-delete-list-item", { item: "ingredients", index: index });
+    deleteListItem(index: number) {
+      this.$emit("delete-list-item", { item: "ingredients", index: index });
     }
   }
 };

@@ -7,7 +7,7 @@
         step-item(
           :step="step"
           @on-change-step-item="onChangeStepList($event, index)"
-          @on-delete-item="onDeleteListItem(index)"
+          @on-delete-item="deleteListItem(index)"
         )
     .icon
       add-icon
@@ -47,8 +47,8 @@ export default {
       this.stepItems[index] = stepItem;
       this.$emit("on-change-step-list", this.stepItems);
     },
-    onDeleteListItem(index: number) {
-      this.$emit("on-delete-list-item", { item: "steps", index: index });
+    deleteListItem(index: number) {
+      this.$emit("delete-list-item", { item: "steps", index: index });
     }
   }
 };
