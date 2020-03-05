@@ -7,14 +7,12 @@
         v-model="servingForItem"
         @on-change-serving-for-item="onChangeServingFor($event)"
       )
-    .ingredient-list(
-      v-for="(ingredient, index) in ingredientItems"
-      v-model="ingredientItems"
-    )
-      ingredient-item(
-        :ingredient="ingredient"
-        @on-change-ingredient-item="onChangeIngredientList($event, index)"
-      )
+    ul.ingredient-list
+      li(v-for="(ingredient, index) in ingredientItems" v-model="ingredientItems")
+        ingredient-item(
+          :ingredient="ingredient"
+          @on-change-ingredient-item="onChangeIngredientList($event, index)"
+        )
     .icon
       add-icon
 </template>
@@ -75,6 +73,9 @@ export default {
   .ingredient-list {
     margin-top: 5px;
     width: 316px;
+    li + li {
+      margin-top: 5px;
+    }
   }
   .icon {
     margin-left: auto;
