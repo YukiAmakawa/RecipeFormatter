@@ -133,7 +133,6 @@ export default Vue.extend({
   }),
   methods: {
     onChangeRecipeTitle(recipeTitle: Recipe) {
-      console.log(recipeTitle);
       this.recipe = recipeTitle;
     },
     onChangeHashTagList(hashtagList: Hashtag[]) {

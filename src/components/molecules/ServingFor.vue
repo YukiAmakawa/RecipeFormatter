@@ -37,7 +37,6 @@ export default Vue.extend({
   },
   methods: {
     onChangeServingForItem() {
-      console.log(this.servingForItem);
       this.$emit("on-change-serving-for-item", this.servingForItem);
     }
   }
