@@ -6,7 +6,7 @@
         app-form.name(type="text" placeholder="じゃがいも" v-model="ingredientItem.name" @on-change-form="onChangeIngredientItem($event, 'name')")
         app-form.amount(type="text" placeholder="2つ" v-model="ingredientItem.amount" @on-change-form="onChangeIngredientItem($event, 'amount')")
       .icon
-        close-icon
+        close-icon(@click="onDeleteItem")
 </template>
 <script lang="ts">
 import MoveIcon from "../../assets/icons/Orion_copy.svg";
@@ -43,6 +43,9 @@ export default Vue.extend({
     onChangeIngredientItem(value: string, prop: string) {
       this.ingredientItem.prop = value;
       this.$emit("on-change-hashtag-item", this.ingredientItem);
+    },
+    onDeleteItem() {
+      this.$emit("on-delete-item");
     }
   }
 });

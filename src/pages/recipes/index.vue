@@ -10,7 +10,8 @@
         :ingredients="ingredients.ingredientsList"
         :servingFor="ingredients.servingFor"
         @on-change-ingredient-list="onChangeIngredientList"
-        @on-change-serving-for="onChangeServingFor"
+        @on-change-serving-for="onChangeServingFor",
+        @on-delete-list-item="onDeleteListItem"
       )
       step-list.step-list(
         :steps="steps"
@@ -139,6 +140,17 @@ export default Vue.extend({
     },
     onChangeMemoList(memoList: Memo[]) {
       this.memos = memoList;
+    },
+    onDeleteListItem({ item, index }) {
+      // item側で処理する
+      // if (index === 0) return;
+      // if (!alert("本当によろしいですか？")) return;
+      if (item === "ingredients") {
+        this.ingredients.ingredientsList = this.ingredients.ingredientsList.splice(
+          index,
+          1
+        );
+      }
     }
   }
 });
