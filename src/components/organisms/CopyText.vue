@@ -1,10 +1,13 @@
 <template lang="pug">
   .CopyText
+    transition(name="fade")
+      .tool-tip(v-if="showToolTip")
+        p.copy-succeed-message コピーしました
     .message-wrap.flex.flex-middle.end(@click="copyTexts")
       .icon
         copy-icon
       p.copy-message クリップボードにコピー
-    div.formatted-text
+    .formatted-text
       p.default-message(v-if="isNoText") レシピを入力するとコピー用のテキストが表示されます
       span.recipe
         span.recipe-name {{formattedTitle}}<br>
@@ -42,6 +45,11 @@ import { Memo } from "../../components/molecules/MemoItem.vue";
 export default {
   components: {
     CopyIcon
+  },
+  data() {
+    return {
+      showToolTip: false
+    };
   },
   props: {
     recipe: {
@@ -146,7 +154,10 @@ export default {
       navigator.clipboard
         .writeText(formattedText)
         .then(() => {
-          console.log("ok");
+          this.showToolTip = true;
+          setTimeout(() => {
+            this.showToolTip = false;
+          }, 1500);
         })
         .catch(e => {
           console.log(e);
@@ -157,6 +168,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .CopyText {
+  position: relative;
   width: 100%;
   border-top: 1px dashed gray;
   font-size: 12px;
@@ -169,6 +181,20 @@ export default {
     .icon {
       width: 14px;
       height: 14px;
+    }
+  }
+  .tool-tip {
+    position: absolute;
+    top: -15px;
+    right: -10px;
+    z-index: 10000;
+    padding: 5px 10px 4px;
+    background: #999;
+    border-radius: 3px;
+    font-size: 12px;
+    text-align: center;
+    .copy-succeed-message {
+      color: #fefefe;
     }
   }
   .formatted-text {
