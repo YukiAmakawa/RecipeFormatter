@@ -34,7 +34,7 @@ export default {
     }
   },
   methods: {
-    onChangeTextarea(value: string) {
+    onChangeTextarea(value: string): void {
       this.$emit("on-change-textarea", value);
     }
   }

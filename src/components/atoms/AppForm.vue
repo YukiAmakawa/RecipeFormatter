@@ -14,7 +14,6 @@ export default {
     type: {
       type: String,
       default: "text"
-      // validator: type => ["text"].includes(type)
     },
     placeholder: {
       type: [String, Number],
@@ -40,7 +39,7 @@ export default {
     }
   },
   methods: {
-    onChangeForm(value: string) {
+    onChangeForm(value: string): void {
       this.$emit("on-change-form", value);
     }
   }
