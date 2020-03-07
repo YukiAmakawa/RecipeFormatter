@@ -11,6 +11,7 @@
       li(v-for="(ingredient, index) in ingredientItems" v-model="ingredientItems")
         ingredient-item(
           :ingredient="ingredient"
+          :index="index"
           @on-change-ingredient-item="onChangeIngredientList($event, index)"
           @on-delete-item="deleteListItem(index)"
         )

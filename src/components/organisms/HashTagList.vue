@@ -4,6 +4,7 @@
       li(v-for="(hashtag, index) in hashtags" v-model="hashtagItems")
         hash-tag-item.hash-tag-item(
           :hashtag="hashtag"
+          :index="index"
           @on-change-hashtag-item="onChangeHashtagList($event, index)"
           @on-delete-item="deleteListItem(index)"
         )

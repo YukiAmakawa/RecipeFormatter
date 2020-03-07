@@ -7,7 +7,7 @@
         v-model="step.description"
         @on-change-textarea="onChangeStepItem"
       )
-      .icon
+      .icon(v-if="!isFirstItem")
         close-icon(@click="onDeleteItem")
 </template>
 <script lang="ts">
@@ -24,6 +24,7 @@ type Data = {
 };
 type Props = {
   step: string;
+  index: number;
 };
 
 export default Vue.extend({
@@ -33,12 +34,18 @@ export default Vue.extend({
     AppTextarea
   },
   props: {
-    step: Object as PropType<Step>
+    step: Object as PropType<Step>,
+    index: Number
   },
   data() {
     return {
       stepItem: this.step
     };
+  },
+  computed: {
+    isFirstItem() {
+      return this.index === 0;
+    }
   },
   methods: {
     onChangeStepItem() {

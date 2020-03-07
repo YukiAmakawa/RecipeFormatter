@@ -6,6 +6,7 @@
       li(v-for="(memo, index) in memos")
         memo-item(
           :memo="memo"
+          :index="index"
           @on-change-memo-item="onChangeMemoList($event, index)"
           @on-delete-item="deleteListItem(index)"
         )

@@ -151,9 +151,7 @@ export default Vue.extend({
       this.memos = memoList;
     },
     deleteListItem({ item, index }) {
-      // item側で処理する
-      // if (index === 0) return;
-      // if (!alert("本当によろしいですか？")) return;
+      if (!confirm("削除してよろしいですか？")) return;
       if (item === "ingredients") {
         this.ingredients.ingredientsList.splice(index, 1);
       } else {

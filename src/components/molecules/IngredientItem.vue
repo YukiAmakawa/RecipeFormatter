@@ -5,7 +5,7 @@
       .wrap-forms.flex
         app-form.name(type="text" placeholder="じゃがいも" v-model="ingredientItem.name" @on-change-form="onChangeIngredientItem($event, 'name')")
         app-form.amount(type="text" placeholder="2つ" v-model="ingredientItem.amount" @on-change-form="onChangeIngredientItem($event, 'amount')")
-      .icon
+      .icon(v-if="!isFirstItem")
         close-icon(@click="onDeleteItem")
 </template>
 <script lang="ts">
@@ -23,6 +23,7 @@ type Data = {
 };
 type Props = {
   ingredient: Ingredient;
+  index: number;
 };
 
 export default Vue.extend({
@@ -32,15 +33,21 @@ export default Vue.extend({
     AppForm
   },
   props: {
-    ingredient: Object as PropType<Ingredient>
+    ingredient: Object as PropType<Ingredient>,
+    index: Number
   },
   data() {
     return {
       ingredientItem: this.ingredient
     };
   },
+  computed: {
+    isFirstItem() {
+      return this.index === 0;
+    }
+  },
   methods: {
-    onChangeIngredientItem(value: string, prop: string) {
+    onChangeIngredientItem(value: string) {
       this.ingredientItem.prop = value;
       this.$emit("on-change-hashtag-item", this.ingredientItem);
     },

@@ -6,6 +6,7 @@
       li(v-for="(step, index) in steps")
         step-item(
           :step="step"
+          :index="index"
           @on-change-step-item="onChangeStepList($event, index)"
           @on-delete-item="deleteListItem(index)"
         )
