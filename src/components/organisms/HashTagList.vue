@@ -2,9 +2,14 @@
   .HashTagList
     ul.hash-tag-list
       li(v-for="(hashtag, index) in hashtags" v-model="hashtagItems")
-        hash-tag-item.hash-tag-item(:hashtag="hashtag" @on-change-hashtag-item="onChangeHashtagList($event, index)")
+        hash-tag-item.hash-tag-item(
+          :hashtag="hashtag"
+          :index="index"
+          @on-change-hashtag-item="onChangeHashtagList($event, index)"
+          @on-delete-item="deleteListItem(index)"
+        )
     .icon
-      add-icon
+      add-icon(@click="addListItem")
 </template>
 <script lang="ts">
 import HashTagItem from "../molecules/HashTagItem.vue";
@@ -38,6 +43,12 @@ export default {
     onChangeHashtagList(hashtagItem: Hashtag, index: number) {
       this.hashtagItems[index] = hashtagItem;
       this.$emit("on-change-hashtag-list", this.hashtagItems);
+    },
+    deleteListItem(index: number) {
+      this.$emit("delete-list-item", { item: "hashtags", index: index });
+    },
+    addListItem() {
+      this.$emit("add-list-item", { item: "hashtags" });
     }
   }
 };

@@ -7,8 +7,8 @@
         v-model="memo.description"
         @on-change-textarea="onChangeMemoItem"
       )
-      .icon
-        close-icon
+      .icon(v-if="!isFirstItem")
+        close-icon(@click="onDeleteItem")
 </template>
 <script lang="ts">
 import MoveIcon from "../../assets/icons/Orion_copy.svg";
@@ -24,6 +24,7 @@ type Data = {
 };
 type Props = {
   memo: string;
+  index: number;
 };
 
 export default Vue.extend({
@@ -33,16 +34,25 @@ export default Vue.extend({
     AppTextarea
   },
   props: {
-    memo: Object as PropType<Memo>
+    memo: Object as PropType<Memo>,
+    index: Number
   },
   data() {
     return {
       MemoItem: this.memo
     };
   },
+  computed: {
+    isFirstItem() {
+      return this.index === 0;
+    }
+  },
   methods: {
     onChangeMemoItem() {
       this.$emit("on-change-memo-item", this.MemoItem);
+    },
+    onDeleteItem() {
+      this.$emit("on-delete-item");
     }
   }
 });

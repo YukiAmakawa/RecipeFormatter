@@ -6,10 +6,12 @@
       li(v-for="(memo, index) in memos")
         memo-item(
           :memo="memo"
+          :index="index"
           @on-change-memo-item="onChangeMemoList($event, index)"
+          @on-delete-item="deleteListItem(index)"
         )
     .icon
-      add-icon
+      add-icon(@click="addListItem")
 </template>
 <script lang="ts">
 import AppSubTitle from "../atoms/AppSubTitle.vue";
@@ -45,6 +47,12 @@ export default {
     onChangeMemoList(memoItem: Memo, index: number) {
       this.memoItems[index] = memoItem;
       this.$emit("on-change-memo-list", this.memoItems);
+    },
+    deleteListItem(index: number) {
+      this.$emit("delete-list-item", { item: "memos", index: index });
+    },
+    addListItem() {
+      this.$emit("add-list-item", { item: "memos" });
     }
   }
 };

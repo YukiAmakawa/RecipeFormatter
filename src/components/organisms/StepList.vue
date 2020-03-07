@@ -6,10 +6,12 @@
       li(v-for="(step, index) in steps")
         step-item(
           :step="step"
+          :index="index"
           @on-change-step-item="onChangeStepList($event, index)"
+          @on-delete-item="deleteListItem(index)"
         )
     .icon
-      add-icon
+      add-icon(@click="addListItem")
 </template>
 <script lang="ts">
 import AppSubTitle from "../atoms/AppSubTitle.vue";
@@ -45,6 +47,12 @@ export default {
     onChangeStepList(stepItem: Hashtag, index: number) {
       this.stepItems[index] = stepItem;
       this.$emit("on-change-step-list", this.stepItems);
+    },
+    deleteListItem(index: number) {
+      this.$emit("delete-list-item", { item: "steps", index: index });
+    },
+    addListItem() {
+      this.$emit("add-list-item", { item: "steps" });
     }
   }
 };

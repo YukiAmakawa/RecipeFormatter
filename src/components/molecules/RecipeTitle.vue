@@ -39,7 +39,6 @@ export default Vue.extend({
   },
   methods: {
     onChangeRecipeTitle() {
-      console.log("called");
       this.$emit("on-change-recipe-title", this.recipeItem);
     }
   }

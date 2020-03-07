@@ -3,8 +3,8 @@
     div.flex.flex-middle
       span.hash #
       app-form.title(type="text" placeholder="和食" v-model="hashtagItem.title" @on-change-form="onChangeHashtagItem")
-      .icon
-        close-icon
+      .icon(v-if="!isFirstItem")
+        close-icon(@click="onDeleteItem")
 </template>
 <script lang="ts">
 import AppForm from "../atoms/AppForm.vue";
@@ -19,6 +19,7 @@ type Data = {
 };
 type Props = {
   hashtag: Record<string, string>;
+  index: number;
 };
 
 export default Vue.extend({
@@ -27,17 +28,25 @@ export default Vue.extend({
     CloseIcon
   },
   props: {
-    hashtag: Object as Vue.PropType<Hashtag>
-    // hashtag: String
+    hashtag: Object as Vue.PropType<Hashtag>,
+    index: Number
   },
   data() {
     return {
       hashtagItem: this.hashtag
     };
   },
+  computed: {
+    isFirstItem() {
+      return this.index === 0;
+    }
+  },
   methods: {
     onChangeHashtagItem() {
       this.$emit("on-change-hashtag-item", this.hashtagItem);
+    },
+    onDeleteItem() {
+      this.$emit("on-delete-item");
     }
   }
 });

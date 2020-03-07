@@ -10,17 +10,28 @@
         :ingredients="ingredients.ingredientsList"
         :servingFor="ingredients.servingFor"
         @on-change-ingredient-list="onChangeIngredientList"
-        @on-change-serving-for="onChangeServingFor"
+        @on-change-serving-for="onChangeServingFor",
+        @delete-list-item="deleteListItem"
+        @add-list-item="addListItem"
       )
       step-list.step-list(
         :steps="steps"
         @on-change-step-list="onChangeStepList"
+        @delete-list-item="deleteListItem"
+        @add-list-item="addListItem"
         )
       memo-list.memo-list(
         :memos="memos"
         @on-change-memo-list="onChangeMemoList"
+        @delete-list-item="deleteListItem"
+        @add-list-item="addListItem"
       )
-      hash-tag-list.hash-tag-list(:hashtags="hashtags" @on-change-hashtag-list="onChangeHashTagList")
+      hash-tag-list.hash-tag-list(
+        :hashtags="hashtags"
+        @on-change-hashtag-list="onChangeHashTagList"
+        @delete-list-item="deleteListItem"
+        @add-list-item="addListItem"
+      )
       copy-text.copy-text(
         :recipe="recipe"
         :ingredients="ingredients.ingredientsList"
@@ -122,7 +133,6 @@ export default Vue.extend({
   }),
   methods: {
     onChangeRecipeTitle(recipeTitle: Recipe) {
-      console.log(recipeTitle);
       this.recipe = recipeTitle;
     },
     onChangeHashTagList(hashtagList: Hashtag[]) {
@@ -139,6 +149,30 @@ export default Vue.extend({
     },
     onChangeMemoList(memoList: Memo[]) {
       this.memos = memoList;
+    },
+    deleteListItem({ item, index }) {
+      if (!confirm("削除してよろしいですか？")) return;
+      if (item === "ingredients") {
+        this.ingredients.ingredientsList.splice(index, 1);
+      } else {
+        this[item].splice(index, 1);
+      }
+    },
+    addListItem({ item }) {
+      switch (item) {
+        case "ingredients":
+          this.ingredients.ingredientsList.push({ name: "", amount: "" });
+          break;
+        case "steps":
+          this.steps.push({ description: "" });
+          break;
+        case "memos":
+          this.memos.push({ description: "" });
+          break;
+        case "hashtags":
+          this.hashtags.push({ title: "" });
+          break;
+      }
     }
   }
 });

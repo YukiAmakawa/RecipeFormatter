@@ -11,10 +11,12 @@
       li(v-for="(ingredient, index) in ingredientItems" v-model="ingredientItems")
         ingredient-item(
           :ingredient="ingredient"
+          :index="index"
           @on-change-ingredient-item="onChangeIngredientList($event, index)"
+          @on-delete-item="deleteListItem(index)"
         )
     .icon
-      add-icon
+      add-icon(@click="addListItem")
 </template>
 <script lang="ts">
 import AppSubTitle from "../atoms/AppSubTitle.vue";
@@ -63,6 +65,12 @@ export default {
     },
     onChangeServingFor(servingFor: string) {
       this.$emit("on-change-serving-for", servingFor);
+    },
+    deleteListItem(index: number) {
+      this.$emit("delete-list-item", { item: "ingredients", index: index });
+    },
+    addListItem() {
+      this.$emit("add-list-item", { item: "ingredients" });
     }
   }
 };
