@@ -23,19 +23,14 @@ import AppSubTitle from "../atoms/AppSubTitle.vue";
 import IngredientItem from "../molecules/IngredientItem.vue";
 import ServingFor from "../molecules/ServingFor.vue";
 import AddIcon from "../../assets/icons/Orion_add-circle.svg";
-import { PropType } from "vue";
 import { Ingredient } from "../../components/molecules/IngredientItem.vue";
-
+import Vue, { PropType } from "vue";
 type Data = {
   ingredientItems: Array<Ingredient>;
-  servingFor: string;
-};
-type Props = {
-  ingredients: Array<Ingredient>;
-  servingFor: string;
+  servingForItem: string;
 };
 
-export default {
+export default Vue.extend({
   components: {
     AppSubTitle,
     IngredientItem,
@@ -52,28 +47,28 @@ export default {
       default: ""
     }
   },
-  data() {
+  data(): Data {
     return {
       ingredientItems: this.ingredients,
       servingForItem: this.servingFor
     };
   },
   methods: {
-    onChangeIngredientList(ingredientItem: Ingredient, index: number) {
+    onChangeIngredientList(ingredientItem: Ingredient, index: number): void {
       this.ingredientItems[index] = ingredientItem;
       this.$emit("on-change-ingredient-list", this.ingredientItems);
     },
-    onChangeServingFor(servingFor: string) {
+    onChangeServingFor(servingFor: string): void {
       this.$emit("on-change-serving-for", servingFor);
     },
-    deleteListItem(index: number) {
+    deleteListItem(index: number): void {
       this.$emit("delete-list-item", { item: "ingredients", index: index });
     },
     addListItem() {
       this.$emit("add-list-item", { item: "ingredients" });
     }
   }
-};
+});
 </script>
 <style lang="scss" scoped>
 .IngredientList {

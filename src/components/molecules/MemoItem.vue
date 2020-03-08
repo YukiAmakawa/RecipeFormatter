@@ -20,11 +20,7 @@ export type Memo = {
 };
 
 type Data = {
-  memo: string;
-};
-type Props = {
-  memo: string;
-  index: number;
+  memoItem: Memo;
 };
 
 export default Vue.extend({
@@ -37,21 +33,21 @@ export default Vue.extend({
     memo: Object as PropType<Memo>,
     index: Number
   },
-  data() {
+  data(): Data {
     return {
-      MemoItem: this.memo
+      memoItem: this.memo
     };
   },
   computed: {
-    isFirstItem() {
+    isFirstItem(): boolean {
       return this.index === 0;
     }
   },
   methods: {
-    onChangeMemoItem() {
-      this.$emit("on-change-memo-item", this.MemoItem);
+    onChangeMemoItem(): void {
+      this.$emit("on-change-memo-item", this.memoItem);
     },
-    onDeleteItem() {
+    onDeleteItem(): void {
       this.$emit("on-delete-item");
     }
   }

@@ -18,15 +18,12 @@ import AppSubTitle from "../atoms/AppSubTitle.vue";
 import StepItem from "../molecules/StepItem.vue";
 import AddIcon from "../../assets/icons/Orion_add-circle.svg";
 import { Step } from "../../components/molecules/StepItem.vue";
-
+import Vue, { PropType } from "vue";
 type Data = {
-  stepItems: Array<Step>;
-};
-type Props = {
-  steps: Array<Step>;
+  stepItems: Step[];
 };
 
-export default {
+export default Vue.extend({
   components: {
     AppSubTitle,
     StepItem,
@@ -38,24 +35,24 @@ export default {
       default: () => []
     }
   },
-  data() {
+  data(): Data {
     return {
       stepItems: this.steps
     };
   },
   methods: {
-    onChangeStepList(stepItem: Hashtag, index: number) {
+    onChangeStepList(stepItem: Step, index: number): void {
       this.stepItems[index] = stepItem;
       this.$emit("on-change-step-list", this.stepItems);
     },
-    deleteListItem(index: number) {
+    deleteListItem(index: number): void {
       this.$emit("delete-list-item", { item: "steps", index: index });
     },
-    addListItem() {
+    addListItem(): void {
       this.$emit("add-list-item", { item: "steps" });
     }
   }
-};
+});
 </script>
 <style lang="scss" scoped>
 .StepList {

@@ -16,9 +16,6 @@ import Vue from "vue";
 type Data = {
   servingForItem: string;
 };
-type Props = {
-  servingFor: string;
-};
 
 export default Vue.extend({
   components: {
@@ -26,17 +23,16 @@ export default Vue.extend({
   },
   props: {
     servingFor: {
-      type: String,
-      name: ""
+      type: String
     }
   },
-  data() {
+  data(): Data {
     return {
       servingForItem: this.servingFor
     };
   },
   methods: {
-    onChangeServingForItem() {
+    onChangeServingForItem(): void {
       this.$emit("on-change-serving-for-item", this.servingForItem);
     }
   }

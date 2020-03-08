@@ -5,22 +5,22 @@
         :placeholder="placeholder"
         v-model="text"
         :disabled="disabled"
-        @change="onChangeForm(value)"
       )
 </template>
 <script lang="ts">
-export default {
+import Vue from "vue";
+export default Vue.extend({
   props: {
     type: {
       type: String,
       default: "text"
     },
     placeholder: {
-      type: [String, Number],
+      type: String,
       default: ""
     },
     value: {
-      type: [String],
+      type: String,
       default: ""
     },
     disabled: {
@@ -33,17 +33,17 @@ export default {
       get(): string {
         return this.value;
       },
-      set(value: string) {
+      set(value: string): void {
         this.$emit("input", value);
       }
     }
-  },
-  methods: {
-    onChangeForm(value: string): void {
-      this.$emit("on-change-form", value);
-    }
   }
-};
+  // methods: {
+  //   onChangeForm(value: string): void {
+  //     this.$emit("on-change-form", value);
+  //   }
+  // }
+});
 </script>
 <style lang="scss" scoped>
 .AppForm {

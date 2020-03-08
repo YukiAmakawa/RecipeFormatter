@@ -15,11 +15,7 @@ export type Hashtag = {
 };
 
 type Data = {
-  hastagItem: Record<string, string>;
-};
-type Props = {
-  hashtag: Record<string, string>;
-  index: number;
+  hashtagItem: Hashtag;
 };
 
 export default Vue.extend({
@@ -31,21 +27,21 @@ export default Vue.extend({
     hashtag: Object as Vue.PropType<Hashtag>,
     index: Number
   },
-  data() {
+  data(): Data {
     return {
       hashtagItem: this.hashtag
     };
   },
   computed: {
-    isFirstItem() {
+    isFirstItem(): boolean {
       return this.index === 0;
     }
   },
   methods: {
-    onChangeHashtagItem() {
+    onChangeHashtagItem(): void {
       this.$emit("on-change-hashtag-item", this.hashtagItem);
     },
-    onDeleteItem() {
+    onDeleteItem(): void {
       this.$emit("on-delete-item");
     }
   }

@@ -21,24 +21,33 @@ export type Recipe = {
   description: string;
 };
 
+type Data = {
+  recipeItem: {
+    recipeTitle: string;
+    recipeDescription: string;
+  };
+};
+
 export default Vue.extend({
   components: {
     AppForm,
     AppTextarea
   },
   props: {
-    recipe: Object as PropType<Recipe>
+    recipe: {
+      type: Object as PropType<Recipe>
+    }
   },
-  data() {
+  data(): Data {
     return {
       recipeItem: {
-        title: this.title,
-        description: this.description
+        recipeTitle: this.recipe.title,
+        recipeDescription: this.recipe.description
       }
     };
   },
   methods: {
-    onChangeRecipeTitle() {
+    onChangeRecipeTitle(): void {
       this.$emit("on-change-recipe-title", this.recipeItem);
     }
   }

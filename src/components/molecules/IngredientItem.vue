@@ -3,8 +3,8 @@
     //- move-icon
     div.flex.flex-middle
       .wrap-forms.flex
-        app-form.name(type="text" placeholder="じゃがいも" v-model="ingredientItem.name" @on-change-form="onChangeIngredientItem($event, 'name')")
-        app-form.amount(type="text" placeholder="2つ" v-model="ingredientItem.amount" @on-change-form="onChangeIngredientItem($event, 'amount')")
+        app-form.name(type="text" placeholder="じゃがいも" v-model="ingredientItem.name")
+        app-form.amount(type="text" placeholder="2つ" v-model="ingredientItem.amount")
       .icon(v-if="!isFirstItem")
         close-icon(@click="onDeleteItem")
 </template>
@@ -21,10 +21,6 @@ export type Ingredient = {
 type Data = {
   ingredientItem: Ingredient;
 };
-type Props = {
-  ingredient: Ingredient;
-  index: number;
-};
 
 export default Vue.extend({
   components: {
@@ -36,22 +32,21 @@ export default Vue.extend({
     ingredient: Object as PropType<Ingredient>,
     index: Number
   },
-  data() {
+  data(): Data {
     return {
       ingredientItem: this.ingredient
     };
   },
   computed: {
-    isFirstItem() {
+    isFirstItem(): boolean {
       return this.index === 0;
     }
   },
   methods: {
-    onChangeIngredientItem(value: string) {
-      this.ingredientItem.prop = value;
+    onChangeIngredientItem(): void {
       this.$emit("on-change-hashtag-item", this.ingredientItem);
     },
-    onDeleteItem() {
+    onDeleteItem(): void {
       this.$emit("on-delete-item");
     }
   }

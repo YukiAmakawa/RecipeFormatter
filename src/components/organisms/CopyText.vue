@@ -36,17 +36,20 @@
 </template>
 <script lang="ts">
 import CopyIcon from "../../assets/icons/Orion_copy.svg";
-import { PropType } from "vue";
 import { Recipe } from "../../components/molecules/RecipeTitle.vue";
 import { Hashtag } from "../../components/molecules/HashTagItem.vue";
-import { Ingredient } from "../../components/molecules/IngredientItem.vue";
 import { Step } from "../../components/molecules/StepItem.vue";
 import { Memo } from "../../components/molecules/MemoItem.vue";
-export default {
+import Vue, { PropType } from "vue";
+import { Ingredient } from "../molecules/IngredientItem.vue";
+type Data = {
+  showToolTip: boolean;
+};
+export default Vue.extend({
   components: {
     CopyIcon
   },
-  data() {
+  data(): Data {
     return {
       showToolTip: false
     };
@@ -78,7 +81,7 @@ export default {
     }
   },
   computed: {
-    isNoText() {
+    isNoText(): boolean {
       return (
         !this.recipe.title &&
         !this.recipe.description &&
@@ -89,66 +92,61 @@ export default {
         !this.hashtags[0].title
       );
     },
-    formattedServingFor() {
+    formattedServingFor(): string {
       return this.servingFor ? `（${this.servingFor})` : "";
     },
-    formattedTitle() {
+    formattedTitle(): string {
       return this.recipe.title ? `【${this.recipe.title}】` : "";
     },
-    formattedDescription() {
+    formattedDescription(): string {
       return this.recipe.description ? `${this.recipe.description}` : "";
     },
-    formattedIngredientTitle() {
+    formattedIngredientTitle(): string {
       return this.ingredients[0].name && this.ingredients[0].amount
         ? `ー材料${this.formattedServingFor}ーーーーーー`
         : "";
     },
-    formattedIngredientItem() {
-      let formattedIngredientItem = [];
-      this.ingredients.forEach(i => {
-        if (!i.name || !i.amount) return;
-        formattedIngredientItem += `\r\n${i.name}  ${i.amount}`;
-      });
-      return formattedIngredientItem;
+    formattedIngredientItem(): string {
+      return this.ingredients.reduce(
+        (accumulator, currentValue) =>
+          accumulator + `\r\n${currentValue.name}  ${currentValue.amount}`,
+        ""
+      );
     },
-    formattedStepTitle() {
+    formattedStepTitle(): string {
       return this.steps[0].description ? `ー作り方ーーーーーー` : "";
     },
-    formattedStepItem() {
-      let formattedStepItem = [];
-      this.steps.forEach((s, index) => {
-        if (!s.description) return;
-        formattedStepItem += `\r\n${index + 1}. ${s.description}`;
-      });
-      return formattedStepItem;
+    formattedStepItem(): string {
+      return this.steps.reduce(
+        (accumulator, currentValue, currentIndex) =>
+          accumulator + `\r\n${currentIndex + 1}. ${currentValue.description}`,
+        ""
+      );
     },
-    formattedMemotTitle() {
+    formattedMemotTitle(): string {
       return this.memos[0].description ? `ー備考ーーーーーー` : "";
     },
-    formattedMemoItem() {
-      let formattedMemoItem = [];
-      this.memos.forEach((m, index) => {
-        if (!m.description) return;
-        formattedMemoItem += `\r\n${index + 1}. ${m.description}`;
-      });
-      return formattedMemoItem;
+    formattedMemoItem(): string {
+      return this.memos.reduce(
+        (accumulator, currentValue, currentIndex) =>
+          accumulator + `\r\n${currentIndex + 1}. ${currentValue.description}`,
+        ""
+      );
     },
-    formatReturn() {
+    formatReturn(): string {
       return `
 
 `;
     },
-    formattedHashtagItem() {
-      let formattedHashtagItem = [];
-      this.hashtags.forEach(h => {
-        if (!h.title) return;
-        formattedHashtagItem += `#${h.title}`;
-      });
-      return formattedHashtagItem;
+    formattedHashtagItem(): string {
+      return this.hashtags.reduce(
+        (accumulator, currentValue) => accumulator + `#${currentValue.title}`,
+        ""
+      );
     }
   },
   methods: {
-    copyTexts() {
+    copyTexts(): void {
       const formattedText = `${this.formatReturn}${this.formattedTitle}${this.formatReturn}${this.formattedDescription}${this.formatReturn}${this.formattedIngredientTitle}${this.formattedIngredientItem}${this.formatReturn}${this.formattedStepTitle}${this.formattedStepItem}${this.formatReturn}${this.formattedMemotTitle}${this.formattedMemoItem}${this.formatReturn}${this.formattedHashtagItem}`;
 
       navigator.clipboard
@@ -159,12 +157,12 @@ export default {
             this.showToolTip = false;
           }, 1500);
         })
-        .catch(e => {
-          console.log(e);
+        .catch(() => {
+          return;
         });
     }
   }
-};
+});
 </script>
 <style lang="scss" scoped>
 .CopyText {

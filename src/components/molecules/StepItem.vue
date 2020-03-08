@@ -20,11 +20,7 @@ export type Step = {
 };
 
 type Data = {
-  step: string;
-};
-type Props = {
-  step: string;
-  index: number;
+  stepItem: Step;
 };
 
 export default Vue.extend({
@@ -37,21 +33,21 @@ export default Vue.extend({
     step: Object as PropType<Step>,
     index: Number
   },
-  data() {
+  data(): Data {
     return {
       stepItem: this.step
     };
   },
   computed: {
-    isFirstItem() {
+    isFirstItem(): boolean {
       return this.index === 0;
     }
   },
   methods: {
-    onChangeStepItem() {
+    onChangeStepItem(): void {
       this.$emit("on-change-step-item", this.stepItem);
     },
-    onDeleteItem() {
+    onDeleteItem(): void {
       this.$emit("on-delete-item");
     }
   }
