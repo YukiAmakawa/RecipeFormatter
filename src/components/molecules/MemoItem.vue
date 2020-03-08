@@ -1,13 +1,15 @@
 <template lang="pug">
   .MemoItem
     //- move-icon
-    div.flex.flex-middle
-      app-textarea.description(
-        placeholder="じゃがいもの下茹では電子レンジで代用できます"
-        v-model="memo.description"
-      )
-      .icon(v-if="!isFirstItem")
-        close-icon(@click="onDeleteItem")
+    div.flex
+      span.index {{index+1}}.
+      .flex.flex-middle
+        app-textarea.description(
+          placeholder="じゃがいもの下茹では電子レンジで代用できます"
+          v-model="memo.description"
+        )
+        .icon(v-if="!isFirstItem")
+          close-icon(@click="onDeleteItem")
 </template>
 <script lang="ts">
 import MoveIcon from "../../assets/icons/Orion_copy.svg";
@@ -53,7 +55,8 @@ export default Vue.extend({
 .MemoItem {
   width: 100%;
   .description {
-    width: 290px;
+    width: 265px;
+    margin-left: 10px;
   }
   .icon {
     margin-left: 5px;

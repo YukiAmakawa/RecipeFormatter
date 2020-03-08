@@ -82,18 +82,11 @@ export default Vue.extend({
         {
           name: "",
           amount: ""
-        },
-        {
-          name: "",
-          amount: ""
         }
       ],
       servingFor: ""
     },
     steps: [
-      {
-        description: ""
-      },
       {
         description: ""
       }
@@ -157,6 +150,7 @@ export default Vue.extend({
 </script>
 <style lang="scss">
 .recipes-index {
+  font-size: 0.87rem;
   .recipe-title {
     margin-top: 36px;
   }

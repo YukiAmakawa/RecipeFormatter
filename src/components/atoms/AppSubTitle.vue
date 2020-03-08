@@ -48,13 +48,12 @@ export default Vue.extend({
 </script>
 <style lang="scss" scoped>
 .AppSubTitle {
-  // width: 90px;
   .subtitle-wrap {
-    .sub-title {
-      font-size: 0.87rem;
-    }
     .serving-form {
       width: 150px;
+      .blacket {
+        font-size: 18px;
+      }
     }
   }
 }
