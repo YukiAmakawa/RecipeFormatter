@@ -1,11 +1,14 @@
 <template lang="pug">
   .RecipeTitle
-    app-form.title(
-      type="text"
-      placeholder="肉じゃが"
-      v-model="recipeItem.title"
-      @input="onChangeRecipeTitle"
-    )
+    .title-wrap.flex.flex-middle
+      span 【
+      app-form.title(
+        type="text"
+        placeholder="肉じゃが"
+        v-model="recipeItem.title"
+        @input="onChangeRecipeTitle"
+      )
+      span 】
     app-textarea.description(
       placeholder="食卓の定番料理。薄めの優しい味つけです"
       v-model="recipeItem.description"
@@ -56,8 +59,13 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .RecipeTitle {
   width: 100%;
-  .title {
-    width: 175px;
+  .title-wrap {
+    span {
+      font-size: 18px;
+    }
+    .title {
+      width: 175px;
+    }
   }
   .description {
     width: 290px;

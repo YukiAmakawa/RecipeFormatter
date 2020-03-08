@@ -1,11 +1,11 @@
 <template lang="pug">
   .IngredientList
     .title-wrap.flex.flex-middle
-      app-sub-title.subtitle(title="材料")
-      serving-for(
-        :servingFor="servingFor"
+      app-sub-title.subtitle(
+        title="材料"
+        :servingFor="ingredients.servingFor"
         v-model="servingForItem"
-        @on-change-serving-for-item="onChangeServingFor($event)"
+        @on-change-serving-for="onChangeServingFor($event)"
       )
     ul.ingredient-list
       li(v-for="(ingredient, index) in ingredientItems" v-model="ingredientItems")
@@ -21,7 +21,6 @@
 <script lang="ts">
 import AppSubTitle from "../atoms/AppSubTitle.vue";
 import IngredientItem from "../molecules/IngredientItem.vue";
-import ServingFor from "../molecules/ServingFor.vue";
 import AddIcon from "../../assets/icons/Orion_add-circle.svg";
 import { Ingredient } from "../../components/molecules/IngredientItem.vue";
 import Vue, { PropType } from "vue";
@@ -34,7 +33,6 @@ export default Vue.extend({
   components: {
     AppSubTitle,
     IngredientItem,
-    ServingFor,
     AddIcon
   },
   props: {
