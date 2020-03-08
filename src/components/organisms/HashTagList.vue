@@ -14,16 +14,13 @@
 <script lang="ts">
 import HashTagItem from "../molecules/HashTagItem.vue";
 import AddIcon from "../../assets/icons/Orion_add-circle.svg";
-import { PropType } from "vue";
 import { Hashtag } from "../../components/molecules/HashTagItem.vue";
+import Vue, { PropType } from "vue";
 type Data = {
-  hastagItems: Array<Hashtag>;
-};
-type Props = {
-  hastags: Array<Hashtag>;
+  hashtagItems: Hashtag[];
 };
 
-export default {
+export default Vue.extend({
   components: {
     HashTagItem,
     AddIcon
@@ -34,24 +31,24 @@ export default {
       default: () => []
     }
   },
-  data() {
+  data(): Data {
     return {
       hashtagItems: this.hashtags
     };
   },
   methods: {
-    onChangeHashtagList(hashtagItem: Hashtag, index: number) {
+    onChangeHashtagList(hashtagItem: Hashtag, index: number): void {
       this.hashtagItems[index] = hashtagItem;
       this.$emit("on-change-hashtag-list", this.hashtagItems);
     },
-    deleteListItem(index: number) {
+    deleteListItem(index: number): void {
       this.$emit("delete-list-item", { item: "hashtags", index: index });
     },
-    addListItem() {
+    addListItem(): void {
       this.$emit("add-list-item", { item: "hashtags" });
     }
   }
-};
+});
 </script>
 <style lang="scss" scoped>
 .HashTagList {

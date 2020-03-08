@@ -57,25 +57,9 @@ import { Ingredient } from "../../components/molecules/IngredientItem.vue";
 import { Step } from "../../components/molecules/StepItem.vue";
 import { Memo } from "../../components/molecules/MemoItem.vue";
 
-type IngredientList = {
-  ingredientsList: Ingredient[];
-  servingFor: string;
-};
-
-type StepList = {
-  stepList: Step[];
-};
-
-type MemoList = {
-  memoList: Memo[];
-};
-
+type Key = string;
 export type Data = {
-  recipe: Recipe;
-  ingredients: IngredientList;
-  steps: Step[];
-  memos: Memo[];
-  hashtags: Hashtag[];
+  [key in Key]: any;
 };
 
 export default Vue.extend({
@@ -117,40 +101,34 @@ export default Vue.extend({
     memos: [
       {
         description: ""
-      },
-      {
-        description: ""
       }
     ],
     hashtags: [
-      {
-        title: ""
-      },
       {
         title: ""
       }
     ]
   }),
   methods: {
-    onChangeRecipeTitle(recipeTitle: Recipe) {
+    onChangeRecipeTitle(recipeTitle: Recipe): void {
       this.recipe = recipeTitle;
     },
-    onChangeHashTagList(hashtagList: Hashtag[]) {
+    onChangeHashTagList(hashtagList: Hashtag[]): void {
       this.hashtags = hashtagList;
     },
-    onChangeIngredientList(ingredientList: Ingredient[]) {
+    onChangeIngredientList(ingredientList: Ingredient[]): void {
       this.ingredients.ingredientsList = ingredientList;
     },
-    onChangeServingFor(servingFor: string) {
+    onChangeServingFor(servingFor: string): void {
       this.ingredients.servingFor = servingFor;
     },
-    onChangeStepList(stepList: Step[]) {
+    onChangeStepList(stepList: Step[]): void {
       this.steps = stepList;
     },
-    onChangeMemoList(memoList: Memo[]) {
+    onChangeMemoList(memoList: Memo[]): void {
       this.memos = memoList;
     },
-    deleteListItem({ item, index }) {
+    deleteListItem({ item, index }: { item: string; index: number }): void {
       if (!confirm("削除してよろしいですか？")) return;
       if (item === "ingredients") {
         this.ingredients.ingredientsList.splice(index, 1);
@@ -158,7 +136,7 @@ export default Vue.extend({
         this[item].splice(index, 1);
       }
     },
-    addListItem({ item }) {
+    addListItem({ item }: { item: string }): void {
       switch (item) {
         case "ingredients":
           this.ingredients.ingredientsList.push({ name: "", amount: "" });

@@ -5,7 +5,6 @@
       app-textarea.description(
         placeholder="じゃがいもの下茹では電子レンジで代用できます"
         v-model="memo.description"
-        @on-change-textarea="onChangeMemoItem"
       )
       .icon(v-if="!isFirstItem")
         close-icon(@click="onDeleteItem")
@@ -20,11 +19,7 @@ export type Memo = {
 };
 
 type Data = {
-  memo: string;
-};
-type Props = {
-  memo: string;
-  index: number;
+  memoItem: Memo;
 };
 
 export default Vue.extend({
@@ -37,21 +32,18 @@ export default Vue.extend({
     memo: Object as PropType<Memo>,
     index: Number
   },
-  data() {
+  data(): Data {
     return {
-      MemoItem: this.memo
+      memoItem: this.memo
     };
   },
   computed: {
-    isFirstItem() {
+    isFirstItem(): boolean {
       return this.index === 0;
     }
   },
   methods: {
-    onChangeMemoItem() {
-      this.$emit("on-change-memo-item", this.MemoItem);
-    },
-    onDeleteItem() {
+    onDeleteItem(): void {
       this.$emit("on-delete-item");
     }
   }

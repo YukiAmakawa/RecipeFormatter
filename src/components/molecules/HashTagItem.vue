@@ -2,7 +2,7 @@
   .HashTagItem
     div.flex.flex-middle
       span.hash #
-      app-form.title(type="text" placeholder="和食" v-model="hashtagItem.title" @on-change-form="onChangeHashtagItem")
+      app-form.title(type="text" placeholder="和食" v-model="hashtagItem.title")
       .icon(v-if="!isFirstItem")
         close-icon(@click="onDeleteItem")
 </template>
@@ -15,11 +15,7 @@ export type Hashtag = {
 };
 
 type Data = {
-  hastagItem: Record<string, string>;
-};
-type Props = {
-  hashtag: Record<string, string>;
-  index: number;
+  hashtagItem: Hashtag;
 };
 
 export default Vue.extend({
@@ -31,21 +27,18 @@ export default Vue.extend({
     hashtag: Object as Vue.PropType<Hashtag>,
     index: Number
   },
-  data() {
+  data(): Data {
     return {
       hashtagItem: this.hashtag
     };
   },
   computed: {
-    isFirstItem() {
+    isFirstItem(): boolean {
       return this.index === 0;
     }
   },
   methods: {
-    onChangeHashtagItem() {
-      this.$emit("on-change-hashtag-item", this.hashtagItem);
-    },
-    onDeleteItem() {
+    onDeleteItem(): void {
       this.$emit("on-delete-item");
     }
   }

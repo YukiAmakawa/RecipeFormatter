@@ -18,15 +18,13 @@ import AppSubTitle from "../atoms/AppSubTitle.vue";
 import MemoItem from "../molecules/MemoItem.vue";
 import AddIcon from "../../assets/icons/Orion_add-circle.svg";
 import { Memo } from "../../components/molecules/MemoItem.vue";
+import Vue, { PropType } from "vue";
 
 type Data = {
   memoItems: Array<Memo>;
 };
-type Props = {
-  memos: Array<Memo>;
-};
 
-export default {
+export default Vue.extend({
   components: {
     AppSubTitle,
     MemoItem,
@@ -38,24 +36,24 @@ export default {
       default: () => []
     }
   },
-  data() {
+  data(): Data {
     return {
       memoItems: this.memos
     };
   },
   methods: {
-    onChangeMemoList(memoItem: Memo, index: number) {
+    onChangeMemoList(memoItem: Memo, index: number): void {
       this.memoItems[index] = memoItem;
       this.$emit("on-change-memo-list", this.memoItems);
     },
-    deleteListItem(index: number) {
+    deleteListItem(index: number): void {
       this.$emit("delete-list-item", { item: "memos", index: index });
     },
-    addListItem() {
+    addListItem(): void {
       this.$emit("add-list-item", { item: "memos" });
     }
   }
-};
+});
 </script>
 <style lang="scss" scoped>
 .MemoList {

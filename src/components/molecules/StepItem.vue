@@ -5,7 +5,6 @@
       app-textarea.description(
         placeholder="じゃがいもの皮をむき、一口大に切る"
         v-model="step.description"
-        @on-change-textarea="onChangeStepItem"
       )
       .icon(v-if="!isFirstItem")
         close-icon(@click="onDeleteItem")
@@ -20,11 +19,7 @@ export type Step = {
 };
 
 type Data = {
-  step: string;
-};
-type Props = {
-  step: string;
-  index: number;
+  stepItem: Step;
 };
 
 export default Vue.extend({
@@ -37,21 +32,18 @@ export default Vue.extend({
     step: Object as PropType<Step>,
     index: Number
   },
-  data() {
+  data(): Data {
     return {
       stepItem: this.step
     };
   },
   computed: {
-    isFirstItem() {
+    isFirstItem(): boolean {
       return this.index === 0;
     }
   },
   methods: {
-    onChangeStepItem() {
-      this.$emit("on-change-step-item", this.stepItem);
-    },
-    onDeleteItem() {
+    onDeleteItem(): void {
       this.$emit("on-delete-item");
     }
   }

@@ -1,15 +1,18 @@
 <template lang="pug">
   .RecipeTitle
-    app-form.title(
-      type="text"
-      placeholder="肉じゃが"
-      v-model="recipeItem.title"
-      @on-change-form="onChangeRecipeTitle"
-    )
+    .title-wrap.flex.flex-middle
+      span 【
+      app-form.title(
+        type="text"
+        placeholder="肉じゃが"
+        v-model="recipeItem.title"
+        @input="onChangeRecipeTitle"
+      )
+      span 】
     app-textarea.description(
       placeholder="食卓の定番料理。薄めの優しい味つけです"
       v-model="recipeItem.description"
-      @on-change-textarea="onChangeRecipeTitle"
+      @input="onChangeRecipeTitle"
     )
 </template>
 <script lang="ts">
@@ -21,24 +24,33 @@ export type Recipe = {
   description: string;
 };
 
+type Data = {
+  recipeItem: {
+    recipeTitle: string;
+    recipeDescription: string;
+  };
+};
+
 export default Vue.extend({
   components: {
     AppForm,
     AppTextarea
   },
   props: {
-    recipe: Object as PropType<Recipe>
+    recipe: {
+      type: Object as PropType<Recipe>
+    }
   },
-  data() {
+  data(): Data {
     return {
       recipeItem: {
-        title: this.title,
-        description: this.description
+        recipeTitle: this.recipe.title,
+        recipeDescription: this.recipe.description
       }
     };
   },
   methods: {
-    onChangeRecipeTitle() {
+    onChangeRecipeTitle(): void {
       this.$emit("on-change-recipe-title", this.recipeItem);
     }
   }
@@ -47,8 +59,13 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .RecipeTitle {
   width: 100%;
-  .title {
-    width: 175px;
+  .title-wrap {
+    span {
+      font-size: 18px;
+    }
+    .title {
+      width: 175px;
+    }
   }
   .description {
     width: 290px;
