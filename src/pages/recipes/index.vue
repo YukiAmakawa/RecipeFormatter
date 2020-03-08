@@ -57,25 +57,9 @@ import { Ingredient } from "../../components/molecules/IngredientItem.vue";
 import { Step } from "../../components/molecules/StepItem.vue";
 import { Memo } from "../../components/molecules/MemoItem.vue";
 
-type IngredientList = {
-  ingredientsList: Ingredient[];
-  servingFor: string;
-};
-
-type StepList = {
-  stepList: Step[];
-};
-
-type MemoList = {
-  memoList: Memo[];
-};
-
+type Key = string;
 export type Data = {
-  recipe: Recipe;
-  ingredients: IngredientList;
-  steps: Step[];
-  memos: Memo[];
-  hashtags: Hashtag[];
+  [key in Key]: any;
 };
 
 export default Vue.extend({
