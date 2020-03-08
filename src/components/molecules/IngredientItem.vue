@@ -43,9 +43,6 @@ export default Vue.extend({
     }
   },
   methods: {
-    onChangeIngredientItem(): void {
-      this.$emit("on-change-hashtag-item", this.ingredientItem);
-    },
     onDeleteItem(): void {
       this.$emit("on-delete-item");
     }

@@ -2,7 +2,7 @@
   .HashTagItem
     div.flex.flex-middle
       span.hash #
-      app-form.title(type="text" placeholder="和食" v-model="hashtagItem.title" @on-change-form="onChangeHashtagItem")
+      app-form.title(type="text" placeholder="和食" v-model="hashtagItem.title")
       .icon(v-if="!isFirstItem")
         close-icon(@click="onDeleteItem")
 </template>
@@ -38,9 +38,6 @@ export default Vue.extend({
     }
   },
   methods: {
-    onChangeHashtagItem(): void {
-      this.$emit("on-change-hashtag-item", this.hashtagItem);
-    },
     onDeleteItem(): void {
       this.$emit("on-delete-item");
     }

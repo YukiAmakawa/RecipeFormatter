@@ -38,11 +38,6 @@ export default Vue.extend({
       }
     }
   }
-  // methods: {
-  //   onChangeForm(value: string): void {
-  //     this.$emit("on-change-form", value);
-  //   }
-  // }
 });
 </script>
 <style lang="scss" scoped>

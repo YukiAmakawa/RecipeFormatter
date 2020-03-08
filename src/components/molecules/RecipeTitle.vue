@@ -4,12 +4,12 @@
       type="text"
       placeholder="肉じゃが"
       v-model="recipeItem.title"
-      @on-change-form="onChangeRecipeTitle"
+      @input="onChangeRecipeTitle"
     )
     app-textarea.description(
       placeholder="食卓の定番料理。薄めの優しい味つけです"
       v-model="recipeItem.description"
-      @on-change-textarea="onChangeRecipeTitle"
+      @input="onChangeRecipeTitle"
     )
 </template>
 <script lang="ts">

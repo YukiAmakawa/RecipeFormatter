@@ -4,14 +4,14 @@
         :placeholder="placeholder"
         v-model="text"
         :row="row"
-        @change="onChangeTextarea(value)"
       )
 </template>
 <script lang="ts">
-export default {
+import Vue from "vue";
+export default Vue.extend({
   props: {
     placeholder: {
-      type: [String, Number],
+      type: String,
       default: ""
     },
     row: {
@@ -32,13 +32,8 @@ export default {
         this.$emit("input", value);
       }
     }
-  },
-  methods: {
-    onChangeTextarea(value: string): void {
-      this.$emit("on-change-textarea", value);
-    }
   }
-};
+});
 </script>
 <style lang="scss" scoped>
 .AppTextarea {

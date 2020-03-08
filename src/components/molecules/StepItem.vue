@@ -5,7 +5,6 @@
       app-textarea.description(
         placeholder="じゃがいもの皮をむき、一口大に切る"
         v-model="step.description"
-        @on-change-textarea="onChangeStepItem"
       )
       .icon(v-if="!isFirstItem")
         close-icon(@click="onDeleteItem")
@@ -44,9 +43,6 @@ export default Vue.extend({
     }
   },
   methods: {
-    onChangeStepItem(): void {
-      this.$emit("on-change-step-item", this.stepItem);
-    },
     onDeleteItem(): void {
       this.$emit("on-delete-item");
     }

@@ -6,7 +6,7 @@
         type="text"
         placeholder="2人分"
         v-model="servingForItem"
-        @on-change-form="onChangeServingForItem"
+        @input="onChangeServingForItem"
       )
       span.blacket ）
 </template>
