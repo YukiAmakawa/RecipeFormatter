@@ -40,14 +40,11 @@ export default Vue.extend({
   width: 100%;
   .text-input {
     width: 100%;
+    background: #fffffe;
     height: 48px;
-    border: 1px solid rgba(0, 0, 0, 0.15);
     padding: 3px 8px;
     border-radius: 3px;
     resize: none;
-    &:focus {
-      outline: 1px solid rgba(0, 0, 0, 0.15);
-    }
   }
 }
 </style>

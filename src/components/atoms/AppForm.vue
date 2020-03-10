@@ -45,14 +45,11 @@ export default Vue.extend({
   width: 100%;
   .text-input {
     width: 100%;
+    background: #fffffe;
     font-size: 0.87rem;
     line-height: 0.87rem;
-    border: 1px solid rgba(0, 0, 0, 0.15);
     padding: 3px 8px;
     border-radius: 3px;
-    &:focus {
-      border: 1px solid rgba(0, 0, 0, 0.15);
-    }
   }
 }
 </style>
