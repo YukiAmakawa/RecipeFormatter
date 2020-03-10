@@ -196,8 +196,11 @@ export default Vue.extend({
     }
   }
   .formatted-text {
+    background: #fffffe;
     margin-top: 15px;
+    padding: 10px 8px;
     font-size: 14px;
+    border-radius: 3px;
     .default-message {
       color: gray;
     }
