@@ -10,7 +10,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Install dependencies
-          command: npm
+          command: npm install
       - run:
           name: Build application
           command: npm run build:dev
@@ -32,7 +32,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Install dependencies
-          command: npm
+          command: npm install
       - run:
           name: Build application
           command: npm run build
@@ -49,7 +49,7 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: npm
+          command: npm install
       - run:
           name: Build application
           command: npm run build:dev
@@ -68,7 +68,7 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: npm
+          command: npm install
       - run:
           name: Build application
           command: npm run build
