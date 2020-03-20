@@ -7,14 +7,6 @@ assignees: ''
 
 ---
 
----
-name: バグ報告用テンプレート
-about: バグ報告用
-title: ''
-labels: ''
-assignees: ''
-
----
 
 # 期待する動作
 
