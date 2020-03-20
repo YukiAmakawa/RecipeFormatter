@@ -17,5 +17,4 @@ jobs:
             command: ./node_modules/.bin/firebase --token=$FIREBASE_DEPLOY_TOKEN use $FIREBASE_PROJECT_ID_PRODUCTION
         - run:
             name: Deploy master to Firebase
-            command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKENworkflows:
-            
+            command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
