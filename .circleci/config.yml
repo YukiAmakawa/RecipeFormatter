@@ -12,6 +12,9 @@ jobs:
           name: Install dependencies
           command: npm install
       - run:
+          name: Install firebase
+          command: npm install --save-dev firebase-tools
+      - run:
           name: Build application
           command: npm run build
       # - run:
@@ -50,6 +53,9 @@ jobs:
       - run:
           name: Install dependencies
           command: npm install
+      - run:
+          name: Install firebase
+          command: npm install --save-dev firebase-tools
       - run:
           name: Build application
           command: npm run build
