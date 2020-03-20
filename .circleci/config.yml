@@ -1,110 +1,52 @@
 version: 2
 jobs:
-  build-dev:
-    working_directory: ~/RecipeFormatter/development
-    docker:
-      - image: circleci/node:8.14.0
-    steps:
-      - checkout
-      - restore_cache:
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run:
-          name: Install dependencies
-          command: npm install
-      - run:
-          name: Install firebase
-          command: npm install --save-dev firebase-tools
-      - run:
-          name: Build application
-          command: npm run build
-      # - run:
-      #     name: Test application
-      #     command: npm test
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
-  build-production:
-    working_directory: ~/RecipeFormatter/production
-    docker:
-      - image: circleci/node:8.14.0
-    steps:
-      - checkout
-      - restore_cache:
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run:
-          name: Install dependencies
-          command: npm install
-      - run:
-          name: Build application
-          command: npm run build
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
   deploy-dev:
-    docker:
-      - image: circleci/node:8.14.0
-    working_directory: ~/RecipeFormatter/development
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: npm install
-      - run:
-          name: Install firebase
-          command: npm install --save-dev firebase-tools
-      - run:
-          name: Build application
-          command: npm run build
-      - run:
-          name: Login Firebase Dev Project
-          command: ./node_modules/.bin/firebase --token=$FIREBASE_DEPLOY_TOKEN use $FIREBASE_PROJECT_ID_DEV
-      - run:
-          name: Deploy master to Firebase
-          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
+      docker:
+        - image: circleci/node:8.14.0
+      working_directory: ~/RecipeFormatter/development
+      steps:
+        - checkout
+        - run:
+            name: Install dependencies
+            command: npm install
+        - run:
+            name: Build application
+            command: npm run build
+        - run:
+            name: Login Firebase Development Project
+            command: ./node_modules/.bin/firebase --token=$FIREBASE_DEPLOY_TOKEN use $FIREBASE_PROJECT_ID_DEV
+        - run:
+            name: Deploy development to Firebase
+            command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
 
-  deploy-production:
-    docker:
-      - image: circleci/node:8.14.0
-    working_directory: ~/RecipeFormatter/production
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: npm install
-      - run:
-          name: Build application
-          command: npm run build
-      - run:
-          name: Login Firebase Production Project
-          command: ./node_modules/.bin/firebase --token=$FIREBASE_DEPLOY_TOKEN use $FIREBASE_PROJECT_ID_PRODUCTION
-      - run:
-          name: Deploy master to Firebase
-          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
-
+  deploy-prod:
+      docker:
+        - image: circleci/node:8.14.0
+      working_directory: ~/RecipeFormatter/master
+      steps:
+        - checkout
+        - run:
+            name: Install dependencies
+            command: npm install
+        - run:
+            name: Build application
+            command: npm run build
+        - run:
+            name: Login Firebase Production Project
+            command: ./node_modules/.bin/firebase --token=$FIREBASE_DEPLOY_TOKEN use $FIREBASE_PROJECT_ID_PRODUCTION
+        - run:
+            name: Deploy master to Firebase
+            command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
 workflows:
   version: 2
   build_and_deploy:
     jobs:
-      - build-dev
       - deploy-dev:
-          requires:
-            - build-dev
           filters:
             branches:
               only:
                 - development
-      - build-production:
-          filters:
-            branches:
-              only:
-                - master
-      - deploy-production:
-          requires:
-            - build-production
+      - deploy-prod:
           filters:
             branches:
               only:
