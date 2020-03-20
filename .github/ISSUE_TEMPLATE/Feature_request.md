@@ -7,14 +7,6 @@ assignees: ''
 
 ---
 
----
-name: 機能要望用テンプレート
-about: 新規機能追、機能改善などの要望用
-title: ''
-labels: ''
-assignees: ''
-
----
 
 # 機能概要
 
