@@ -32,6 +32,9 @@ jobs:
             name: Install dependencies
             command: npm install
         - run:
+            name: Install firebase
+            command: npm install --save firebase
+        - run:
             name: Build application
             command: npm run build
         - run:
