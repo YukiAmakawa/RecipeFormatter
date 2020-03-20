@@ -1,48 +1,36 @@
 version: 2
 jobs:
-  build-and-deploy-dev:
-    docker:
-      - image: circleci/node:8.14.0
-    working_directory: ~/RecipeFormatter/development
-    steps:
-      - checkout
-      - restore_cache:
-        key: v1-dependencies-{{ checksum "package.json" }}
-      - run:
-          name: Install dependencies
-          command: npm install
-      - run:
-          name: Build application
-          command: npm run build:dev
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run:
-          name: Login Firebase Development Project
-          command: ./node_modules/.bin/firebase --token=$FIREBASE_DEPLOY_TOKEN use $FIREBASE_PROJECT_ID_DEV
-      - run:
-          name: Deploy development to Firebase
-          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
-
-  build-and-deploy-prod:
+  deploy-dev:
       docker:
         - image: circleci/node:8.14.0
-      working_directory: ~/RecipeFormatter/master
+      working_directory: ~/RecipeFormatter/development
       steps:
         - checkout
-        - restore_cache:
-          key: v1-dependencies-{{ checksum "package.json" }}
         - run:
             name: Install dependencies
             command: npm install
         - run:
             name: Build application
             command: npm run build
-        - save_cache:
-            paths:
-              - node_modules
-            key: v1-dependencies-{{ checksum "package.json" }}
+        - run:
+            name: Login Firebase Development Project
+            command: ./node_modules/.bin/firebase --token=$FIREBASE_DEPLOY_TOKEN use $FIREBASE_PROJECT_ID_DEV
+        - run:
+            name: Deploy development to Firebase
+            command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
+
+  deploy-prod:
+      docker:
+        - image: circleci/node:8.14.0
+      working_directory: ~/RecipeFormatter/master
+      steps:
+        - checkout
+        - run:
+            name: Install dependencies
+            command: npm install
+        - run:
+            name: Build application
+            command: npm run build
         - run:
             name: Login Firebase Production Project
             command: ./node_modules/.bin/firebase --token=$FIREBASE_DEPLOY_TOKEN use $FIREBASE_PROJECT_ID_PRODUCTION
@@ -53,12 +41,12 @@ workflows:
   version: 2
   build_and_deploy:
     jobs:
-      - build-and-deploy-dev:
+      - deploy-dev:
           filters:
             branches:
               only:
                 - development
-      - build-and-deploy-prod:
+      - deploy-prod:
           filters:
             branches:
               only:
