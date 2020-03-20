@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "recipe-formatter"
+    "default": "recipe-formatter-dev",
+    "dev": "recipe-formatter-dev",
+    "production": "recipe-formatter"
   }
 }
