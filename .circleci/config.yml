@@ -13,7 +13,7 @@ jobs:
           command: npm install
       - run:
           name: Build application
-          command: npm run build:dev
+          command: npm run build
       # - run:
       #     name: Test application
       #     command: npm test
@@ -52,7 +52,7 @@ jobs:
           command: npm install
       - run:
           name: Build application
-          command: npm run build:dev
+          command: npm run build
       - run:
           name: Login Firebase Dev Project
           command: ./node_modules/.bin/firebase --token=$FIREBASE_DEPLOY_TOKEN use $FIREBASE_PROJECT_ID_DEV
