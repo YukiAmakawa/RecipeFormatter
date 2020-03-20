@@ -3,10 +3,11 @@
 @import "./font.scss";
 
 html {
-  font-size: 16px;
+  background: #f8f5f2;
+  color: #232323;
 }
 #app {
-  font-family: 'Noto Sans JP';
+  font-family: "Noto Sans JP";
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -17,6 +18,11 @@ html {
 
 .center {
   text-align: center;
+}
+
+.wrap {
+  width: 316px;
+  margin: 35px auto;
 }
 
 /*flex-class*/
@@ -46,7 +52,7 @@ html {
   justify-content: space-around;
 }
 .content-center {
-  justify-content: center
+  justify-content: center;
 }
 .flex-middle {
   align-items: center;
@@ -62,7 +68,7 @@ html {
 a {
   text-decoration: none;
   color: gray;
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 /*buttons*/
@@ -71,20 +77,26 @@ a {
   width: 150px;
   text-decoration: none;
   outline: 0;
-  padding: .5em .6em;
-  background: #001E1D;
+  padding: 0.5em 0.6em;
+  background: #001e1d;
   border-radius: 50px;
   cursor: pointer;
-  color: #FFFFFE;
+  color: #fffffe;
   font-weight: bold;
-  -webkit-transition: .3s ease-in-out;
-  transition: .3s ease-in-out;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+.icon {
+  width: 18px;
+  height: 18px;
 }
 
 // cssのtransition
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.3s;
 }
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }

@@ -1,9 +1,13 @@
 <template lang="pug">
-    h1.AppLogo recipe formatter
+  .AppLogo
+    h1.logo recipe formatter
 </template>
 <style lang="scss" scoped>
 .AppLogo {
-  max-width: 290px;
   width: 100%;
+  .logo {
+    text-align: center;
+    font-size: 28px;
+  }
 }
 </style>

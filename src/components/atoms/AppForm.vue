@@ -3,24 +3,24 @@
       input.text-input(
         :type="type"
         :placeholder="placeholder"
-        v-model="inputText"
+        v-model="text"
         :disabled="disabled"
       )
 </template>
 <script lang="ts">
-export default {
+import Vue from "vue";
+export default Vue.extend({
   props: {
     type: {
       type: String,
-      default: ""
-      // validator: type => ["text", "password", "number"].includes(type)
+      default: "text"
     },
     placeholder: {
-      type: [String, Number],
+      type: String,
       default: ""
     },
     value: {
-      type: [String],
+      type: String,
       default: ""
     },
     disabled: {
@@ -29,16 +29,27 @@ export default {
     }
   },
   computed: {
-    inputText: {
-      get() {
+    text: {
+      get(): string {
         return this.value;
+      },
+      set(value: string): void {
+        this.$emit("input", value);
       }
     }
   }
-};
+});
 </script>
 <style lang="scss" scoped>
-.FormText {
+.AppForm {
   width: 100%;
+  .text-input {
+    width: 100%;
+    background: #fffffe;
+    font-size: 0.87rem;
+    line-height: 0.87rem;
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
 }
 </style>
