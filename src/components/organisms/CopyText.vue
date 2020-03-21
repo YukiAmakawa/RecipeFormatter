@@ -6,7 +6,7 @@
     .message-wrap.flex.flex-middle.end(@click="copyTexts")
       .icon
         copy-icon
-      p.copy-message クリップボードにコピー
+      button.copy-message クリップボードにコピー
     .formatted-text
       p.default-message(v-if="isNoText") レシピを入力するとコピー用のテキストが表示されます
       span.recipe
