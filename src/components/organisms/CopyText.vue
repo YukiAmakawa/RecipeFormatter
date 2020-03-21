@@ -3,10 +3,10 @@
     transition(name="fade")
       .tool-tip(v-if="showToolTip")
         p.copy-succeed-message コピーしました
-    .message-wrap.flex.flex-middle.end(@click="copyTexts")
-      .icon
+    button.message-wrap.flex.flex-middle.end(@click="copyTexts")
+      i.icon
         copy-icon
-      button.copy-message クリップボードにコピー
+      span.copy-message クリップボードにコピー
     .formatted-text
       p.default-message(v-if="isNoText") レシピを入力するとコピー用のテキストが表示されます
       span.recipe
@@ -176,6 +176,7 @@ export default Vue.extend({
 
   .message-wrap {
     margin-top: 8px;
+    margin-left: auto;
     .copy-message {
       margin-left: 5px;
     }
