@@ -64,7 +64,7 @@ export default Vue.extend({
       font-size: 18px;
     }
     .title {
-      width: calc(100% - 50px);
+      max-width: calc(100% - 50px);
     }
   }
   .description {
