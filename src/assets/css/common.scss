@@ -91,6 +91,10 @@ a {
   height: 18px;
 }
 
+svg {
+  max-width: 18px;
+  max-height: 18px;
+}
 // cssのtransition
 .fade-enter-active,
 .fade-leave-active {
