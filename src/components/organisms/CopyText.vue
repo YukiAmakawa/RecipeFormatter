@@ -6,7 +6,7 @@
     .message-wrap.flex.flex-middle.end(@click="copyTexts")
       .icon
         copy-icon
-      p.copy-message クリップボードにコピー
+      button.copy-message クリップボードにコピー
     .formatted-text
       p.default-message(v-if="isNoText") レシピを入力するとコピー用のテキストが表示されます
       span.recipe
@@ -15,21 +15,21 @@
         span.recipe-description {{formattedDescription}}<br>
         <br>
       template.formatted-ingredients {{formattedIngredientTitle}}<br>
-      //- ul.formatted-ingredients-list
+
       template.ingredient(v-for="ingredient in ingredients")
         span.ing-name-amount(v-if="ingredient.name&&ingredient.amount") {{ingredient.name}}  {{ingredient.amount}}<br>
       <br>
       template.formatted-steps {{formattedStepTitle}}<br>
-      //- ul.formatted-steps-list
+
       template.step(v-for="(step, index) in steps")
         template.step-description(v-if="step.description") {{index+1}}. {{step.description}}<br>
       <br>
       template.formatted-steps {{formattedMemotTitle}}<br>
-      //- ul.formatted-hashtags-list
+
       template.memo(v-for="(memo, index) in memos")
           template.memo-description(v-if="memo.description") {{index+1}}. {{memo.description}}<br>
       <br>
-      //- ul.formatted-hashtags-list
+
       template.hashtag(v-for="hashtag in hashtags")
         template.hashtag-title(v-if="hashtag.title") \#{{hashtag.title}} 
       <br>
