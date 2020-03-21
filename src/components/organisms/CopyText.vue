@@ -3,7 +3,7 @@
     transition(name="fade")
       .tool-tip(v-if="showToolTip")
         p.copy-succeed-message コピーしました
-    button.message-wrap.flex.flex-middle.end(@click="copyTexts")
+    button.message-wrap.flex.flex-middle.end(@click="copyTexts" @touchstart="copyTexts")
       i.icon
         copy-icon
       span.copy-message クリップボードにコピー
