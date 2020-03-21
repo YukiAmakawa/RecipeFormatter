@@ -8,7 +8,7 @@
           placeholder="じゃがいもの下茹では電子レンジで代用できます"
           v-model="memo.description"
         )
-        .icon(v-if="!isFirstItem")
+        i.icon(v-if="!isFirstItem")
           close-icon(@click="onDeleteItem")
 </template>
 <script lang="ts">

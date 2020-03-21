@@ -3,7 +3,7 @@
     div.flex.flex-middle
       span.hash #
       app-form.title(type="text" placeholder="和食" v-model="hashtagItem.title")
-      .icon(v-if="!isFirstItem")
+      i.icon(v-if="!isFirstItem")
         close-icon(@click="onDeleteItem")
 </template>
 <script lang="ts">
@@ -52,6 +52,8 @@ export default Vue.extend({
   }
   .icon {
     margin-left: 5px;
+    width: 18px;
+    height: 18px;
   }
 }
 </style>
