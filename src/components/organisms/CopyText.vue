@@ -155,17 +155,18 @@ export default Vue.extend({
   methods: {
     isIOS() {
       const agent = window.navigator.userAgent;
-      console.log(agent);
       return agent.indexOf("iPhone") != -1 || agent.indexOf("iPad") != -1;
     },
     copyTexts(): void {
       if (this.isIOS()) {
-        const doc = document.getElementById("hidden-copy-text");
+        const doc: HTMLInputElement = document.getElementById(
+          "hidden-copy-text"
+        ) as HTMLInputElement;
         const selected = window.getSelection();
         const range = document.createRange();
         range.selectNodeContents(doc);
-        selected.removeAllRanges();
-        selected.addRange(range);
+        selected!.removeAllRanges();
+        selected!.addRange(range);
         document.execCommand("copy");
       } else {
         const formattedText = `${this.formatReturn}${this.formattedTitle}${this.formatReturn}${this.formattedDescription}${this.formatReturn}${this.formattedIngredientTitle}${this.formattedIngredientItem}${this.formatReturn}${this.formattedStepTitle}${this.formattedStepItem}${this.formatReturn}${this.formattedMemotTitle}${this.formattedMemoItem}${this.formatReturn}${this.formattedHashtagItem}`;
@@ -175,45 +176,6 @@ export default Vue.extend({
       setTimeout(() => {
         this.showToolTip = false;
       }, 1500);
-    },
-    copyTextsTouch(): void {
-      console.log("touch called");
-      if (this.isIOS()) {
-        try {
-          const doc = document.querySelector("#hidden-copy-text");
-          // doc.contentEditable = true;
-          // doc.readOnly = false;
-          console.log(doc);
-          const selected = window.getSelection();
-          const range = document.createRange();
-          range.selectNode(doc);
-          selected.removeAllRanges();
-          selected.addRange(range);
-          console.log(document);
-          console.log(selected.toString());
-          document.execCommand("copy");
-          this.showToolTip = true;
-          setTimeout(() => {
-            this.showToolTip = false;
-          }, 1500);
-        } catch (e) {
-          alert(e);
-        }
-      } else {
-        const formattedText = `${this.formatReturn}${this.formattedTitle}${this.formatReturn}${this.formattedDescription}${this.formatReturn}${this.formattedIngredientTitle}${this.formattedIngredientItem}${this.formatReturn}${this.formattedStepTitle}${this.formattedStepItem}${this.formatReturn}${this.formattedMemotTitle}${this.formattedMemoItem}${this.formatReturn}${this.formattedHashtagItem}`;
-
-        navigator.clipboard
-          .writeText(formattedText)
-          .then(() => {
-            this.showToolTip = true;
-            setTimeout(() => {
-              this.showToolTip = false;
-            }, 1500);
-          })
-          .catch(() => {
-            return;
-          });
-      }
     }
   }
 });
