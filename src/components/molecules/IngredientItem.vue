@@ -5,7 +5,7 @@
       .wrap-forms.flex
         app-form.name(type="text" placeholder="じゃがいも" v-model="ingredientItem.name")
         app-form.amount(type="text" placeholder="2つ" v-model="ingredientItem.amount")
-      .icon(v-if="!isFirstItem")
+      i.icon(v-if="!isFirstItem")
         close-icon(@click="onDeleteItem")
 </template>
 <script lang="ts">

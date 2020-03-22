@@ -8,7 +8,7 @@
           placeholder="じゃがいもの皮をむき、一口大に切る"
           v-model="step.description"
         )
-        .icon(v-if="!isFirstItem")
+        i.icon(v-if="!isFirstItem")
           close-icon(@click="onDeleteItem")
 </template>
 <script lang="ts">

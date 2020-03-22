@@ -3,10 +3,10 @@
     transition(name="fade")
       .tool-tip(v-if="showToolTip")
         p.copy-succeed-message コピーしました
-    .message-wrap.flex.flex-middle.end(@click="copyTexts")
-      .icon
+    button.message-wrap.flex.flex-middle.end(@click.prevent="copyTexts")
+      i.icon
         copy-icon
-      p.copy-message クリップボードにコピー
+      span.copy-message クリップボードにコピー
     .formatted-text
       p.default-message(v-if="isNoText") レシピを入力するとコピー用のテキストが表示されます
       span.recipe
@@ -15,24 +15,25 @@
         span.recipe-description {{formattedDescription}}<br>
         <br>
       template.formatted-ingredients {{formattedIngredientTitle}}<br>
-      //- ul.formatted-ingredients-list
+
       template.ingredient(v-for="ingredient in ingredients")
         span.ing-name-amount(v-if="ingredient.name&&ingredient.amount") {{ingredient.name}}  {{ingredient.amount}}<br>
       <br>
       template.formatted-steps {{formattedStepTitle}}<br>
-      //- ul.formatted-steps-list
+
       template.step(v-for="(step, index) in steps")
         template.step-description(v-if="step.description") {{index+1}}. {{step.description}}<br>
       <br>
       template.formatted-steps {{formattedMemotTitle}}<br>
-      //- ul.formatted-hashtags-list
+
       template.memo(v-for="(memo, index) in memos")
           template.memo-description(v-if="memo.description") {{index+1}}. {{memo.description}}<br>
       <br>
-      //- ul.formatted-hashtags-list
+
       template.hashtag(v-for="hashtag in hashtags")
         template.hashtag-title(v-if="hashtag.title") \#{{hashtag.title}} 
       <br>
+    #hidden-copy-text {{hiddenCopyText}}
 </template>
 <script lang="ts">
 import CopyIcon from "../../assets/icons/Orion_copy.svg";
@@ -146,23 +147,35 @@ export default Vue.extend({
         (accumulator, currentValue) => accumulator + `#${currentValue.title}`,
         ""
       );
+    },
+    hiddenCopyText(): string {
+      return `${this.formatReturn}${this.formattedTitle}${this.formatReturn}${this.formattedDescription}${this.formatReturn}${this.formattedIngredientTitle}${this.formattedIngredientItem}${this.formatReturn}${this.formattedStepTitle}${this.formattedStepItem}${this.formatReturn}${this.formattedMemotTitle}${this.formattedMemoItem}${this.formatReturn}${this.formattedHashtagItem}`;
     }
   },
   methods: {
+    isIOS() {
+      const agent = window.navigator.userAgent;
+      return agent.indexOf("iPhone") != -1 || agent.indexOf("iPad") != -1;
+    },
     copyTexts(): void {
-      const formattedText = `${this.formatReturn}${this.formattedTitle}${this.formatReturn}${this.formattedDescription}${this.formatReturn}${this.formattedIngredientTitle}${this.formattedIngredientItem}${this.formatReturn}${this.formattedStepTitle}${this.formattedStepItem}${this.formatReturn}${this.formattedMemotTitle}${this.formattedMemoItem}${this.formatReturn}${this.formattedHashtagItem}`;
-
-      navigator.clipboard
-        .writeText(formattedText)
-        .then(() => {
-          this.showToolTip = true;
-          setTimeout(() => {
-            this.showToolTip = false;
-          }, 1500);
-        })
-        .catch(() => {
-          return;
-        });
+      if (this.isIOS()) {
+        const doc: HTMLInputElement = document.getElementById(
+          "hidden-copy-text"
+        ) as HTMLInputElement;
+        const selected = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(doc);
+        selected!.removeAllRanges();
+        selected!.addRange(range);
+        document.execCommand("copy");
+      } else {
+        const formattedText = `${this.formatReturn}${this.formattedTitle}${this.formatReturn}${this.formattedDescription}${this.formatReturn}${this.formattedIngredientTitle}${this.formattedIngredientItem}${this.formatReturn}${this.formattedStepTitle}${this.formattedStepItem}${this.formatReturn}${this.formattedMemotTitle}${this.formattedMemoItem}${this.formatReturn}${this.formattedHashtagItem}`;
+        navigator.clipboard.writeText(formattedText);
+      }
+      this.showToolTip = true;
+      setTimeout(() => {
+        this.showToolTip = false;
+      }, 1500);
     }
   }
 });
@@ -176,6 +189,7 @@ export default Vue.extend({
 
   .message-wrap {
     margin-top: 8px;
+    margin-left: auto;
     .copy-message {
       margin-left: 5px;
     }
@@ -210,6 +224,11 @@ export default Vue.extend({
     p {
       margin: 2px;
     }
+  }
+  #hidden-copy-text {
+    position: fixed;
+    left: 100vw;
+    white-space: pre-wrap;
   }
 }
 </style>
