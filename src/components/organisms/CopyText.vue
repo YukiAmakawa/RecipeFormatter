@@ -3,8 +3,8 @@
     transition(name="fade")
       .tool-tip(v-if="showToolTip")
         p.copy-succeed-message コピーしました
-    button.message-wrap.flex.flex-middle.end
-      i.icon(@click.prevent="copyTexts")
+    button.message-wrap.flex.flex-middle.end(@click.prevent="copyTexts")
+      i.icon
         copy-icon
       span.copy-message クリップボードにコピー
     .formatted-text
@@ -226,7 +226,8 @@ export default Vue.extend({
     }
   }
   #hidden-copy-text {
-    // display: none;
+    position: fixed;
+    left: 100vw;
     white-space: pre-wrap;
   }
 }
