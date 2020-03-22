@@ -3,8 +3,8 @@
     transition(name="fade")
       .tool-tip(v-if="showToolTip")
         p.copy-succeed-message コピーしました
-    button.message-wrap.flex.flex-middle.end(@click="copyTexts" @touchstart="copyTexts")
-      i.icon
+    button.message-wrap.flex.flex-middle.end
+      i.icon(@click.prevent="copyTexts")
         copy-icon
       span.copy-message クリップボードにコピー
     .formatted-text
@@ -33,6 +33,7 @@
       template.hashtag(v-for="hashtag in hashtags")
         template.hashtag-title(v-if="hashtag.title") \#{{hashtag.title}} 
       <br>
+    #hidden-copy-text {{hiddenCopyText}}
 </template>
 <script lang="ts">
 import CopyIcon from "../../assets/icons/Orion_copy.svg";
@@ -146,23 +147,73 @@ export default Vue.extend({
         (accumulator, currentValue) => accumulator + `#${currentValue.title}`,
         ""
       );
+    },
+    hiddenCopyText(): string {
+      return `${this.formatReturn}${this.formattedTitle}${this.formatReturn}${this.formattedDescription}${this.formatReturn}${this.formattedIngredientTitle}${this.formattedIngredientItem}${this.formatReturn}${this.formattedStepTitle}${this.formattedStepItem}${this.formatReturn}${this.formattedMemotTitle}${this.formattedMemoItem}${this.formatReturn}${this.formattedHashtagItem}`;
     }
   },
   methods: {
+    isIOS() {
+      const agent = window.navigator.userAgent;
+      console.log(agent);
+      return agent.indexOf("iPhone") != -1 || agent.indexOf("iPad") != -1;
+    },
     copyTexts(): void {
-      const formattedText = `${this.formatReturn}${this.formattedTitle}${this.formatReturn}${this.formattedDescription}${this.formatReturn}${this.formattedIngredientTitle}${this.formattedIngredientItem}${this.formatReturn}${this.formattedStepTitle}${this.formattedStepItem}${this.formatReturn}${this.formattedMemotTitle}${this.formattedMemoItem}${this.formatReturn}${this.formattedHashtagItem}`;
-
-      navigator.clipboard
-        .writeText(formattedText)
-        .then(() => {
+      if (this.isIOS()) {
+        const doc = document.getElementById("hidden-copy-text");
+        const selected = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(doc);
+        selected.removeAllRanges();
+        selected.addRange(range);
+        document.execCommand("copy");
+      } else {
+        const formattedText = `${this.formatReturn}${this.formattedTitle}${this.formatReturn}${this.formattedDescription}${this.formatReturn}${this.formattedIngredientTitle}${this.formattedIngredientItem}${this.formatReturn}${this.formattedStepTitle}${this.formattedStepItem}${this.formatReturn}${this.formattedMemotTitle}${this.formattedMemoItem}${this.formatReturn}${this.formattedHashtagItem}`;
+        navigator.clipboard.writeText(formattedText);
+      }
+      this.showToolTip = true;
+      setTimeout(() => {
+        this.showToolTip = false;
+      }, 1500);
+    },
+    copyTextsTouch(): void {
+      console.log("touch called");
+      if (this.isIOS()) {
+        try {
+          const doc = document.querySelector("#hidden-copy-text");
+          // doc.contentEditable = true;
+          // doc.readOnly = false;
+          console.log(doc);
+          const selected = window.getSelection();
+          const range = document.createRange();
+          range.selectNode(doc);
+          selected.removeAllRanges();
+          selected.addRange(range);
+          console.log(document);
+          console.log(selected.toString());
+          document.execCommand("copy");
           this.showToolTip = true;
           setTimeout(() => {
             this.showToolTip = false;
           }, 1500);
-        })
-        .catch(() => {
-          return;
-        });
+        } catch (e) {
+          alert(e);
+        }
+      } else {
+        const formattedText = `${this.formatReturn}${this.formattedTitle}${this.formatReturn}${this.formattedDescription}${this.formatReturn}${this.formattedIngredientTitle}${this.formattedIngredientItem}${this.formatReturn}${this.formattedStepTitle}${this.formattedStepItem}${this.formatReturn}${this.formattedMemotTitle}${this.formattedMemoItem}${this.formatReturn}${this.formattedHashtagItem}`;
+
+        navigator.clipboard
+          .writeText(formattedText)
+          .then(() => {
+            this.showToolTip = true;
+            setTimeout(() => {
+              this.showToolTip = false;
+            }, 1500);
+          })
+          .catch(() => {
+            return;
+          });
+      }
     }
   }
 });
@@ -211,6 +262,10 @@ export default Vue.extend({
     p {
       margin: 2px;
     }
+  }
+  #hidden-copy-text {
+    // display: none;
+    white-space: pre-wrap;
   }
 }
 </style>
