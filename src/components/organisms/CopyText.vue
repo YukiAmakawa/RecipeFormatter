@@ -118,23 +118,23 @@ export default Vue.extend({
       return this.steps[0].description ? `ー作り方ーーーーーー` : "";
     },
     formattedStepItem(): string {
-      if (!this.steps[0].description) return "";
-      return this.steps.reduce(
-        (accumulator, currentValue, currentIndex) =>
-          accumulator + `\r\n${currentIndex + 1}. ${currentValue.description}`,
-        ""
-      );
+      return this.steps.reduce((accumulator, currentValue, currentIndex) => {
+        const returnValue = !currentValue.description
+          ? ""
+          : `\r\n${currentIndex + 1}. ${currentValue.description}`;
+        return accumulator + returnValue;
+      }, "");
     },
     formattedMemotTitle(): string {
       return this.memos[0].description ? `ー備考ーーーーーー` : "";
     },
     formattedMemoItem(): string {
-      if (!this.memos[0].description) return "";
-      return this.memos.reduce(
-        (accumulator, currentValue, currentIndex) =>
-          accumulator + `\r\n${currentIndex + 1}. ${currentValue.description}`,
-        ""
-      );
+      return this.memos.reduce((accumulator, currentValue, currentIndex) => {
+        const returnValue = !currentValue.description
+          ? ""
+          : `\r\n${currentIndex + 1}. ${currentValue.description}`;
+        return accumulator + returnValue;
+      }, "");
     },
     formatReturn(): string {
       return `
