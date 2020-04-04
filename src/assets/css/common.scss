@@ -3,11 +3,11 @@
 @import "./font.scss";
 
 html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', 'Helvetica', 'Arial', sans-serif;
   background: #f8f5f2;
   color: #232323;
 }
 #app {
-  font-family: "Noto Sans JP";
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -87,13 +87,14 @@ a {
   transition: 0.3s ease-in-out;
 }
 .icon {
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
+  margin-left: 5px;
 }
 
 svg {
-  max-width: 18px;
-  max-height: 18px;
+  width: 24px;
+  height: 24px;
 }
 // cssのtransition
 .fade-enter-active,
