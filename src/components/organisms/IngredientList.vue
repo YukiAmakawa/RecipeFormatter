@@ -80,7 +80,7 @@ export default Vue.extend({
   }
   .icon {
     margin-left: auto;
-    margin-right: 3px;
+    margin-top: 10px;
   }
 }
 </style>
