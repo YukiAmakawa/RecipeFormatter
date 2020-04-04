@@ -50,10 +50,5 @@ export default Vue.extend({
     width: 175px;
     margin-left: 5px;
   }
-  .icon {
-    margin-left: 5px;
-    width: 18px;
-    height: 18px;
-  }
 }
 </style>
