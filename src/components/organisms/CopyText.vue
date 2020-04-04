@@ -161,17 +161,13 @@ export default Vue.extend({
   position: relative;
   width: 100%;
   border-top: 1px dashed gray;
-  font-size: 12px;
+  font-size: 14px;
 
   .message-wrap {
     margin-top: 8px;
     margin-left: auto;
     .copy-message {
       margin-left: 5px;
-    }
-    .icon {
-      width: 14px;
-      height: 14px;
     }
   }
   .tool-tip {
@@ -182,7 +178,6 @@ export default Vue.extend({
     padding: 5px 10px 4px;
     background: #999;
     border-radius: 3px;
-    font-size: 12px;
     text-align: center;
     .copy-succeed-message {
       color: #fefefe;
@@ -192,7 +187,6 @@ export default Vue.extend({
     background: #fffffe;
     margin-top: 15px;
     padding: 10px 8px;
-    font-size: 14px;
     border-radius: 3px;
     .default-message {
       color: gray;

@@ -58,8 +58,5 @@ export default Vue.extend({
     width: 265px;
     margin-left: 10px;
   }
-  .icon {
-    margin-left: 5px;
-  }
 }
 </style>

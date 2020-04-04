@@ -62,8 +62,5 @@ export default Vue.extend({
       margin-left: 7px;
     }
   }
-  .icon {
-    margin-left: 5px;
-  }
 }
 </style>
