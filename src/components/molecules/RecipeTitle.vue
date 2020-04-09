@@ -10,7 +10,7 @@
       )
       span 】
     app-textarea.description(
-      placeholder="食卓の定番料理。薄めの優しい味つけです"
+      placeholder="野菜もたくさんたべられる定番料理！一晩たつとじゃがいもに味が染みてもっとおいしくなりますよ。お弁当にもぜひどうぞ。"
       v-model="recipeItem.description"
       @input="onChangeRecipeTitle"
     )
