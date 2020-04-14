@@ -161,7 +161,7 @@ export default Vue.extend({
   position: relative;
   width: 100%;
   border-top: 1px dashed gray;
-  font-size: 14px;
+  font-size: $small;
 
   .message-wrap {
     margin-top: 8px;
@@ -181,6 +181,14 @@ export default Vue.extend({
     text-align: center;
     .copy-succeed-message {
       color: #fefefe;
+    }
+  }
+  .icon {
+    width: $medium;
+    height: $medium;
+    svg {
+      width: $medium;
+      height: $medium;
     }
   }
   .formatted-text {

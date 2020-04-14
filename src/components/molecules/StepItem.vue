@@ -7,6 +7,7 @@
         app-textarea.description(
           placeholder="じゃがいもの皮をむき、一口大に切る"
           v-model="step.description"
+          rowNum=2
         )
         i.icon(v-if="!isFirstItem")
           close-icon(@click="onDeleteItem")

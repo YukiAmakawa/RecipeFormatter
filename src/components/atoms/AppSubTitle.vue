@@ -52,7 +52,7 @@ export default Vue.extend({
     .serving-form {
       width: 150px;
       .blacket {
-        font-size: 18px;
+        font-size: $default;
       }
     }
   }

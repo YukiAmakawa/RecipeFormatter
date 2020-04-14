@@ -7,7 +7,7 @@
   width: 100%;
   .logo {
     text-align: center;
-    font-size: 28px;
+    font-size: $accent;
   }
 }
 </style>

@@ -150,7 +150,7 @@ export default Vue.extend({
 </script>
 <style lang="scss">
 .recipes-index {
-  font-size: 0.87rem;
+  font-size: $small;
   .recipe-title {
     margin-top: 36px;
   }
