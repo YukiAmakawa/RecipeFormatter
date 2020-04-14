@@ -19,7 +19,8 @@ module.exports = {
     loaderOptions: {
       scss: {
         prependData: `@import "@/assets/css/reset.scss"; \
-                      @import "@/assets/css/common.scss";`
+                      @import "@/assets/css/common.scss";\
+                      @import "@/assets/css/size.scss";`
       }
     }
   }
