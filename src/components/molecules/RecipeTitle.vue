@@ -11,6 +11,7 @@
       span 】
     app-textarea.description(
       placeholder="野菜もたくさんたべられる定番料理！一晩たつとじゃがいもに味が染みてもっとおいしくなりますよ。お弁当にもぜひどうぞ。"
+      rowNum=3
       v-model="recipeItem.description"
       @input="onChangeRecipeTitle"
     )
@@ -61,7 +62,7 @@ export default Vue.extend({
   width: 100%;
   .title-wrap {
     span {
-      font-size: 18px;
+      font-size: $default;
     }
     .title {
       max-width: calc(100% - 50px);

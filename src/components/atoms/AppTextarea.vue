@@ -3,7 +3,8 @@
       textarea.text-input(
         :placeholder="placeholder"
         v-model="text"
-        :row="row"
+        :row="rowNum"
+        :class="textareaClass"
       )
 </template>
 <script lang="ts">
@@ -14,9 +15,9 @@ export default Vue.extend({
       type: String,
       default: ""
     },
-    row: {
-      type: Number,
-      default: 2
+    rowNum: {
+      type: String,
+      default: "2"
     },
     value: {
       type: String,
@@ -24,6 +25,9 @@ export default Vue.extend({
     }
   },
   computed: {
+    textareaClass(): string {
+      return `textarea-${this.rowNum}`;
+    },
     text: {
       get(): string {
         return this.value;
@@ -41,10 +45,15 @@ export default Vue.extend({
   .text-input {
     width: 100%;
     background: #fffffe;
-    height: 48px;
     padding: 3px 8px;
     border-radius: 3px;
     resize: none;
+  }
+  .textarea-2 {
+    height: calc(1.4rem * 2);
+  }
+  .textarea-3 {
+    height: calc(1.4rem * 3);
   }
 }
 </style>

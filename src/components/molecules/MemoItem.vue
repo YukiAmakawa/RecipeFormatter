@@ -7,6 +7,7 @@
         app-textarea.description(
           placeholder="じゃがいもの下茹では電子レンジで代用できます"
           v-model="memo.description"
+          rowNum=3
         )
         i.icon(v-if="!isFirstItem")
           close-icon(@click="onDeleteItem")
