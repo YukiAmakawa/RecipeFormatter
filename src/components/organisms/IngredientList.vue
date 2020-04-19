@@ -12,8 +12,11 @@
         ingredient-item(
           :ingredient="ingredient"
           :index="index"
+          :isLast="isLast(index)"
           @on-change-ingredient-item="onChangeIngredientList($event, index)"
           @on-delete-item="deleteListItem(index)"
+          @on-up-item="upListItem(index)"
+          @on-down-item="downListItem(index)"
         )
     .icon
       add-icon(@click="addListItem")
@@ -52,9 +55,25 @@ export default Vue.extend({
     };
   },
   methods: {
+    isLast(index: number): boolean {
+      return this.ingredients.length - 1 === index;
+    },
     onChangeIngredientList(ingredientItem: Ingredient, index: number): void {
       this.ingredientItems[index] = ingredientItem;
       this.$emit("on-change-ingredient-list", this.ingredientItems);
+    },
+    upListItem(index: number): void {
+      this.$emit("on-up-ingredient-list", {
+        item: "ingredients",
+        index: index
+      });
+    },
+    downListItem(index: number): void {
+      console.log("on-down-ingredient-list");
+      this.$emit("on-down-ingredient-list", {
+        item: "ingredients",
+        index: index
+      });
     },
     onChangeServingFor(servingFor: string): void {
       this.$emit("on-change-serving-for", servingFor);

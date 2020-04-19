@@ -12,6 +12,8 @@
         @on-change-ingredient-list="onChangeIngredientList"
         @on-change-serving-for="onChangeServingFor",
         @delete-list-item="deleteListItem"
+        @on-up-ingredient-list="upListItem"
+        @on-down-ingredient-list="downListItem"
         @add-list-item="addListItem"
       )
       step-list.step-list(
@@ -120,6 +122,34 @@ export default Vue.extend({
     },
     onChangeMemoList(memoList: Memo[]): void {
       this.memos = memoList;
+    },
+    upListItem({ item, index }: { item: string; index: number }): void {
+      if (item === "ingredients") {
+        this.ingredients.ingredientsList.splice(
+          index - 1,
+          2,
+          this.ingredients.ingredientsList[index],
+          this.ingredients.ingredientsList[index - 1]
+        );
+      } else {
+        const array = this[item];
+        array.splice(index - 1, 2, array[index], array[index - 1]);
+      }
+    },
+    downListItem({ item, index }: { item: string; index: number }): void {
+      console.log(item, index);
+      if (item === "ingredients") {
+        this.ingredients.ingredientsList.splice(
+          index,
+          2,
+          this.ingredients.ingredientsList[index + 1],
+          this.ingredients.ingredientsList[index]
+        );
+        this.ingredients.splice();
+      } else {
+        const array = this[item];
+        array.splice(index, 2, array[index + 1], array[index]);
+      }
     },
     deleteListItem({ item, index }: { item: string; index: number }): void {
       if (!confirm("削除してよろしいですか？")) return;

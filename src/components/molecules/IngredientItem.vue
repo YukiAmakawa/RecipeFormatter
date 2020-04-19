@@ -1,15 +1,20 @@
 <template lang="pug">
   .IngredientItem
-    //- move-icon
     div.flex.flex-middle
+      .wrap-icons.flex
+        i.move-icon(v-if="!isFirst")
+          up-icon(@click="onUpItem")
+        i.move-icon(v-if="!isLast")
+          down-icon(@click="onDownItem")
       .wrap-forms.flex
-        app-form.name(type="text" placeholder="じゃがいも" v-model="ingredientItem.name")
-        app-form.amount(type="text" placeholder="2つ" v-model="ingredientItem.amount")
-      i.icon(v-if="!isFirstItem")
+        app-form.name(type="text" placeholder="じゃがいも" v-model="ingredient.name")
+        app-form.amount(type="text" placeholder="2つ" v-model="ingredient.amount")
+      i.icon
         close-icon(@click="onDeleteItem")
 </template>
 <script lang="ts">
-import MoveIcon from "../../assets/icons/Orion_copy.svg";
+import UpIcon from "../../assets/icons/Orion_arrow_up.svg";
+import DownIcon from "../../assets/icons/Orion_arrow_down.svg";
 import CloseIcon from "../../assets/icons/Orion_close.svg";
 import AppForm from "../atoms/AppForm.vue";
 import Vue, { PropType } from "vue";
@@ -18,33 +23,33 @@ export type Ingredient = {
   amount: string;
 };
 
-type Data = {
-  ingredientItem: Ingredient;
-};
-
 export default Vue.extend({
   components: {
-    MoveIcon,
+    UpIcon,
+    DownIcon,
     CloseIcon,
     AppForm
   },
   props: {
     ingredient: Object as PropType<Ingredient>,
-    index: Number
-  },
-  data(): Data {
-    return {
-      ingredientItem: this.ingredient
-    };
+    index: Number,
+    isLast: Boolean
   },
   computed: {
-    isFirstItem(): boolean {
+    isFirst(): boolean {
       return this.index === 0;
     }
   },
   methods: {
     onDeleteItem(): void {
       this.$emit("on-delete-item");
+    },
+    onUpItem(): void {
+      this.$emit("on-up-item");
+    },
+    onDownItem(): void {
+      console.log("on-down-item");
+      this.$emit("on-down-item");
     }
   }
 });
@@ -52,14 +57,30 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .IngredientItem {
   width: 100%;
+  .wrap-icons {
+    width: 37px;
+  }
   .wrap-forms {
-    width: 290px;
+    width: calc(100% - 67px);
     .name {
-      width: 175px;
+      width: 70%;
     }
     .amount {
-      width: 108px;
+      width: 30%;
       margin-left: 7px;
+    }
+  }
+  .icon {
+    svg {
+      width: 20px;
+      height: 24px;
+      margin-left: 4px;
+    }
+  }
+  .move-icon {
+    svg {
+      width: 17px;
+      height: 20px;
     }
   }
 }
