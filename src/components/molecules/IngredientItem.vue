@@ -48,7 +48,6 @@ export default Vue.extend({
       this.$emit("on-up-item");
     },
     onDownItem(): void {
-      console.log("on-down-item");
       this.$emit("on-down-item");
     }
   }

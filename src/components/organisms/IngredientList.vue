@@ -63,14 +63,13 @@ export default Vue.extend({
       this.$emit("on-change-ingredient-list", this.ingredientItems);
     },
     upListItem(index: number): void {
-      this.$emit("on-up-ingredient-list", {
+      this.$emit("on-up-list", {
         item: "ingredients",
         index: index
       });
     },
     downListItem(index: number): void {
-      console.log("on-down-ingredient-list");
-      this.$emit("on-down-ingredient-list", {
+      this.$emit("on-down-list", {
         item: "ingredients",
         index: index
       });
