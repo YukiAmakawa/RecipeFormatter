@@ -12,8 +12,8 @@
         @on-change-ingredient-list="onChangeIngredientList"
         @on-change-serving-for="onChangeServingFor",
         @delete-list-item="deleteListItem"
-        @on-up-ingredient-list="upListItem"
-        @on-down-ingredient-list="downListItem"
+        @on-up-list="upListItem"
+        @on-down-list="downListItem"
         @add-list-item="addListItem"
       )
       step-list.step-list(
@@ -21,12 +21,16 @@
         @on-change-step-list="onChangeStepList"
         @delete-list-item="deleteListItem"
         @add-list-item="addListItem"
+        @on-up-list="upListItem"
+        @on-down-list="downListItem"
         )
       memo-list.memo-list(
         :memos="memos"
         @on-change-memo-list="onChangeMemoList"
         @delete-list-item="deleteListItem"
         @add-list-item="addListItem"
+        @on-up-list="upListItem"
+        @on-down-list="downListItem"
       )
       hash-tag-list.hash-tag-list(
         :hashtags="hashtags"
@@ -137,7 +141,6 @@ export default Vue.extend({
       }
     },
     downListItem({ item, index }: { item: string; index: number }): void {
-      console.log(item, index);
       if (item === "ingredients") {
         this.ingredients.ingredientsList.splice(
           index,
@@ -145,7 +148,6 @@ export default Vue.extend({
           this.ingredients.ingredientsList[index + 1],
           this.ingredients.ingredientsList[index]
         );
-        this.ingredients.splice();
       } else {
         const array = this[item];
         array.splice(index, 2, array[index + 1], array[index]);
