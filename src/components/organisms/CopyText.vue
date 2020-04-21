@@ -162,6 +162,7 @@ export default Vue.extend({
   width: 100%;
   border-top: 1px dashed gray;
   font-size: $small;
+  line-height: 1.2rem;
 
   .message-wrap {
     margin-top: 8px;
