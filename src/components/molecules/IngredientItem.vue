@@ -57,10 +57,10 @@ export default Vue.extend({
 .IngredientItem {
   width: 100%;
   .wrap-icons {
-    width: 37px;
+    width: 31px;
   }
   .wrap-forms {
-    width: calc(100% - 67px);
+    width: calc(100% - 55px);
     .name {
       width: 70%;
     }
@@ -69,16 +69,9 @@ export default Vue.extend({
       margin-left: 7px;
     }
   }
-  .icon {
-    svg {
-      width: 20px;
-      height: 24px;
-      margin-left: 4px;
-    }
-  }
   .move-icon {
     svg {
-      width: 17px;
+      width: 14px;
       height: 20px;
     }
   }
