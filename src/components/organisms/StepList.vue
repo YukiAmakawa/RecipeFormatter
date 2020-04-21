@@ -7,8 +7,11 @@
         step-item(
           :step="step"
           :index="index"
+          :isLast="isLast(index)"
           @on-change-step-item="onChangeStepList($event, index)"
           @on-delete-item="deleteListItem(index)"
+          @on-up-item="upListItem(index)"
+          @on-down-item="downListItem(index)"
         )
     .icon
       add-icon(@click="addListItem")
@@ -41,9 +44,24 @@ export default Vue.extend({
     };
   },
   methods: {
+    isLast(index: number): boolean {
+      return this.steps.length - 1 === index;
+    },
     onChangeStepList(stepItem: Step, index: number): void {
       this.stepItems[index] = stepItem;
       this.$emit("on-change-step-list", this.stepItems);
+    },
+    upListItem(index: number): void {
+      this.$emit("on-up-list", {
+        item: "steps",
+        index: index
+      });
+    },
+    downListItem(index: number): void {
+      this.$emit("on-down-list", {
+        item: "steps",
+        index: index
+      });
     },
     deleteListItem(index: number): void {
       this.$emit("delete-list-item", { item: "steps", index: index });
