@@ -12,6 +12,8 @@
         @on-change-ingredient-list="onChangeIngredientList"
         @on-change-serving-for="onChangeServingFor",
         @delete-list-item="deleteListItem"
+        @on-up-list="upListItem"
+        @on-down-list="downListItem"
         @add-list-item="addListItem"
       )
       step-list.step-list(
@@ -19,12 +21,16 @@
         @on-change-step-list="onChangeStepList"
         @delete-list-item="deleteListItem"
         @add-list-item="addListItem"
+        @on-up-list="upListItem"
+        @on-down-list="downListItem"
         )
       memo-list.memo-list(
         :memos="memos"
         @on-change-memo-list="onChangeMemoList"
         @delete-list-item="deleteListItem"
         @add-list-item="addListItem"
+        @on-up-list="upListItem"
+        @on-down-list="downListItem"
       )
       hash-tag-list.hash-tag-list(
         :hashtags="hashtags"
@@ -120,6 +126,32 @@ export default Vue.extend({
     },
     onChangeMemoList(memoList: Memo[]): void {
       this.memos = memoList;
+    },
+    upListItem({ item, index }: { item: string; index: number }): void {
+      if (item === "ingredients") {
+        this.ingredients.ingredientsList.splice(
+          index - 1,
+          2,
+          this.ingredients.ingredientsList[index],
+          this.ingredients.ingredientsList[index - 1]
+        );
+      } else {
+        const array = this[item];
+        array.splice(index - 1, 2, array[index], array[index - 1]);
+      }
+    },
+    downListItem({ item, index }: { item: string; index: number }): void {
+      if (item === "ingredients") {
+        this.ingredients.ingredientsList.splice(
+          index,
+          2,
+          this.ingredients.ingredientsList[index + 1],
+          this.ingredients.ingredientsList[index]
+        );
+      } else {
+        const array = this[item];
+        array.splice(index, 2, array[index + 1], array[index]);
+      }
     },
     deleteListItem({ item, index }: { item: string; index: number }): void {
       if (!confirm("削除してよろしいですか？")) return;

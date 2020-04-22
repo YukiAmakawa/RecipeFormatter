@@ -71,7 +71,7 @@ export default Vue.extend({
       );
     },
     formattedServingFor(): string {
-      return this.servingFor ? `（${this.servingFor})` : "";
+      return this.servingFor ? `(${this.servingFor})` : "";
     },
     formattedTitle(): string {
       return this.recipe.title ? `【${this.recipe.title}】` : "";

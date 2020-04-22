@@ -7,8 +7,11 @@
         memo-item(
           :memo="memo"
           :index="index"
+          :isLast="isLast(index)"
           @on-change-memo-item="onChangeMemoList($event, index)"
           @on-delete-item="deleteListItem(index)"
+          @on-up-item="upListItem(index)"
+          @on-down-item="downListItem(index)"
         )
     .icon
       add-icon(@click="addListItem")
@@ -19,10 +22,6 @@ import MemoItem from "../molecules/MemoItem.vue";
 import AddIcon from "../../assets/icons/Orion_add-circle.svg";
 import { Memo } from "../../components/molecules/MemoItem.vue";
 import Vue, { PropType } from "vue";
-
-type Data = {
-  memoItems: Array<Memo>;
-};
 
 export default Vue.extend({
   components: {
@@ -36,15 +35,25 @@ export default Vue.extend({
       default: () => []
     }
   },
-  data(): Data {
-    return {
-      memoItems: this.memos
-    };
-  },
   methods: {
+    isLast(index: number): boolean {
+      return this.memos.length - 1 === index;
+    },
     onChangeMemoList(memoItem: Memo, index: number): void {
       this.memoItems[index] = memoItem;
       this.$emit("on-change-memo-list", this.memoItems);
+    },
+    upListItem(index: number): void {
+      this.$emit("on-up-list", {
+        item: "memos",
+        index: index
+      });
+    },
+    downListItem(index: number): void {
+      this.$emit("on-down-list", {
+        item: "memos",
+        index: index
+      });
     },
     deleteListItem(index: number): void {
       this.$emit("delete-list-item", { item: "memos", index: index });
