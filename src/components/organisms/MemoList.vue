@@ -40,8 +40,8 @@ export default Vue.extend({
       return this.memos.length - 1 === index;
     },
     onChangeMemoList(memoItem: Memo, index: number): void {
-      this.memoItems[index] = memoItem;
-      this.$emit("on-change-memo-list", this.memoItems);
+      this.memos[index] = memoItem;
+      this.$emit("on-change-memo-list", this.memos);
     },
     upListItem(index: number): void {
       this.$emit("on-up-list", {
