@@ -46,8 +46,8 @@ export default Vue.extend({
   .text-input {
     width: 100%;
     background: #fffffe;
-    font-size: 0.87rem;
-    line-height: 0.87rem;
+    font-size: $small;
+    line-height: $small;
     padding: 3px 8px;
     border-radius: 3px;
   }

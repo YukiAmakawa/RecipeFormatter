@@ -1,6 +1,5 @@
 // @import "./colors";
-// @import "./size";
-@import "./font.scss";
+@import "./size";
 
 html {
   font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', 'Helvetica', 'Arial', sans-serif;
@@ -89,7 +88,6 @@ a {
 .icon {
   width: 24px;
   height: 24px;
-  margin-left: 5px;
 }
 
 svg {

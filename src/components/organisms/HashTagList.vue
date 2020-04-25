@@ -52,9 +52,9 @@ export default Vue.extend({
 </script>
 <style lang="scss" scoped>
 .HashTagList {
-  width: 217px;
+  width: calc(100% - 31px);
+  margin-left: auto;
   .hash-tag-list {
-    width: 217px;
     li + li {
       margin-top: 5px;
     }

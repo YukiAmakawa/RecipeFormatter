@@ -3,14 +3,14 @@
     .subtitle-wrap.flex.flex-middle
       span.sub-title ー{{title}}
       .serving-form.flex.flex-middle(v-if="title === '材料'")
-        span.blacket （
+        span.blacket (
         app-form.servingForm(
           type="text"
           placeholder="2人分"
           v-model="servingForItem"
           @input="onChangeServingFor"
         )
-        span.blacket ）
+        span.blacket )
       span ーーーーーー
 </template>
 <script lang="ts">
@@ -52,7 +52,7 @@ export default Vue.extend({
     .serving-form {
       width: 150px;
       .blacket {
-        font-size: 18px;
+        font-size: $default;
       }
     }
   }

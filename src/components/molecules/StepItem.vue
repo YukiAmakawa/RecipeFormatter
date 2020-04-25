@@ -1,18 +1,24 @@
 <template lang="pug">
   .StepItem
-    //- move-icon
     div.flex
-      span.index {{index+1}}.
-      .flex.flex-middle
-        app-textarea.description(
+      .wrap-icons.flex
+        i.move-icon(v-if="!isFirst")
+          up-icon(@click="onUpItem")
+        i.move-icon(v-if="!isLast")
+          down-icon(@click="onDownItem")
+      .index {{index+1}}.
+      .wrap-forms.flex
+        app-textarea(
           placeholder="じゃがいもの皮をむき、一口大に切る"
           v-model="step.description"
+          rowNum=2
         )
-        i.icon(v-if="!isFirstItem")
+      i.icon(v-if="!isFirst")
           close-icon(@click="onDeleteItem")
 </template>
 <script lang="ts">
-import MoveIcon from "../../assets/icons/Orion_copy.svg";
+import UpIcon from "../../assets/icons/Orion_arrow_up.svg";
+import DownIcon from "../../assets/icons/Orion_arrow_down.svg";
 import CloseIcon from "../../assets/icons/Orion_close.svg";
 import AppTextarea from "../atoms/AppTextarea.vue";
 import Vue, { PropType } from "vue";
@@ -20,33 +26,32 @@ export type Step = {
   description: string;
 };
 
-type Data = {
-  stepItem: Step;
-};
-
 export default Vue.extend({
   components: {
-    MoveIcon,
+    UpIcon,
+    DownIcon,
     CloseIcon,
     AppTextarea
   },
   props: {
     step: Object as PropType<Step>,
-    index: Number
-  },
-  data(): Data {
-    return {
-      stepItem: this.step
-    };
+    index: Number,
+    isLast: Boolean
   },
   computed: {
-    isFirstItem(): boolean {
+    isFirst(): boolean {
       return this.index === 0;
     }
   },
   methods: {
     onDeleteItem(): void {
       this.$emit("on-delete-item");
+    },
+    onUpItem(): void {
+      this.$emit("on-up-item");
+    },
+    onDownItem(): void {
+      this.$emit("on-down-item");
     }
   }
 });
@@ -54,9 +59,24 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .StepItem {
   width: 100%;
-  .description {
-    width: 265px;
-    margin-left: 10px;
+  .wrap-icons {
+    width: 31px;
+  }
+  .index {
+    width: 15px;
+    font-size: 12px;
+  }
+  .wrap-forms {
+    width: calc(100% - 70px);
+    textarea {
+      width: 100%;
+    }
+  }
+  .move-icon {
+    svg {
+      width: 14px;
+      height: 20px;
+    }
   }
 }
 </style>

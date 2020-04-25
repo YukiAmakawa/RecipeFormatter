@@ -71,7 +71,7 @@ export default Vue.extend({
       );
     },
     formattedServingFor(): string {
-      return this.servingFor ? `（${this.servingFor})` : "";
+      return this.servingFor ? `(${this.servingFor})` : "";
     },
     formattedTitle(): string {
       return this.recipe.title ? `【${this.recipe.title}】` : "";
@@ -161,7 +161,8 @@ export default Vue.extend({
   position: relative;
   width: 100%;
   border-top: 1px dashed gray;
-  font-size: 14px;
+  font-size: $small;
+  line-height: 1.2rem;
 
   .message-wrap {
     margin-top: 8px;
@@ -181,6 +182,14 @@ export default Vue.extend({
     text-align: center;
     .copy-succeed-message {
       color: #fefefe;
+    }
+  }
+  .icon {
+    width: $medium;
+    height: $medium;
+    svg {
+      width: $medium;
+      height: $medium;
     }
   }
   .formatted-text {
