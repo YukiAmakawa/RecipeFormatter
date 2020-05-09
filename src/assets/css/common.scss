@@ -94,6 +94,17 @@ svg {
   width: 24px;
   height: 24px;
 }
+
+.icon {
+  svg {
+    circle,
+    path {
+      stroke: #078080;
+      stroke-width: 3px;
+    }
+  }
+}
+
 // cssのtransition
 .fade-enter-active,
 .fade-leave-active {
