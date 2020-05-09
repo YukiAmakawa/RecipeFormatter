@@ -1,7 +1,7 @@
 <template lang="pug">
   .IngredientItem
     div.flex.flex-middle
-      .wrap-icons.flex
+      .icon.wrap-icons.flex
         i.move-icon(v-if="!isFirst")
           up-icon(@click="onUpItem")
         i.move-icon(v-if="!isLast")
