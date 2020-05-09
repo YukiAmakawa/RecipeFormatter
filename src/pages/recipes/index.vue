@@ -1,7 +1,9 @@
 <template lang="pug">
   .recipes-index
     .wrap
-      app-logo.app-logo
+      .app-logo
+        app-logo.logo
+        span あなたの味をだれかに届けよう
       recipe-title.recipe-title(
         :recipe="recipe"
         @on-change-recipe-title="onChangeRecipeTitle"
@@ -50,7 +52,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import AppLogo from "../../components/atoms/AppLogo.vue";
+import AppLogo from "../../assets/recipe_maker_logo_type.svg";
 import RecipeTitle from "../../components/molecules/RecipeTitle.vue";
 import IngredientList from "../../components/organisms/IngredientList.vue";
 import StepList from "../../components/organisms/StepList.vue";
@@ -183,8 +185,15 @@ export default Vue.extend({
 <style lang="scss">
 .recipes-index {
   font-size: $small;
+  .app-logo {
+    text-align: center;
+    .logo {
+      width: 316px;
+      height: 46px;
+    }
+  }
   .recipe-title {
-    margin-top: 36px;
+    margin-top: 20px;
   }
   .ingredient-list {
     margin-top: 15px;
