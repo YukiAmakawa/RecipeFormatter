@@ -169,8 +169,14 @@ export default Vue.extend({
     margin-left: auto;
     .copy-message {
       margin-left: 5px;
-      color: #078080;
+      color: #f45d3a;
       font-weight: bold;
+    }
+    svg {
+      path {
+        stroke: #f45d3a;
+        stroke-width: 8px;
+      }
     }
   }
   .tool-tip {
