@@ -89,7 +89,8 @@ export default Vue.extend({
       ingredientsList: [
         {
           name: "",
-          amount: ""
+          amount: "",
+          unit: ""
         }
       ],
       servingFor: ""
