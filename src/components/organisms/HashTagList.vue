@@ -8,8 +8,8 @@
           @on-change-hashtag-item="onChangeHashtagList($event, index)"
           @on-delete-item="deleteListItem(index)"
         )
-    .icon
-      add-icon(@click="addListItem")
+    .wrap-button.flex.flex-middle.content-center
+      span.add(@click="addListItem") ＋ハッシュタグを追加
 </template>
 <script lang="ts">
 import HashTagItem from "../molecules/HashTagItem.vue";
@@ -53,6 +53,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .HashTagList {
   width: calc(100% - 31px);
+  margin-top: 15px;
   margin-left: auto;
   .hash-tag-list {
     li + li {
