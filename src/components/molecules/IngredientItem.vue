@@ -1,14 +1,20 @@
 <template lang="pug">
   .IngredientItem
-    div.flex.flex-middle
-      .icon.wrap-icons.flex
-        i.move-icon(v-if="!isFirst")
-          up-icon(@click="onUpItem")
-        i.move-icon(v-if="!isLast")
-          down-icon(@click="onDownItem")
-      .wrap-forms.flex
+    div(v-if="isEdit")
+      .wrap-forms.flex.flex-middle
         app-form.name(type="text" placeholder="じゃがいも" v-model="ingredient.name")
-        app-form.amount(type="text" placeholder="2つ" v-model="ingredient.amount")
+        app-form.amount(type="text" placeholder="2" v-model="ingredient.amount")
+        app-form.unit(type="text" placeholder="個" v-model="ingredient.unit")
+    div.flex.flex-middle(v-else)
+      .icon.wrap-icons.flex
+        i.move-icon(v-show="!isFirst")
+          up-icon(@click="onUpItem")
+        i.move-icon(v-show="!isLast")
+          down-icon(@click="onDownItem")
+      .wrap-texts.flex
+        p.name {{ingredient.name}}
+        p.amount {{ingredient.amount}}
+        p.unit {{ingredient.unit}}
       i.icon
         close-icon(@click="onDeleteItem")
 </template>
@@ -21,6 +27,7 @@ import Vue, { PropType } from "vue";
 export type Ingredient = {
   name: string;
   amount: string;
+  unit: string;
 };
 
 export default Vue.extend({
@@ -33,7 +40,8 @@ export default Vue.extend({
   props: {
     ingredient: Object as PropType<Ingredient>,
     index: Number,
-    isLast: Boolean
+    isLast: Boolean,
+    isEdit: Boolean
   },
   computed: {
     isFirst(): boolean {
@@ -60,13 +68,30 @@ export default Vue.extend({
     width: 31px;
   }
   .wrap-forms {
-    width: calc(100% - 55px);
     .name {
-      width: 70%;
+      width: 60%;
     }
     .amount {
-      width: 30%;
-      margin-left: 7px;
+      width: 19%;
+      margin-left: 1%;
+    }
+    .unit {
+      width: 19%;
+      margin-left: 1%;
+    }
+  }
+  .wrap-texts {
+    width: calc(100% - 55px);
+    .name {
+      width: 60%;
+    }
+    .amount {
+      width: 19%;
+      margin-left: 1%;
+    }
+    .unit {
+      width: 19%;
+      margin-left: 1%;
     }
   }
   .move-icon {
