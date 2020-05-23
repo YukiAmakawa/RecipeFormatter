@@ -4,7 +4,7 @@
       .wrap-forms.flex.flex-middle
         app-form.name(type="text" placeholder="じゃがいも" v-model="ingredient.name")
         app-form.amount(type="text" placeholder="2" v-model="ingredient.amount")
-        app-form.unit(type="text" placeholder="個" v-model="ingredient.unit")
+        app-datalist.unit(type="text" placeholder="個" v-model="ingredient.unit")
     div.flex.flex-middle(v-else)
       .icon.wrap-icons.flex
         i.move-icon(v-show="!isFirst")
@@ -23,6 +23,7 @@ import UpIcon from "../../assets/icons/Orion_arrow_up.svg";
 import DownIcon from "../../assets/icons/Orion_arrow_down.svg";
 import CloseIcon from "../../assets/icons/Orion_close.svg";
 import AppForm from "../atoms/AppForm.vue";
+import AppDatalist from "../atoms/AppDatalist.vue";
 import Vue, { PropType } from "vue";
 export type Ingredient = {
   name: string;
@@ -35,7 +36,8 @@ export default Vue.extend({
     UpIcon,
     DownIcon,
     CloseIcon,
-    AppForm
+    AppForm,
+    AppDatalist
   },
   props: {
     ingredient: Object as PropType<Ingredient>,

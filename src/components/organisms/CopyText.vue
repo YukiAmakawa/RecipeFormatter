@@ -87,7 +87,8 @@ export default Vue.extend({
     formattedIngredientItem(): string {
       return this.ingredients.reduce(
         (accumulator, currentValue) =>
-          accumulator + `\r\n${currentValue.name}  ${currentValue.amount}`,
+          accumulator +
+          `\r\n${currentValue.name}  ${currentValue.amount}${currentValue.unit}`,
         ""
       );
     },
