@@ -1,6 +1,10 @@
 <template lang="pug">
     .AppDatalist
       div
+        .modal(
+          v-if="isOptionListShow"
+          @click="closeOptionList"
+        )
         input.text-input(
           :type="type"
           :placeholder="placeholder"
@@ -9,7 +13,7 @@
         )
         .options(v-if="isOptionListShow")
           p(
-            v-for="option in filteredOptionList"
+            v-for="option in optionList"
             @click="selectOption(option)"
             ) {{option}}
 </template>
@@ -25,10 +29,6 @@ export default Vue.extend({
     type: String,
     placeholder: String,
     value: String
-    // keywords: {
-    //   type: Boolean,
-    //   default: false
-    // }
   },
   data(): Data {
     return {
@@ -45,13 +45,14 @@ export default Vue.extend({
       set(value: string): void {
         this.$emit("input", value);
       }
-    },
-    filteredOptionList(): string[] | [] {
-      if (!this.searchWord) return this.optionList;
-      return this.optionList.filter(item => {
-        return item.includes(this.searchWord);
-      });
     }
+    // optionsの数が少ないので、inputの値での絞り込みは一旦なし
+    // filteredOptionList(): string[] | [] {
+    //   if (!this.searchWord) return this.optionList;
+    //   return this.optionList.filter(item => {
+    //     return item.includes(this.searchWord);
+    //   });
+    // }
   },
   methods: {
     openOptionList(): void {
@@ -72,19 +73,37 @@ export default Vue.extend({
   width: 100%;
   .text-input {
     width: 100%;
+    z-index: 3;
     background: #fffffe;
     font-size: $small;
     line-height: $small;
     padding: 3px 8px;
     border-radius: 3px;
+    position: relative;
   }
-  datalist option {
+  .modal {
+    display: flex;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+  }
+  .options {
+    position: absolute;
+    z-index: 3;
     background: #fffffe;
     font-size: $small;
     line-height: $small;
     padding: 3px 8px;
-    border-radius: 3px;
+    border-radius: 2px;
+    p {
+      padding: 7px 3px;
+    }
+    p + p {
+      border-top: 1px solid #f5f5f5;
+    }
   }
 }
 </style>
