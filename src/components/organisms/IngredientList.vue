@@ -13,13 +13,19 @@
           :ingredient="ingredient"
           :index="index"
           :isLast="isLast(index)"
+          :isEdit="isEdit"
           @on-change-ingredient-item="onChangeIngredientList($event, index)"
           @on-delete-item="deleteListItem(index)"
           @on-up-item="upListItem(index)"
           @on-down-item="downListItem(index)"
         )
-    .icon
-      add-icon(@click="addListItem")
+    .wrap-button.flex.flex-middle.content-center(v-if="isEdit")
+      span.switch(@click="toggleEdit") ＋並び替え
+      span.add(@click="addListItem") ＋材料を追加
+    .wrap-button.flex.flex-middle.content-center(v-else)
+      span.switch(@click="toggleEdit") ＋並び替えを完了
+    //- .icon
+    //-   add-icon(@click="addListItem")
 </template>
 <script lang="ts">
 import AppSubTitle from "../atoms/AppSubTitle.vue";
@@ -30,6 +36,7 @@ import Vue, { PropType } from "vue";
 type Data = {
   ingredientItems: Array<Ingredient>;
   servingForItem: string;
+  isEdit: boolean;
 };
 
 export default Vue.extend({
@@ -51,12 +58,16 @@ export default Vue.extend({
   data(): Data {
     return {
       ingredientItems: this.ingredients,
-      servingForItem: this.servingFor
+      servingForItem: this.servingFor,
+      isEdit: true
     };
   },
   methods: {
     isLast(index: number): boolean {
       return this.ingredients.length - 1 === index;
+    },
+    toggleEdit() {
+      this.isEdit = !this.isEdit;
     },
     onChangeIngredientList(ingredientItem: Ingredient, index: number): void {
       this.ingredientItems[index] = ingredientItem;
@@ -90,15 +101,11 @@ export default Vue.extend({
 .IngredientList {
   width: 100%;
   .ingredient-list {
+    width: 100%;
     margin-top: 5px;
-    width: 316px;
     li + li {
       margin-top: 5px;
     }
-  }
-  .icon {
-    margin-left: auto;
-    margin-top: 10px;
   }
 }
 </style>

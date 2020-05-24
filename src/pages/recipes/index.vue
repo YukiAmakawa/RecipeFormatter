@@ -3,7 +3,7 @@
     .wrap
       .app-logo
         app-logo.logo
-        span あなたの味をだれかに届けよう
+        span あなたの味を届けよう
       recipe-title.recipe-title(
         :recipe="recipe"
         @on-change-recipe-title="onChangeRecipeTitle"
@@ -89,7 +89,8 @@ export default Vue.extend({
       ingredientsList: [
         {
           name: "",
-          amount: ""
+          amount: "",
+          unit: ""
         }
       ],
       servingFor: ""
@@ -166,7 +167,11 @@ export default Vue.extend({
     addListItem({ item }: { item: string }): void {
       switch (item) {
         case "ingredients":
-          this.ingredients.ingredientsList.push({ name: "", amount: "" });
+          this.ingredients.ingredientsList.push({
+            name: "",
+            amount: "",
+            unit: ""
+          });
           break;
         case "steps":
           this.steps.push({ description: "" });
@@ -187,6 +192,7 @@ export default Vue.extend({
   font-size: $small;
   .app-logo {
     text-align: center;
+    color: gray;
     .logo {
       width: 316px;
       height: 46px;

@@ -8,13 +8,17 @@
           :step="step"
           :index="index"
           :isLast="isLast(index)"
+          :isEdit="isEdit"
           @on-change-step-item="onChangeStepList($event, index)"
           @on-delete-item="deleteListItem(index)"
           @on-up-item="upListItem(index)"
           @on-down-item="downListItem(index)"
         )
-    .icon
-      add-icon(@click="addListItem")
+    .wrap-button.flex.flex-middle.content-center(v-if="isEdit")
+      span.switch(@click="toggleEdit") ＋並び替え
+      span.add(@click="addListItem") ＋手順を追加
+    .wrap-button.flex.flex-middle.content-center(v-else)
+      span.switch(@click="toggleEdit") ＋並び替えを完了
 </template>
 <script lang="ts">
 import AppSubTitle from "../atoms/AppSubTitle.vue";
@@ -24,6 +28,7 @@ import { Step } from "../../components/molecules/StepItem.vue";
 import Vue, { PropType } from "vue";
 type Data = {
   stepItems: Step[];
+  isEdit: boolean;
 };
 
 export default Vue.extend({
@@ -40,12 +45,16 @@ export default Vue.extend({
   },
   data(): Data {
     return {
-      stepItems: this.steps
+      stepItems: this.steps,
+      isEdit: true
     };
   },
   methods: {
     isLast(index: number): boolean {
       return this.steps.length - 1 === index;
+    },
+    toggleEdit() {
+      this.isEdit = !this.isEdit;
     },
     onChangeStepList(stepItem: Step, index: number): void {
       this.stepItems[index] = stepItem;
@@ -75,6 +84,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .StepList {
   width: 100%;
+  margin-top: 15px;
   .step-list {
     margin-top: 5px;
     li + li {

@@ -48,6 +48,7 @@ export default Vue.extend({
     padding: 3px 8px;
     border-radius: 3px;
     resize: none;
+    @include placeholder();
   }
   .textarea-2 {
     height: calc(1.4rem * 2);
