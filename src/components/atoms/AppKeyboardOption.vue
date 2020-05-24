@@ -96,6 +96,9 @@ export default Vue.extend({
     height: 100%;
     // background-color: #f45d48;
   }
+  .text-input {
+    @include placeholder();
+  }
   .keyboard-option {
     position: fixed;
     width: 100%;

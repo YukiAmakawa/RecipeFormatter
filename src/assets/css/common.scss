@@ -70,6 +70,23 @@ a {
   transition: 0.2s ease-in-out;
 }
 
+// placeholderの色変更
+@mixin placeholder() {
+  &::placeholder {
+    color: #c0c0c0;
+  }
+
+  // IE
+  &:-ms-input-placeholder {
+    color: #c0c0c0;
+  }
+
+  // Edge
+  &::-ms-input-placeholder {
+    color: #c0c0c0;
+  }
+}
+
 /*buttons*/
 .button {
   display: inline-block;
