@@ -47,6 +47,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .HashTagItem {
   .title {
+    width: calc(100% - 38px);
     margin-left: 5px;
   }
 }
