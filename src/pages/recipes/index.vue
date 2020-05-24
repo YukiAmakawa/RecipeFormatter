@@ -48,6 +48,7 @@
         :memos="memos"
         :hashtags="hashtags"
       )
+      app-footer
 </template>
 
 <script lang="ts">
@@ -59,6 +60,7 @@ import StepList from "../../components/organisms/StepList.vue";
 import MemoList from "../../components/organisms/MemoList.vue";
 import CopyText from "../../components/organisms/CopyText.vue";
 import HashTagList from "../../components/organisms/HashTagList.vue";
+import AppFooter from "../../components/atoms/AppFooter.vue";
 import { Recipe } from "../../components/molecules/RecipeTitle.vue";
 import { Hashtag } from "../../components/molecules/HashTagItem.vue";
 import { Ingredient } from "../../components/molecules/IngredientItem.vue";
@@ -78,7 +80,8 @@ export default Vue.extend({
     StepList,
     MemoList,
     HashTagList,
-    CopyText
+    CopyText,
+    AppFooter
   },
   data: (): Data => ({
     recipe: {
