@@ -3,7 +3,7 @@
     .wrap
       .app-logo
         app-logo.logo
-        span あなたの味をだれかに届けよう
+        span あなたの味を届けよう
       recipe-title.recipe-title(
         :recipe="recipe"
         @on-change-recipe-title="onChangeRecipeTitle"
@@ -192,6 +192,7 @@ export default Vue.extend({
   font-size: $small;
   .app-logo {
     text-align: center;
+    color: gray;
     .logo {
       width: 316px;
       height: 46px;

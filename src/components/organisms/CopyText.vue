@@ -210,7 +210,7 @@ export default Vue.extend({
     padding: 10px 8px;
     border-radius: 3px;
     .default-message {
-      color: gray;
+      color: #c0c0c0;
     }
     p {
       margin: 2px;

@@ -3,7 +3,7 @@
     div(v-if="isEdit")
       .wrap-forms.flex.flex-middle
         app-form.name(type="text" placeholder="じゃがいも" v-model="ingredient.name")
-        app-form.amount(type="text" placeholder="2" v-model="ingredient.amount")
+        app-keyboard-option.amount(type="text" placeholder="2" v-model="ingredient.amount")
         app-datalist.unit(type="text" placeholder="個" v-model="ingredient.unit")
     div.flex.flex-middle(v-else)
       .icon.wrap-icons.flex
@@ -24,20 +24,21 @@ import DownIcon from "../../assets/icons/Orion_arrow_down.svg";
 import CloseIcon from "../../assets/icons/Orion_close.svg";
 import AppForm from "../atoms/AppForm.vue";
 import AppDatalist from "../atoms/AppDatalist.vue";
+import AppKeyboardOption from "../atoms/AppKeyboardOption.vue";
 import Vue, { PropType } from "vue";
 export type Ingredient = {
   name: string;
   amount: string;
   unit: string;
 };
-
 export default Vue.extend({
   components: {
     UpIcon,
     DownIcon,
     CloseIcon,
     AppForm,
-    AppDatalist
+    AppDatalist,
+    AppKeyboardOption
   },
   props: {
     ingredient: Object as PropType<Ingredient>,
@@ -74,11 +75,11 @@ export default Vue.extend({
       width: 60%;
     }
     .amount {
-      width: 19%;
+      width: 25%;
       margin-left: 1%;
     }
     .unit {
-      width: 19%;
+      width: 13%;
       margin-left: 1%;
     }
   }
