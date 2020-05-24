@@ -167,7 +167,11 @@ export default Vue.extend({
     addListItem({ item }: { item: string }): void {
       switch (item) {
         case "ingredients":
-          this.ingredients.ingredientsList.push({ name: "", amount: "" });
+          this.ingredients.ingredientsList.push({
+            name: "",
+            amount: "",
+            unit: ""
+          });
           break;
         case "steps":
           this.steps.push({ description: "" });
