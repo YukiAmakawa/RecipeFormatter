@@ -1,8 +1,8 @@
 {
-  "name": "recipe maker",
-  "short_name": "recipe maker",
+  "name": "レシピメーカー",
+  "short_name": "レシピメーカー",
   "theme_color": "#f45d48",
-  "background_color": "#f45d48",
+  "background_color": "#F8F5F2",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
