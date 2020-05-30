@@ -10,7 +10,7 @@
         :placeholder="placeholder"
         v-model="text"
         @focus="openOptionList"
-        id="inputWithOption"
+        ref="inputWithOption"
         autocomplete="off"
       )
       .options(v-if="isOptionListShow")
@@ -21,6 +21,7 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
+import { isHTMLElement } from "../../utils/types";
 type Data = {
   searchWord: string;
   optionList: string[];
@@ -59,9 +60,8 @@ export default Vue.extend({
   methods: {
     openOptionList(): void {
       this.isOptionListShow = true;
-      const optionList: HTMLInputElement = document.getElementById(
-        "inputWithOption"
-      ) as HTMLInputElement;
+      const optionList = this.$refs.inputWithOption;
+      if (!isHTMLElement(optionList)) return;
       this.$nextTick(() => optionList.focus());
     },
     closeOptionList(): void {
