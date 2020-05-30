@@ -10,7 +10,7 @@
         :placeholder="placeholder"
         v-model="text"
         @focus="openOptionList"
-        id="inputWithKeyboardOption"
+        ref="inputWithKeyboardOption"
         autocomplete="off"
       )
       .keyboard-option(v-if="isOptionListShow")
@@ -22,6 +22,7 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
+import { isHTMLElement } from "../../utils/types";
 type Data = {
   searchWord: string;
   optionList: string[];
@@ -60,10 +61,9 @@ export default Vue.extend({
   methods: {
     openOptionList(): void {
       this.isOptionListShow = true;
-      const keyboardOption: HTMLInputElement = document.getElementById(
-        "inputWithKeyboardOption"
-      ) as HTMLInputElement;
-      this.$nextTick(() => keyboardOption.focus());
+      const inputWithKeyboardOption = this.$refs.inputWithKeyboardOption;
+      if (!isHTMLElement(inputWithKeyboardOption)) return;
+      this.$nextTick(() => inputWithKeyboardOption.focus());
     },
     closeOptionList(): void {
       this.isOptionListShow = false;
@@ -71,10 +71,9 @@ export default Vue.extend({
     selectOption(option: string): void {
       this.$emit("input", option + this.text);
       this.closeOptionList();
-      const keyboardOption: HTMLInputElement = document.getElementById(
-        "inputWithKeyboardOption"
-      ) as HTMLInputElement;
-      this.$nextTick(() => keyboardOption.focus());
+      const inputWithKeyboardOption = this.$refs.inputWithKeyboardOption;
+      if (!isHTMLElement(inputWithKeyboardOption)) return;
+      this.$nextTick(() => inputWithKeyboardOption.focus());
     }
   }
 });
