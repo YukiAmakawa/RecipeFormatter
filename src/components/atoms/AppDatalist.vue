@@ -10,7 +10,7 @@
         :placeholder="placeholder"
         v-model="text"
         @focus="openOptionList"
-        ref="inputWithOption"
+        id="inputWithOption"
         autocomplete="off"
       )
       .options(v-if="isOptionListShow")
@@ -59,7 +59,10 @@ export default Vue.extend({
   methods: {
     openOptionList(): void {
       this.isOptionListShow = true;
-      this.$nextTick(() => this.$refs.inputWithOption.focus());
+      const optionList: HTMLInputElement = document.getElementById(
+        "inputWithOption"
+      ) as HTMLInputElement;
+      this.$nextTick(() => optionList.focus());
     },
     closeOptionList(): void {
       this.isOptionListShow = false;
