@@ -10,7 +10,7 @@
         :placeholder="placeholder"
         v-model="text"
         @focus="openOptionList"
-        ref="inputWithKeyboardOption"
+        id="inputWithKeyboardOption"
         autocomplete="off"
       )
       .keyboard-option(v-if="isOptionListShow")
@@ -60,7 +60,10 @@ export default Vue.extend({
   methods: {
     openOptionList(): void {
       this.isOptionListShow = true;
-      this.$nextTick(() => this.$refs.inputWithKeyboardOption.focus());
+      const keyboardOption: HTMLInputElement = document.getElementById(
+        "inputWithKeyboardOption"
+      ) as HTMLInputElement;
+      this.$nextTick(() => keyboardOption.focus());
     },
     closeOptionList(): void {
       this.isOptionListShow = false;
@@ -68,7 +71,10 @@ export default Vue.extend({
     selectOption(option: string): void {
       this.$emit("input", option + this.text);
       this.closeOptionList();
-      this.$nextTick(() => this.$refs.inputWithKeyboardOption.focus());
+      const keyboardOption: HTMLInputElement = document.getElementById(
+        "inputWithKeyboardOption"
+      ) as HTMLInputElement;
+      this.$nextTick(() => keyboardOption.focus());
     }
   }
 });
