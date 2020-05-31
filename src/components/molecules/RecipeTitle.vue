@@ -64,12 +64,8 @@ export default Vue.extend({
     span {
       font-size: $default;
     }
-    .title {
-      max-width: calc(100% - 50px);
-    }
   }
   .description {
-    width: 290px;
     margin-top: 5px;
   }
 }

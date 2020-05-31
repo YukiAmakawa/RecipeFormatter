@@ -4,6 +4,7 @@ import router from "./router";
 import firebase from "firebase";
 import VueAnalytics from "vue-analytics";
 import config from "./configuration";
+import "./registerServiceWorker";
 
 Vue.config.productionTip = false;
 Vue.use(VueAnalytics, {

@@ -1,7 +1,9 @@
 <template lang="pug">
   .recipes-index
     .wrap
-      app-logo.app-logo
+      .app-logo
+        app-logo.logo
+        span あなたの味を届けよう
       recipe-title.recipe-title(
         :recipe="recipe"
         @on-change-recipe-title="onChangeRecipeTitle"
@@ -46,17 +48,19 @@
         :memos="memos"
         :hashtags="hashtags"
       )
+      app-footer
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import AppLogo from "../../components/atoms/AppLogo.vue";
+import AppLogo from "../../assets/recipe_maker_logo_type.svg";
 import RecipeTitle from "../../components/molecules/RecipeTitle.vue";
 import IngredientList from "../../components/organisms/IngredientList.vue";
 import StepList from "../../components/organisms/StepList.vue";
 import MemoList from "../../components/organisms/MemoList.vue";
 import CopyText from "../../components/organisms/CopyText.vue";
 import HashTagList from "../../components/organisms/HashTagList.vue";
+import AppFooter from "../../components/atoms/AppFooter.vue";
 import { Recipe } from "../../components/molecules/RecipeTitle.vue";
 import { Hashtag } from "../../components/molecules/HashTagItem.vue";
 import { Ingredient } from "../../components/molecules/IngredientItem.vue";
@@ -76,7 +80,8 @@ export default Vue.extend({
     StepList,
     MemoList,
     HashTagList,
-    CopyText
+    CopyText,
+    AppFooter
   },
   data: (): Data => ({
     recipe: {
@@ -87,7 +92,8 @@ export default Vue.extend({
       ingredientsList: [
         {
           name: "",
-          amount: ""
+          amount: "",
+          unit: ""
         }
       ],
       servingFor: ""
@@ -164,7 +170,11 @@ export default Vue.extend({
     addListItem({ item }: { item: string }): void {
       switch (item) {
         case "ingredients":
-          this.ingredients.ingredientsList.push({ name: "", amount: "" });
+          this.ingredients.ingredientsList.push({
+            name: "",
+            amount: "",
+            unit: ""
+          });
           break;
         case "steps":
           this.steps.push({ description: "" });
@@ -183,8 +193,16 @@ export default Vue.extend({
 <style lang="scss">
 .recipes-index {
   font-size: $small;
+  .app-logo {
+    text-align: center;
+    color: gray;
+    .logo {
+      width: 316px;
+      height: 46px;
+    }
+  }
   .recipe-title {
-    margin-top: 36px;
+    margin-top: 20px;
   }
   .ingredient-list {
     margin-top: 15px;

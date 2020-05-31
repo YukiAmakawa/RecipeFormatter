@@ -1,6 +1,6 @@
 <template lang="pug">
   .AppLogo
-    h1.logo recipe formatter
+    img(alt="recipe maker" src="../../assets/recipe_maker_logo_type.svg")
 </template>
 <style lang="scss" scoped>
 .AppLogo {

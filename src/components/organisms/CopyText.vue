@@ -6,7 +6,7 @@
     button.message-wrap.flex.flex-middle.end(@click.prevent="copyTexts")
       i.icon
         copy-icon
-      span.copy-message クリップボードにコピー
+      span.copy-message テキストをコピー
     .formatted-text
       p.default-message(v-if="isNoText") レシピを入力するとコピー用のテキストが表示されます
       #copy-text {{copyText}}
@@ -87,7 +87,8 @@ export default Vue.extend({
     formattedIngredientItem(): string {
       return this.ingredients.reduce(
         (accumulator, currentValue) =>
-          accumulator + `\r\n${currentValue.name}  ${currentValue.amount}`,
+          accumulator +
+          `\r\n${currentValue.name}  ${currentValue.amount}${currentValue.unit}`,
         ""
       );
     },
@@ -169,6 +170,14 @@ export default Vue.extend({
     margin-left: auto;
     .copy-message {
       margin-left: 5px;
+      color: #f45d3a;
+      font-weight: bold;
+    }
+    svg {
+      path {
+        stroke: #f45d3a;
+        stroke-width: 8px;
+      }
     }
   }
   .tool-tip {
@@ -185,11 +194,14 @@ export default Vue.extend({
     }
   }
   .icon {
-    width: $medium;
-    height: $medium;
+    width: $small;
+    height: $small;
     svg {
-      width: $medium;
-      height: $medium;
+      width: $small;
+      height: $small;
+      path {
+        stroke-width: 5px;
+      }
     }
   }
   .formatted-text {
@@ -198,7 +210,7 @@ export default Vue.extend({
     padding: 10px 8px;
     border-radius: 3px;
     .default-message {
-      color: gray;
+      color: #c0c0c0;
     }
     p {
       margin: 2px;

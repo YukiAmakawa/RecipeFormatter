@@ -21,7 +21,7 @@ html {
 
 .wrap {
   width: 316px;
-  margin: 35px auto;
+  margin: 35px auto 0 auto;
 }
 
 /*flex-class*/
@@ -70,6 +70,23 @@ a {
   transition: 0.2s ease-in-out;
 }
 
+// placeholderの色変更
+@mixin placeholder() {
+  &::placeholder {
+    color: #c0c0c0;
+  }
+
+  // IE
+  &:-ms-input-placeholder {
+    color: #c0c0c0;
+  }
+
+  // Edge
+  &::-ms-input-placeholder {
+    color: #c0c0c0;
+  }
+}
+
 /*buttons*/
 .button {
   display: inline-block;
@@ -85,6 +102,24 @@ a {
   -webkit-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
 }
+
+// 並び替え・削除ボタンのcss
+
+.wrap-button {
+  width: 100%;
+  margin-top: 15px;
+  color: gray;
+  span {
+    padding: 5px 8px;
+    border: 1px solid gray;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  span + span {
+    margin-left: 15px;
+  }
+}
+
 .icon {
   width: 24px;
   height: 24px;
@@ -94,6 +129,17 @@ svg {
   width: 24px;
   height: 24px;
 }
+
+.icon {
+  svg {
+    circle,
+    path {
+      stroke: gray;
+      stroke-width: 3px;
+    }
+  }
+}
+
 // cssのtransition
 .fade-enter-active,
 .fade-leave-active {

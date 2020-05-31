@@ -1,19 +1,24 @@
 <template lang="pug">
   .StepItem
-    div.flex
-      .wrap-icons.flex
-        i.move-icon(v-if="!isFirst")
+    div(v-if="isEdit")
+      .wrap-forms.flex
+        .index {{index+1}}.
+        .wrap-forms.flex
+          app-textarea(
+            placeholder="じゃがいもの皮をむき、一口大に切る"
+            v-model="step.description"
+            rowNum=2
+          )
+    div.flex(v-else)
+      .icon.wrap-icons.flex
+        i.move-icon(v-show="!isFirst")
           up-icon(@click="onUpItem")
-        i.move-icon(v-if="!isLast")
+        i.move-icon(v-show="!isLast")
           down-icon(@click="onDownItem")
       .index {{index+1}}.
-      .wrap-forms.flex
-        app-textarea(
-          placeholder="じゃがいもの皮をむき、一口大に切る"
-          v-model="step.description"
-          rowNum=2
-        )
-      i.icon(v-if="!isFirst")
+      .wrap-texts
+        p {{step.description}}
+      i.icon(v-show="!isFirst")
           close-icon(@click="onDeleteItem")
 </template>
 <script lang="ts">
@@ -36,7 +41,8 @@ export default Vue.extend({
   props: {
     step: Object as PropType<Step>,
     index: Number,
-    isLast: Boolean
+    isLast: Boolean,
+    isEdit: Boolean
   },
   computed: {
     isFirst(): boolean {
@@ -59,23 +65,29 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .StepItem {
   width: 100%;
-  .wrap-icons {
-    width: 31px;
-  }
   .index {
     width: 15px;
     font-size: 12px;
   }
   .wrap-forms {
-    width: calc(100% - 70px);
+    width: 100%;
     textarea {
       width: 100%;
     }
   }
-  .move-icon {
-    svg {
-      width: 14px;
-      height: 20px;
+  .wrap-texts {
+    width: calc(100% - 71px);
+    textarea {
+      width: 100%;
+    }
+  }
+  .wrap-icons {
+    width: 31px;
+    .move-icon {
+      svg {
+        width: 14px;
+        height: 20px;
+      }
     }
   }
 }
